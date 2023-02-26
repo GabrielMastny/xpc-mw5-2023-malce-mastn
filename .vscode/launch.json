@@ -9,7 +9,7 @@
             "type": "clr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/bin/Debug/API.exe",
+            "program": "${workspaceFolder}/API/bin/Debug/API.exe",
             "args": [],
             "cwd": "${workspaceFolder}",
             "console": "internalConsole",
