@@ -18,11 +18,32 @@ namespace WebAPI.Controllers
             _logger = logger;
         }
 
-        [HttpGet]
+        [HttpGet(Name = nameof(Get))]
         public IEnumerable<CommodityEntity> Get()
         {
-            var rng = new Random();
             return new List<CommodityEntity>();
+        }
+        
+        [HttpGet]
+        [Route("{id:int}", Name = nameof(GetSingleCommodity))]
+        public ActionResult GetSingleCommodity(int id)
+        {
+            CommodityEntity commodityItem = null;
+
+            if (commodityItem == null)
+            {
+                return NotFound();
+            }
+
+            
+
+            return Ok();
+        }
+
+        [HttpPost(Name = nameof(AddCommodity))]
+        public ActionResult AddCommodity()
+        {
+            return Ok();
         }
     }
 }
