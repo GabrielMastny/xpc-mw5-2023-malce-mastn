@@ -1,6 +1,6 @@
 ﻿namespace App.DAL.Entities;
 
-public record CommodityBase : EntityBase
+public record CommodityEntity : EntityBase
 {
     public required string _name { get; set; }
     public string _image { get; set; }
