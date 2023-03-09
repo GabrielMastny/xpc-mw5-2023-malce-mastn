@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using App.DAL.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -18,10 +19,10 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<object> Get()
+        public IEnumerable<CommodityEntity> Get()
         {
             var rng = new Random();
-            return new List<object>();
+            return new List<CommodityEntity>();
         }
     }
 }
