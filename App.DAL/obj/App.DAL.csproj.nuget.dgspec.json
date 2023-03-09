@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/Users/vojtechlukas/Documents/GitHub/xpc-mw5-2023-lukas-malce-mastn/App.DAL/App.DAL.csproj": {}
+    "C:\\Users\\User\\Documents\\GitHub\\xpc-mw5-2023-lukas-malce-mastn\\App.DAL\\App.DAL.csproj": {}
   },
   "projects": {
-    "/Users/vojtechlukas/Documents/GitHub/xpc-mw5-2023-lukas-malce-mastn/App.DAL/App.DAL.csproj": {
+    "C:\\Users\\User\\Documents\\GitHub\\xpc-mw5-2023-lukas-malce-mastn\\App.DAL\\App.DAL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/vojtechlukas/Documents/GitHub/xpc-mw5-2023-lukas-malce-mastn/App.DAL/App.DAL.csproj",
+        "projectUniqueName": "C:\\Users\\User\\Documents\\GitHub\\xpc-mw5-2023-lukas-malce-mastn\\App.DAL\\App.DAL.csproj",
         "projectName": "App.DAL",
-        "projectPath": "/Users/vojtechlukas/Documents/GitHub/xpc-mw5-2023-lukas-malce-mastn/App.DAL/App.DAL.csproj",
-        "packagesPath": "/Users/vojtechlukas/.nuget/packages/",
-        "outputPath": "/Users/vojtechlukas/Documents/GitHub/xpc-mw5-2023-lukas-malce-mastn/App.DAL/obj/",
+        "projectPath": "C:\\Users\\User\\Documents\\GitHub\\xpc-mw5-2023-lukas-malce-mastn\\App.DAL\\App.DAL.csproj",
+        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\User\\Documents\\GitHub\\xpc-mw5-2023-lukas-malce-mastn\\App.DAL\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/vojtechlukas/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
@@ -53,7 +53,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.102/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }
