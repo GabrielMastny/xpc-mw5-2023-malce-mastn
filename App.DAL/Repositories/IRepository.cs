@@ -1,6 +1,8 @@
-﻿namespace App.DAL.Repositories;
+﻿using App.DAL.Entities;
 
-public interface IRepository
+namespace App.DAL.Repositories;
+
+public interface IRepository<TEntity> where TEntity : class, IEntity
 {
     
 }
