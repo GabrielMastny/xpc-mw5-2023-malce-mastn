@@ -11,13 +11,12 @@ public class CommodityRepository : IRepository<CommodityEntity>
         if (entity is null) throw new ArgumentNullException(nameof(entity));
 
         entity.id = Guid.NewGuid();
+        entity._reviews = new List<ReviewEntity>();
         
         Database.Instance.Commodities.Add(entity);
 
-        // var man = Database.Instance.Manufacturers.Single(s => s._name == entity._manufacturer);
-        //
-        // man._listOfCommodities.Add(entity);
-
+        Database.Instance.Manufacturers.Single(s => s._name == entity._manufacturer)._listOfCommodities.Add(entity);
+        
         return entity.id;
     }
 

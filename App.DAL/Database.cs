@@ -24,25 +24,25 @@ public class Database
     {
         Console.WriteLine("--------------------------");
         
-        Console.WriteLine("# Commodities:");
+        Console.WriteLine("\n# Commodities:");
         foreach (var c in Commodities)
         {
             Console.WriteLine(c);
         }
         
-        Console.WriteLine("# Manufacturers:");
+        Console.WriteLine("\n# Manufacturers:");
         foreach (var m in Manufacturers)
         {
             Console.WriteLine(m);
         }
         
-        Console.WriteLine("# Categories:");
+        Console.WriteLine("\n# Categories:");
         foreach (var c in Categories)
         {
             Console.WriteLine(c);
         }
         
-        Console.WriteLine("# Reviews:");
+        Console.WriteLine("\n# Reviews:");
         foreach (var r in Reviews)
         {
             Console.WriteLine(r);

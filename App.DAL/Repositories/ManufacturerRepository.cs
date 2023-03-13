@@ -11,6 +11,7 @@ public class ManufacturerRepository : IRepository<ManufacturerEntity>
         if (entity is null) throw new ArgumentNullException();
 
         entity.id = Guid.NewGuid();
+        entity._listOfCommodities = new List<CommodityEntity>();
         
         Database.Instance.Manufacturers.Add(entity);
 

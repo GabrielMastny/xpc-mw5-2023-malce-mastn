@@ -11,19 +11,6 @@ public class CategoryRepository : IRepository<CategoryEntity>
     {
         if (entity is null) throw new ArgumentNullException();
 
-        // if (Database.Instance.Categories.Contains(entity) != null)
-        // {
-        //     return new Guid();// Database.Instance.Categories.;
-        // }
-        // else 
-        // {
-        //     entity.id = new Guid();
-        //     
-        //     Database.Instance.Categories.Add(entity);
-        //     
-        //     return entity.id;
-        // }
-        
         entity.id = Guid.NewGuid();
         
         Database.Instance.Categories.Add(entity);
