@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.Design;
 using System.Linq;
 using App.DAL.Entities;
 
@@ -31,21 +32,21 @@ public class CategoryRepository : IRepository<CategoryEntity>
 
     }
 
-    // public CategoryEntity ReturnOrCreate(string name)
-    // {
-    //     if (Database.Instance.Categories.Contains(s => s._name == name)) ;
-    //     {
-    //         var category = Create(new CategoryEntity()
-    //         {
-    //             _name = name
-    //         });
-    //         return Database.Instance.Categories.Single(s => s.id == category);
-    //     }
-    //     else
-    //     {
-    //         return Database.Instance.Categories.Single(s => s._name == name);
-    //     }
-    // }
+    public CategoryEntity ReturnOrCreate(string name)
+    {
+        if (Database.Instance.Categories.Any(s => s._name == name))
+        {
+            return Database.Instance.Categories.Single(s => s._name == name);   
+        } 
+        else 
+        {
+            var category = Create(new CategoryEntity()
+            {
+                _name = name
+            });
+            return Database.Instance.Categories.Single(s => s.id == category);
+        }
+    }
 
     public CategoryEntity GetById(Guid id)
     {
