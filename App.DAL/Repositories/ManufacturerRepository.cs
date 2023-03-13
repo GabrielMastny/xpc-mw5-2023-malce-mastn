@@ -26,6 +26,22 @@ public class ManufacturerRepository : IRepository<ManufacturerEntity>
     {
         return Database.Instance.Manufacturers.Single(s => s._name == name);
     }
+    
+    public ManufacturerEntity ReturnOrCreate(string name)
+    {
+        if (Database.Instance.Manufacturers.Any(s => s._name == name))
+        {
+            return Database.Instance.Manufacturers.Single(s => s._name == name);   
+        } 
+        else 
+        {
+            var manufacturer = Create(new ManufacturerEntity()
+            {
+                _name = name
+            });
+            return Database.Instance.Manufacturers.Single(s => s.id == manufacturer);
+        }
+    }
 
     public ManufacturerEntity Update(ManufacturerEntity? entity)
     {
