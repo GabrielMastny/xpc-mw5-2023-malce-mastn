@@ -1,4 +1,5 @@
-﻿using App.DAL.Entities;
+﻿using System;
+using App.DAL.Entities;
 
 namespace App.DAL.Repositories;
 

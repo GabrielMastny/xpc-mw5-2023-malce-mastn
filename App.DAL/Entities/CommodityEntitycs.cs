@@ -1,4 +1,5 @@
-﻿namespace App.DAL.Entities;
+﻿using System.Collections.Generic;
+namespace App.DAL.Entities;
 
 public record CommodityEntity : EntityBase
 {

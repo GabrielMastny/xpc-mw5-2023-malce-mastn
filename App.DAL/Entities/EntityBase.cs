@@ -1,4 +1,5 @@
-﻿namespace App.DAL.Entities;
+﻿using System;
+namespace App.DAL.Entities;
 
 public abstract record EntityBase : IEntity
 {
