@@ -10,7 +10,7 @@ public class CommodityRepository : IRepository<CommodityEntity>
     {
         if (entity is null) throw new ArgumentNullException(nameof(entity));
 
-        entity.id = new Guid();
+        entity.id = Guid.NewGuid();
         
         Database.Instance.Commodities.Add(entity);
 
