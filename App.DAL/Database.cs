@@ -18,7 +18,7 @@ public class Database
     public ICollection<CommodityEntity> Commodities { get; } = new List<CommodityEntity>();
     public ICollection<ManufacturerEntity> Manufacturers { get; } = new List<ManufacturerEntity>();
     public ICollection<CategoryEntity> Categories { get; } = new List<CategoryEntity>();
-    //public ICollection<ReviewEntity> Reviews{ get; } = new List<ReviewEntity>();
+    public ICollection<ReviewEntity> Reviews{ get; } = new List<ReviewEntity>();
 
     public void ShowData()
     {
@@ -30,16 +30,22 @@ public class Database
             Console.WriteLine(c);
         }
         
-        Console.WriteLine("# Courses:");
+        Console.WriteLine("# Manufacturers:");
         foreach (var m in Manufacturers)
         {
             Console.WriteLine(m);
         }
         
-        Console.WriteLine("# Exams:");
+        Console.WriteLine("# Categories:");
         foreach (var c in Categories)
         {
             Console.WriteLine(c);
+        }
+        
+        Console.WriteLine("# Reviews:");
+        foreach (var r in Reviews)
+        {
+            Console.WriteLine(r);
         }
 
         Console.WriteLine("--------------------------");

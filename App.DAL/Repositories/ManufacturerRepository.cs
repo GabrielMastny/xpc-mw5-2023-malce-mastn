@@ -10,7 +10,9 @@ public class ManufacturerRepository : IRepository<ManufacturerEntity>
     {
         if (entity is null) throw new ArgumentNullException();
 
-        entity.id = new Guid();
+        entity.id = Guid.NewGuid();
+        
+        Database.Instance.Manufacturers.Add(entity);
 
         return entity.id;
     }
@@ -18,6 +20,11 @@ public class ManufacturerRepository : IRepository<ManufacturerEntity>
     public ManufacturerEntity GetById(Guid id)
     {
         return Database.Instance.Manufacturers.Single(s => s.id == id);
+    }
+    
+    public ManufacturerEntity GetByName(string name)
+    {
+        return Database.Instance.Manufacturers.Single(s => s._name == name);
     }
 
     public ManufacturerEntity Update(ManufacturerEntity? entity)
