@@ -8,4 +8,5 @@ public record ManufacturerEntity : EntityBase
     public string _image { get; set; }
     public string _countryOfOrigin { get; set; }
     public ICollection<CommodityEntity> _listOfCommodities { get; set; }
+
 }
