@@ -10,24 +10,16 @@ public class CommodityRepository : IRepository<CommodityEntity>
     {
         if (entity is null) throw new ArgumentNullException(nameof(entity));
 
-        entity.id = Guid.NewGuid();
-        entity._reviews = new List<ReviewEntity>();
+        entity.id = new Guid();
         
         Database.Instance.Commodities.Add(entity);
 
-        Database.Instance.Manufacturers.Single(s => s._name == entity._manufacturer)._listOfCommodities.Add(entity);
-        
         return entity.id;
     }
 
     public CommodityEntity GetById(Guid id)
     {
         return Database.Instance.Commodities.Single(s => s.id == id);
-    }
-    
-    public CommodityEntity GetByName(string name)
-    {
-        return Database.Instance.Commodities.Single(s => s._name == name);
     }
 
     public CommodityEntity Update(CommodityEntity? entity)
