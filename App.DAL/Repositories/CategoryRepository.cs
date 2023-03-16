@@ -11,52 +11,52 @@ public class CategoryRepository : IRepository<CategoryEntity>
     {
         if (entity is null) throw new ArgumentNullException();
 
-        entity.id = Guid.NewGuid();
+        entity.Id = Guid.NewGuid();
         
         Database.Instance.Categories.Add(entity);
 
-        return entity.id;
+        return entity.Id;
 
     }
 
     public CategoryEntity ReturnOrCreate(string name)
     {
-        if (Database.Instance.Categories.Any(s => s._name == name))
+        if (Database.Instance.Categories.Any(s => s.Name == name))
         {
-            return Database.Instance.Categories.Single(s => s._name == name);   
+            return Database.Instance.Categories.Single(s => s.Name == name);   
         } 
         else 
         {
             var category = Create(new CategoryEntity()
             {
-                _name = name
+                Name = name
             });
-            return Database.Instance.Categories.Single(s => s.id == category);
+            return Database.Instance.Categories.Single(s => s.Id == category);
         }
     }
 
     public CategoryEntity GetById(Guid id)
     {
-        return Database.Instance.Categories.Single(s => s.id == id);
+        return Database.Instance.Categories.Single(s => s.Id == id);
     }
     
     public CategoryEntity GetByName(string name)
     {
-        return Database.Instance.Categories.Single(s => s._name == name);
+        return Database.Instance.Categories.Single(s => s.Name == name);
     }
 
     public CategoryEntity Update(CategoryEntity? entity)
     {
         if (entity == null) throw new ArgumentNullException(nameof(entity));
         
-        var existingCategory = Database.Instance.Categories.Single(s => s.id == entity.id);
-        existingCategory._name = entity._name;
+        var existingCategory = Database.Instance.Categories.Single(s => s.Id == entity.Id);
+        existingCategory.Name = entity.Name;
         return existingCategory;
     }
 
     public void Delete(Guid id)
     {
-        var category = Database.Instance.Categories.Single(s => s.id == id);
+        var category = Database.Instance.Categories.Single(s => s.Id == id);
         Database.Instance.Categories.Remove(category);
     }
 }

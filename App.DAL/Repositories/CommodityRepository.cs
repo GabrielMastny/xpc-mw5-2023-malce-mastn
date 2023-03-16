@@ -10,16 +10,22 @@ public class CommodityRepository : IRepository<CommodityEntity>
     {
         if (entity is null) throw new ArgumentNullException(nameof(entity));
 
-        entity.id = new Guid();
+        entity.Id = Guid.NewGuid();
+        entity.Reviews = new List<ReviewEntity>();
         
         Database.Instance.Commodities.Add(entity);
 
-        return entity.id;
+        return entity.Id;
     }
 
     public CommodityEntity GetById(Guid id)
     {
-        return Database.Instance.Commodities.Single(s => s.id == id);
+        return Database.Instance.Commodities.Single(s => s.Id == id);
+    }
+
+    public CommodityEntity GetByName(string name)
+    {
+        throw new NotImplementedException();
     }
 
     public CommodityEntity Update(CommodityEntity? entity)

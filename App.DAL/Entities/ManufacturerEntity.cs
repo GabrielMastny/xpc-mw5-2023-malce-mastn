@@ -3,10 +3,10 @@ namespace App.DAL.Entities;
 
 public record ManufacturerEntity : EntityBase
 {
-    public required string _name { get; set; }
-    public string _description { get; set; }
-    public string _image { get; set; }
-    public string _countryOfOrigin { get; set; }
-    public ICollection<CommodityEntity> _listOfCommodities { get; set; }
+    public required string Name { get; set; }
+    public string Description { get; set; }
+    public string Image { get; set; }
+    public string CountryOfOrigin { get; set; }
+    public ICollection<CommodityEntity> ListOfCommodities { get; set; }
 
 }

@@ -2,5 +2,5 @@
 
 public record CategoryEntity : EntityBase
 {
-    public required string _name { get; set; }
+    public required string Name { get; set; }
 }

@@ -8,18 +8,18 @@ public class ReviewRepository : IRepository<ReviewEntity>
     {
         if (entity is null) throw new ArgumentNullException(nameof(entity));
 
-        entity.id = Guid.NewGuid();
+        entity.Id = Guid.NewGuid();
 
         Database.Instance.Reviews.Add(entity);
 
         //Database.Instance.Manufacturers.Single(s => s._name == entity._manufacturer)._listOfCommodities.Add(entity);
         
-        return entity.id;
+        return entity.Id;
     }
 
     public ReviewEntity GetById(Guid id)
     {
-        return Database.Instance.Reviews.Single(s => s.id == id);
+        return Database.Instance.Reviews.Single(s => s.Id == id);
     }
 
     public ReviewEntity GetByName(string name)

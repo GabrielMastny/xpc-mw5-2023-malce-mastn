@@ -3,13 +3,13 @@ namespace App.DAL.Entities;
 
 public record CommodityEntity : EntityBase
 {
-    public required string _name { get; set; }
-    public string _image { get; set; }
-    public string _description { get; set; }
-    public required double _price { get; set; }
-    public double _weight { get; set; }
-    public int _numberOfPiecesInStock { get; set; }
-    public required string _category { get; set; }
-    public required string _manufacturer { get; set; }
-    public ICollection<ReviewEntity> _reviews { get; set; }
+    public required string Name { get; set; }
+    public string Image { get; set; }
+    public string Description { get; set; }
+    public required double Price { get; set; }
+    public double Weight { get; set; }
+    public int NumberOfPiecesInStock { get; set; }
+    public required string Category { get; set; }
+    public required string Manufacturer { get; set; }
+    public ICollection<ReviewEntity> Reviews { get; set; }
 }

@@ -10,37 +10,37 @@ public class ManufacturerRepository : IRepository<ManufacturerEntity>
     {
         if (entity is null) throw new ArgumentNullException();
 
-        entity.id = Guid.NewGuid();
-        entity._listOfCommodities = new List<CommodityEntity>();
+        entity.Id = Guid.NewGuid();
+        entity.ListOfCommodities = new List<CommodityEntity>();
         
         Database.Instance.Manufacturers.Add(entity);
 
-        return entity.id;
+        return entity.Id;
     }
 
     public ManufacturerEntity GetById(Guid id)
     {
-        return Database.Instance.Manufacturers.Single(s => s.id == id);
+        return Database.Instance.Manufacturers.Single(s => s.Id == id);
     }
     
     public ManufacturerEntity GetByName(string name)
     {
-        return Database.Instance.Manufacturers.Single(s => s._name == name);
+        return Database.Instance.Manufacturers.Single(s => s.Name == name);
     }
     
     public ManufacturerEntity ReturnOrCreate(string name)
     {
-        if (Database.Instance.Manufacturers.Any(s => s._name == name))
+        if (Database.Instance.Manufacturers.Any(s => s.Name == name))
         {
-            return Database.Instance.Manufacturers.Single(s => s._name == name);   
+            return Database.Instance.Manufacturers.Single(s => s.Name == name);   
         } 
         else 
         {
             var manufacturer = Create(new ManufacturerEntity()
             {
-                _name = name
+                Name = name
             });
-            return Database.Instance.Manufacturers.Single(s => s.id == manufacturer);
+            return Database.Instance.Manufacturers.Single(s => s.Id == manufacturer);
         }
     }
 

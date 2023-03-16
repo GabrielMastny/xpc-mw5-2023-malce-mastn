@@ -77,15 +77,15 @@ namespace WebAPI.Controllers
 
             var newG = _commodityRepository.Create(new CommodityEntity()
             {
-                _category = commodityCreateDto.Category,
-                _weight = commodityCreateDto.Weight,
-                _name = commodityCreateDto.Name,
-                _description = commodityCreateDto.Description,
-                _image = commodityCreateDto.Image,
-                _manufacturer = commodityCreateDto.Manufacturer,
-                _price = commodityCreateDto.Price,
-                _reviews = new List<ReviewEntity>(),
-                _numberOfPiecesInStock = commodityCreateDto.NumberOfPiecesInStock
+                Category = commodityCreateDto.Category,
+                Weight = commodityCreateDto.Weight,
+                Name = commodityCreateDto.Name,
+                Description = commodityCreateDto.Description,
+                Image = commodityCreateDto.Image,
+                Manufacturer = commodityCreateDto.Manufacturer,
+                Price = commodityCreateDto.Price,
+                Reviews = new List<ReviewEntity>(),
+                NumberOfPiecesInStock = commodityCreateDto.NumberOfPiecesInStock
             });
 #if DEBUG
            return newG.ToString();
