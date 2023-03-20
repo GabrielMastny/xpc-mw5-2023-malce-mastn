@@ -1,6 +1,9 @@
-﻿namespace App.DAL.QueryObjects;
+﻿using App.DAL.Entities;
+using App.DAL.QueryObjects.Filters;
 
-public interface IQuery<TModel, TFilter>
+namespace App.DAL.QueryObjects;
+
+public interface IQuery<TModel, TFilter> where TModel : IEntity where TFilter : IFilter
 {
     IEnumerable<TModel> Execute(TFilter filter);
 }

@@ -13,6 +13,9 @@ public class CommodityRepository : IRepository<CommodityEntity>
         entity.Id = Guid.NewGuid();
         entity.Reviews = new List<ReviewEntity>();
         
+        Database.Instance.Manufacturers.Single(m => m.Name == entity.Manufacturer).ListOfCommodities.Add(entity);
+        //Database.Instance.Categories.Single(c => c.Name == entity.Name).
+        
         Database.Instance.Commodities.Add(entity);
 
         return entity.Id;
