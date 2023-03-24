@@ -25,32 +25,47 @@ public class ManufacturerRepository : IRepository<ManufacturerEntity>
     
     public ManufacturerEntity GetByName(string name)
     {
+        if(name == null) throw new ArgumentNullException();
         return Database.Instance.Manufacturers.Single(s => s.Name == name);
     }
     
-    public ManufacturerEntity ReturnOrCreate(string name)
+    public ManufacturerEntity ReturnOrCreate(ManufacturerEntity manufacturerEntity)
     {
-        if (Database.Instance.Manufacturers.Any(s => s.Name == name))
+        
+        if (manufacturerEntity is null) throw new ArgumentNullException();
+        
+        if (Database.Instance.Manufacturers.Any(s => s.Name == manufacturerEntity.Name))
         {
-            return Database.Instance.Manufacturers.Single(s => s.Name == name);   
+            return Database.Instance.Manufacturers.Single(s => s.Name == manufacturerEntity.Name);   
         } 
         else 
         {
-            var manufacturer = Create(new ManufacturerEntity()
-            {
-                Name = name
-            });
-            return Database.Instance.Manufacturers.Single(s => s.Id == manufacturer);
+            manufacturerEntity.Id = Guid.NewGuid();
+            manufacturerEntity.ListOfCommodities = new List<CommodityEntity>();
+        
+            Database.Instance.Manufacturers.Add(manufacturerEntity);
+            
+            return Database.Instance.Manufacturers.Single(s => s.Name == manufacturerEntity.Name);
         }
     }
 
     public ManufacturerEntity Update(ManufacturerEntity? entity)
     {
-        throw new NotImplementedException();
+        if (entity == null) throw new ArgumentNullException(nameof(entity));
+        
+        var manufacturer = Database.Instance.Manufacturers.Single(s => s.Id == entity.Id);
+        manufacturer.Name = entity.Name;
+        manufacturer.Description = entity.Description;
+        manufacturer.CountryOfOrigin = entity.CountryOfOrigin;
+        return manufacturer;
     }
 
     public void Delete(Guid id)
     {
-        throw new NotImplementedException();
+        if(!Database.Instance.Manufacturers.Any(c => c.Id == id)) throw new ArgumentException();
+        
+        var manufacturer = Database.Instance.Manufacturers.Single(s => s.Id == id);
+        //Database.Instance.Manufacturers.Single(m => m == commodity.Manufacturer).ListOfCommodities.Remove(commodity);
+        Database.Instance.Manufacturers.Remove(manufacturer);
     }
 }

@@ -22,11 +22,6 @@ public class ReviewRepository : IRepository<ReviewEntity>
         return Database.Instance.Reviews.Single(s => s.Id == id);
     }
 
-    public ReviewEntity GetByName(string name)
-    {
-        throw new NotImplementedException();
-    }
-
     public ReviewEntity Update(ReviewEntity? entity)
     {
         throw new NotImplementedException();
@@ -34,6 +29,9 @@ public class ReviewRepository : IRepository<ReviewEntity>
 
     public void Delete(Guid id)
     {
-        throw new NotImplementedException();
+        if(!Database.Instance.Commodities.Any(c => c.Id == id)) throw new ArgumentException();
+                
+        var review = Database.Instance.Reviews.Single(s => s.Id == id);
+        Database.Instance.Reviews.Remove(review);
     }
 }

@@ -19,18 +19,15 @@ public class CategoryRepository : IRepository<CategoryEntity>
 
     }
 
-    public CategoryEntity ReturnOrCreate(string name)
+    public CategoryEntity ReturnOrCreate(CategoryEntity categoryEntity)
     {
-        if (Database.Instance.Categories.Any(s => s.Name == name))
+        if (Database.Instance.Categories.Any(s => s.Name == categoryEntity.Name))
         {
-            return Database.Instance.Categories.Single(s => s.Name == name);   
+            return Database.Instance.Categories.Single(s => s.Name == categoryEntity.Name);   
         } 
         else 
         {
-            var category = Create(new CategoryEntity()
-            {
-                Name = name
-            });
+            var category = Create(categoryEntity);
             return Database.Instance.Categories.Single(s => s.Id == category);
         }
     }

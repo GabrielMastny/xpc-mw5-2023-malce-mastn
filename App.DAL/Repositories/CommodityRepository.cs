@@ -12,10 +12,8 @@ public class CommodityRepository : IRepository<CommodityEntity>
 
         entity.Id = Guid.NewGuid();
         entity.Reviews = new List<ReviewEntity>();
-        
-        Database.Instance.Manufacturers.Single(m => m.Name == entity.Manufacturer).ListOfCommodities.Add(entity);
-        //Database.Instance.Categories.Single(c => c.Name == entity.Name).
-        
+        //entity.Reviews = GenerateDatabase.GenerateFakeReviews(3);
+        Database.Instance.Manufacturers.Single(m => m.Name == entity.Manufacturer.Name).ListOfCommodities.Add(entity);
         Database.Instance.Commodities.Add(entity);
 
         return entity.Id;
@@ -28,16 +26,29 @@ public class CommodityRepository : IRepository<CommodityEntity>
 
     public CommodityEntity GetByName(string name)
     {
-        throw new NotImplementedException();
+        if(name == null) throw new ArgumentNullException();
+        return Database.Instance.Commodities.Single(s => s.Name == name);
     }
 
     public CommodityEntity Update(CommodityEntity? entity)
     {
-        throw new NotImplementedException();
+        if (entity == null) throw new ArgumentNullException(nameof(entity));
+        
+        var commodity = Database.Instance.Commodities.Single(s => s.Id == entity.Id);
+        commodity.Name = entity.Name;
+        return commodity;
     }
 
     public void Delete(Guid id)
     {
-        throw new NotImplementedException();
+        if(!Database.Instance.Commodities.Any(c => c.Id == id)) throw new ArgumentException();
+        
+        var commodity = Database.Instance.Commodities.Single(s => s.Id == id);
+        Database.Instance.Manufacturers.Single(m => m == commodity.Manufacturer).ListOfCommodities.Remove(commodity);
+        foreach (var r in commodity.Reviews)
+        {
+            Database.Instance.Reviews.Remove(r);
+        }
+        Database.Instance.Commodities.Remove(commodity);
     }
 }

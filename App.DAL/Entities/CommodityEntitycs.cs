@@ -9,7 +9,7 @@ public record CommodityEntity : EntityBase
     public required double Price { get; set; }
     public double Weight { get; set; }
     public int NumberOfPiecesInStock { get; set; }
-    public required string Category { get; set; }
-    public required string Manufacturer { get; set; }
+    public required CategoryEntity Category { get; set; }
+    public required ManufacturerEntity Manufacturer { get; set; }
     public ICollection<ReviewEntity> Reviews { get; set; }
 }
