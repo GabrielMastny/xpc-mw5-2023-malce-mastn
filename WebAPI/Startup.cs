@@ -4,15 +4,20 @@ using System.Linq;
 using System.Threading.Tasks;
 using App.DAL.Entities;
 using App.DAL.Repositories;
+using EFDb.Context;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.SwaggerGen;
+using WebAPI.Helpers;
 
 namespace WebAPI
 {
@@ -30,11 +35,11 @@ namespace WebAPI
         {
 
             services.AddControllers();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPI", Version = "v1" });
-            });
+            services.AddSwaggerGen();
+            services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
+            services.AddVersioning();
             services.AddSingleton<CommodityRepository>();
+            services.AddDbContext<EshopContext>(options => options.UseSqlServer(@"Server=localhost\SQLEXPRESS;Database=master;Encrypt=False;Trusted_Connection=Yes"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

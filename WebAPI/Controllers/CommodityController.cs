@@ -19,7 +19,7 @@ namespace WebAPI.Controllers
 {
     [ApiController]
     [ApiVersion("1.0")]
-    [Route("api/v{version}/[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     public class CommodityController : ControllerBase
     {
         private readonly ILogger<CommodityController> _logger;
