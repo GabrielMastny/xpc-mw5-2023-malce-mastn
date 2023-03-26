@@ -5,10 +5,13 @@ namespace EFDb.Context;
 
 public class EshopContext : DbContext
 {
-    public EshopContext()
+    public EshopContext(DbContextOptions options) : base(options)
     {
         
     }
-    
-    public DbSet<Commodity> Comodities { get; set; }
+
+    public DbSet<Commodity> Comodities { get; set; } = null;
+    public DbSet<Category> Categories { get; set; } = null;
+    public DbSet<Manufacturer> Manufacturers { get; set; } = null;
+    public DbSet<Review> Reviews { get; set; } = null;
 }
