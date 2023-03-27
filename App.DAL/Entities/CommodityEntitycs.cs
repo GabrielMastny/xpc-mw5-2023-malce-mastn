@@ -11,5 +11,5 @@ public record CommodityEntity : EntityBase
     public int NumberOfPiecesInStock { get; set; }
     public required CategoryEntity Category { get; set; }
     public required ManufacturerEntity Manufacturer { get; set; }
-    public ICollection<ReviewEntity> Reviews { get; set; }
+    public ICollection<ReviewEntity> Reviews { get; } = new List<ReviewEntity>();
 }

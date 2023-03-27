@@ -84,7 +84,7 @@ namespace WebAPI.Controllers
                 Image = commodityCreateDto.Image,
                 Manufacturer = commodityCreateDto.Manufacturer,
                 Price = commodityCreateDto.Price,
-                Reviews = new List<ReviewEntity>(),
+                //Reviews = new List<ReviewEntity>(),
                 NumberOfPiecesInStock = commodityCreateDto.NumberOfPiecesInStock
             });
 #if DEBUG

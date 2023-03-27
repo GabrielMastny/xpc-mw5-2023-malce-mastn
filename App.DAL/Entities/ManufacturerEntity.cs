@@ -7,6 +7,6 @@ public record ManufacturerEntity : EntityBase
     public string Description { get; set; }
     public string Image { get; set; }
     public string CountryOfOrigin { get; set; }
-    public ICollection<CommodityEntity> ListOfCommodities { get; set; }
+    public ICollection<CommodityEntity> ListOfCommodities { get; } = new List<CommodityEntity>();
 
 }

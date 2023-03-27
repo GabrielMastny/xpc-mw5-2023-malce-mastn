@@ -4,10 +4,10 @@ using Bogus.Extensions;
 
 namespace App.DAL;
 
-public class GenerateDatabase
+public class GenerateDatabase : IDisposable
 {
 
-    public static ICollection<CommodityEntity> init(int number)
+    public ICollection<CommodityEntity> init(int number)
     {
         var faker = new Faker<CommodityEntity>()
             .UseSeed(100)
@@ -23,23 +23,24 @@ public class GenerateDatabase
         return faker.Generate(number);
     }
 
-    public static ICollection<ReviewEntity> GenerateFakeReviews(int number)
+    public ICollection<ReviewEntity> GenerateFakeReviews(int number)
     {
         return new Faker<ReviewEntity>()
+            .UseSeed(99)
             .RuleFor(r => r.Stars, f => f.Random.Int(0, 5))
             .RuleFor(r => r.Description, f => f.Lorem.Sentence())
             .RuleFor(r => r.Title, f => f.Name.FirstName())
             .Generate(number);
     }
 
-    private static Faker<CategoryEntity> GenerateFakeCategory()
+    private Faker<CategoryEntity> GenerateFakeCategory()
     {
         return new Faker<CategoryEntity>()
             .UseSeed(98)
             .RuleFor(c => c.Name, f => f.Name.FirstName());
     }
 
-    private static Faker<ManufacturerEntity> GenerateFakeManufacturer()
+    private Faker<ManufacturerEntity> GenerateFakeManufacturer()
     {
         return new Faker<ManufacturerEntity>()
             .UseSeed(97)
@@ -48,5 +49,9 @@ public class GenerateDatabase
             .RuleFor(m => m.Image, f => f.Random.String(1))
             .RuleFor(m => m.CountryOfOrigin, f => f.Name.FirstName());
     }
-    
+
+    public void Dispose()
+    {
+        Console.WriteLine("Disposing database generator");
+    }
 }

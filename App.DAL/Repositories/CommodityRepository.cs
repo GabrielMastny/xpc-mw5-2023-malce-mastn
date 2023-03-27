@@ -11,8 +11,7 @@ public class CommodityRepository : IRepository<CommodityEntity>
         if (entity is null) throw new ArgumentNullException(nameof(entity));
 
         entity.Id = Guid.NewGuid();
-        entity.Reviews = new List<ReviewEntity>();
-        //entity.Reviews = GenerateDatabase.GenerateFakeReviews(3);
+        
         Database.Instance.Manufacturers.Single(m => m.Name == entity.Manufacturer.Name).ListOfCommodities.Add(entity);
         Database.Instance.Commodities.Add(entity);
 

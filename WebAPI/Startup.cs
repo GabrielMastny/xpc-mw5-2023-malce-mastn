@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using App.DAL;
 using App.DAL.Entities;
 using App.DAL.Repositories;
 using Microsoft.AspNetCore.Builder;
@@ -35,6 +36,7 @@ namespace WebAPI
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPI", Version = "v1" });
             });
             services.AddSingleton<CommodityRepository>();
+            services.AddSingleton<GenerateDatabase>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

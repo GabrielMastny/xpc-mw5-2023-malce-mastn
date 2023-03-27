@@ -1,4 +1,6 @@
-﻿namespace WebAPI.Dtos;
+﻿using App.DAL.Entities;
+
+namespace WebAPI.Dtos;
 
 public class CommodityCreateDto
 {
@@ -8,6 +10,6 @@ public class CommodityCreateDto
     public required double Price { get; set; }
     public double Weight { get; set; }
     public int NumberOfPiecesInStock { get; set; }
-    public required string Category { get; set; }
-    public required string Manufacturer { get; set; }
+    public required CategoryEntity Category { get; set; }
+    public required ManufacturerEntity Manufacturer { get; set; }
 }

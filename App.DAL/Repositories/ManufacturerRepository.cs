@@ -11,7 +11,7 @@ public class ManufacturerRepository : IRepository<ManufacturerEntity>
         if (entity is null) throw new ArgumentNullException();
 
         entity.Id = Guid.NewGuid();
-        entity.ListOfCommodities = new List<CommodityEntity>();
+        //entity.ListOfCommodities = new List<CommodityEntity>();
         
         Database.Instance.Manufacturers.Add(entity);
 
@@ -41,7 +41,7 @@ public class ManufacturerRepository : IRepository<ManufacturerEntity>
         else 
         {
             manufacturerEntity.Id = Guid.NewGuid();
-            manufacturerEntity.ListOfCommodities = new List<CommodityEntity>();
+            //manufacturerEntity.ListOfCommodities = new List<CommodityEntity>();
         
             Database.Instance.Manufacturers.Add(manufacturerEntity);
             
