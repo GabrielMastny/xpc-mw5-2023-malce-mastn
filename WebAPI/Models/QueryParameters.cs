@@ -1,19 +1,26 @@
-﻿namespace WebAPI.Models;
+﻿using System.Collections;
+using System.Collections.Generic;
+
+namespace WebAPI.Models;
 
 public class QueryParameters
 {
-    private const int maxPageCount = 50;
-    public int Page { get; set; } = 1;
-
-    private int _pageCount = maxPageCount;
-
-    public int PageCount
-    {
-        get { return _pageCount; }
-        set { _pageCount = (value > maxPageCount) ? maxPageCount : value; }
-    }
-
-    public string? Query { get; set; }
+    public QueryBase Query { get; set; }
 
     public string OrderBy { get; set; }
+}
+
+public abstract class QueryBase
+{
+    public QueryBase Next;
+
+    public IEnumerable<object> Execute()
+    {
+        return new List<object>();
+    }
+}
+
+public class Query : QueryBase
+{
+    
 }
