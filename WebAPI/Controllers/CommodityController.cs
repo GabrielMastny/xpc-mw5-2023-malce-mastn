@@ -22,12 +22,14 @@ namespace WebAPI.Controllers
     {
         private readonly ILogger<CommodityController> _logger;
         private readonly CommodityRepository _commodityRepository;
-
-        public CommodityController(ILogger<CommodityController> logger, CommodityRepository commodityRepository)
+        private readonly EshopContext _db;
+        public CommodityController(ILogger<CommodityController> logger, CommodityRepository commodityRepository, EshopContext db)
         {
             _logger = logger;
             if (commodityRepository is CommodityRepository commRep)
                 _commodityRepository = commRep;
+
+            _db = db;
         }
 
         [HttpGet(Name = nameof(Get))]
@@ -41,7 +43,8 @@ namespace WebAPI.Controllers
         public ActionResult<CommodityEntity> GetSingleCommodity(ApiVersion version, Guid id)
         {
             CommodityEntity commodityItem = null;
-            
+
+            var com = _db.Comodities.Where(x => x.Id == id).FirstOrDefault();
             
             if (com is default(Commodity))
                 return NotFound();
