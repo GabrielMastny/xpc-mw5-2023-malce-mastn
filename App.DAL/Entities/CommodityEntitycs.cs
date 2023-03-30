@@ -1,7 +1,10 @@
 ﻿using System.Collections.Generic;
+using CommonDbProperties.Interfaces;
+using CommonDbProperties.Interfaces.Entities;
+
 namespace App.DAL.Entities;
 
-public record CommodityEntity : EntityBase
+public record CommodityEntity : EntityBase, ICommodity
 {
     public required string Name { get; set; }
     public string Image { get; set; }

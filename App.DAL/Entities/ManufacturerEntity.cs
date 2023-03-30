@@ -1,7 +1,10 @@
 ﻿using System.Collections.Generic;
+using CommonDbProperties.Interfaces;
+using CommonDbProperties.Interfaces.Entities;
+
 namespace App.DAL.Entities;
 
-public record ManufacturerEntity : EntityBase
+public record ManufacturerEntity : EntityBase, IManufacturer
 {
     public required string Name { get; set; }
     public string Description { get; set; }

@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Linq;
 using App.DAL.Entities;
+using CommonDbProperties.Interfaces;
+using CommonDbProperties.Interfaces.Entities;
+using CommonDbProperties.Interfaces.Repositories;
 
 namespace App.DAL.Repositories;
 
@@ -16,6 +19,11 @@ public class CommodityRepository : IRepository<CommodityEntity>
         Database.Instance.Commodities.Add(entity);
 
         return entity.Id;
+    }
+
+    public IEnumerable<CommodityEntity> Get()
+    {
+        return Database.Instance.Commodities;
     }
 
     public CommodityEntity GetById(Guid id)

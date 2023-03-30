@@ -2,6 +2,9 @@
 using System.ComponentModel.Design;
 using System.Linq;
 using App.DAL.Entities;
+using CommonDbProperties.Interfaces;
+using CommonDbProperties.Interfaces.Entities;
+using CommonDbProperties.Interfaces.Repositories;
 
 namespace App.DAL.Repositories;
 
@@ -17,6 +20,11 @@ public class CategoryRepository : IRepository<CategoryEntity>
 
         return entity.Id;
 
+    }
+    
+    public IEnumerable<CategoryEntity> Get()
+    {
+        return Database.Instance.Categories;
     }
 
     public CategoryEntity ReturnOrCreate(CategoryEntity categoryEntity)

@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Linq;
 using App.DAL.Entities;
+using CommonDbProperties.Interfaces;
+using CommonDbProperties.Interfaces.Entities;
+using CommonDbProperties.Interfaces.Repositories;
 
 namespace App.DAL.Repositories;
 
@@ -16,6 +19,11 @@ public class ManufacturerRepository : IRepository<ManufacturerEntity>
         Database.Instance.Manufacturers.Add(entity);
 
         return entity.Id;
+    }
+    
+    public IEnumerable<ManufacturerEntity> Get()
+    {
+        return Database.Instance.Manufacturers;
     }
 
     public ManufacturerEntity GetById(Guid id)

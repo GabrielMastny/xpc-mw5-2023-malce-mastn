@@ -1,4 +1,7 @@
 ﻿using App.DAL.Entities;
+using CommonDbProperties.Interfaces;
+using CommonDbProperties.Interfaces.Entities;
+using CommonDbProperties.Interfaces.Repositories;
 
 namespace App.DAL.Repositories;
 
@@ -15,6 +18,11 @@ public class ReviewRepository : IRepository<ReviewEntity>
         //Database.Instance.Manufacturers.Single(s => s._name == entity._manufacturer)._listOfCommodities.Add(entity);
         
         return entity.Id;
+    }
+
+    public IEnumerable<ReviewEntity> Get()
+    {
+        return Database.Instance.Reviews;
     }
 
     public ReviewEntity GetById(Guid id)

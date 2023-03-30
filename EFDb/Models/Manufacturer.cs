@@ -1,9 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using CommonDbProperties.Interfaces;
+using CommonDbProperties.Interfaces.Entities;
 
 namespace EFDb.Models;
 
 [Table("Manufacturer")]
-public class Manufacturer : TableBase
+public class Manufacturer : TableBase, IManufacturer
 {
     public string Name { get; set; }
+    public string Description { get; set; }
+    public string Image { get; set; }
+    public string CountryOfOrigin { get; set; }
 }

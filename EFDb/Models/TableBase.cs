@@ -7,5 +7,5 @@ public abstract class TableBase
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public Guid ID { get; set; }
+    public Guid Id { get; set; }
 }

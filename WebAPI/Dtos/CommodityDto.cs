@@ -1,8 +1,6 @@
-﻿using System;
+﻿namespace WebAPI.Dtos;
 
-namespace WebAPI.Dtos;
-
-public class CommodityCreateDto
+public class CommodityDto
 {
     public required string Name { get; set; }
     public string Image { get; set; }
@@ -10,6 +8,4 @@ public class CommodityCreateDto
     public required double Price { get; set; }
     public double Weight { get; set; }
     public int NumberOfPiecesInStock { get; set; }
-    public required Guid CategoryId { get; set; }
-    public required Guid ManufacturerId { get; set; }
 }
