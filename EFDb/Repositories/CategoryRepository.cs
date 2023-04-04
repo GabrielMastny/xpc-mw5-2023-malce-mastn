@@ -1,4 +1,5 @@
 ﻿using App.DAL.Entities;
+using AutoMapper;
 using CommonDbProperties.Interfaces.Repositories;
 using EFDb.Context;
 using EFDb.Models;
@@ -8,20 +9,16 @@ namespace EFDb.Repositories;
 public class CategoryRepository : IRepository<CategoryEntity>
 {
     private readonly EshopContext _db;
+    private readonly IMapper _mapper;
 
-    public CategoryRepository(EshopContext db)
+    public CategoryRepository(EshopContext db, IMapper mapper)
     {
         _db = db;
+        _mapper = mapper;
     }
     public Guid Create(CategoryEntity entity)
     {
-        var cat = _db.Categories.Add(new Category()
-        {
-            Description = entity.Description,
-            Name = entity.Name,
-            Id = entity.Id,
-            Image = entity.Image
-        });
+        var cat = _db.Categories.Add(_mapper.Map<Category>(entity));
         _db.SaveChanges();
 
         return cat.Entity.Id;
@@ -29,21 +26,38 @@ public class CategoryRepository : IRepository<CategoryEntity>
 
     public IEnumerable<CategoryEntity> Get()
     {
-        throw new NotImplementedException();
+        return _db.Categories.Select(x => _mapper.Map<CategoryEntity>(x));
     }
 
     public CategoryEntity GetById(Guid id)
     {
-        throw new NotImplementedException();
+        var ent = _db.Categories.Where(x => x.Id == id).SingleOrDefault();
+
+        if (ent == null) return null;
+
+        return _mapper.Map<CategoryEntity>(ent);
     }
 
     public CategoryEntity Update(CategoryEntity? entity)
     {
-        throw new NotImplementedException();
+        if (entity == null || !_db.Categories.Any(x => x.Id == entity.Id))
+            return null;
+
+        var cat = _mapper.Map<Category>(entity);
+
+        _db.Categories.Update(cat);
+        _db.SaveChanges();
+
+        return entity;
     }
 
     public void Delete(Guid id)
     {
-        throw new NotImplementedException();
+        var cat = _db.Categories.Where(x => x.Id == id).SingleOrDefault();
+        
+        if (cat == null) return;
+
+        _db.Categories.Remove(cat);
+        _db.SaveChanges();
     }
 }
