@@ -1,18 +1,19 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using App.DAL.Entities;
-using App.DAL.Repositories;
+using CommonDbProperties.Interfaces.Repositories;
+using EFDb.Context;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.OpenApi.Models;
+using Microsoft.Extensions.Options;
+using Swashbuckle.AspNetCore.SwaggerGen;
+using WebAPI.Helpers;
+using WebAPI.MappingProfiles;
+using MemDB = App.DAL.Repositories;
+using EFDB = EFDb.Repositories;
 
 namespace WebAPI
 {
@@ -30,15 +31,25 @@ namespace WebAPI
         {
 
             services.AddControllers();
-            services.AddSwaggerGen(c =>
+            services.AddSwaggerGen();
+            services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
+            services.AddVersioning();
             services.AddAutoMapper(typeof(CommodityMappings));
             services.AddAutoMapper(typeof(CategoryMappings));
             services.AddAutoMapper(typeof(ManufacturerMappings));
             if (Environment.GetEnvironmentVariable("DB_Type") == "EFDb")
             {
+                services.AddScoped<IRepository<CommodityEntity>, EFDB.CommodityRepository>();
+                services.AddScoped<IRepository<CategoryEntity>, EFDB.CategoryRepository>();
+                services.AddScoped<IRepository<ManufacturerEntity>, EFDB.ManufacturerRepository>();
+                services.AddDbContext<EshopContext>(options => options.UseSqlServer(@"Server=localhost\SQLEXPRESS;Database=master;Encrypt=False;Trusted_Connection=Yes"));
+                
             }
             else
             {
+                services.AddScoped<IRepository<CommodityEntity>, MemDB.CommodityRepository>();
+                services.AddScoped<IRepository<CategoryEntity>, MemDB.CategoryRepository>();
+                services.AddScoped<IRepository<ManufacturerEntity>, MemDB.ManufacturerRepository>();
             }
         }
 
