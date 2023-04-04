@@ -17,25 +17,24 @@ namespace WebAPI.Controllers
 {
     [ApiController]
     [ApiVersion("1.0")]
-    [Route("api/v{version}/[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     public class CommodityController : ControllerBase
     {
         private readonly ILogger<CommodityController> _logger;
-        private readonly CommodityRepository _commodityRepository;
-        private readonly EshopContext _db;
-        public CommodityController(ILogger<CommodityController> logger, CommodityRepository commodityRepository, EshopContext db)
+        private readonly IRepository<CommodityEntity> _repo;
+        private readonly IMapper _mapper;
+        public CommodityController(ILogger<CommodityController> logger, IRepository<CommodityEntity> repo, IMapper mapper)
         {
             _logger = logger;
-            if (commodityRepository is CommodityRepository commRep)
-                _commodityRepository = commRep;
-
-            _db = db;
+            _repo = repo;
+            _mapper = mapper;
         }
 
         [HttpGet(Name = nameof(Get))]
         public ActionResult<IEnumerable<CommodityEntity>> Get(ApiVersion version, [FromQuery] QueryParameters queryParameters)
         {
-            return Ok(_db.Comodities.Cast<CommodityEntity>());
+            
+            return Ok(_repo.Get());
         }
         
         [HttpGet]
@@ -44,21 +43,7 @@ namespace WebAPI.Controllers
         {
             CommodityEntity commodityItem = null;
 
-            var com = _db.Comodities.Where(x => x.Id == id).FirstOrDefault();
-            
-            if (com is default(Commodity))
-                return NotFound();
-            
-            // // should be removed later on when repository yielding is stable
-            // try
-            // {
-            //     commodityItem = _commodityRepository.GetById(id);
-            // }
-            // catch (Exception e)
-            // {
-            //     _logger.LogError(0, e, "");
-            //     Console.WriteLine(e);
-            // }
+            var com = _repo.GetById(id);
             
 
             if (commodityItem is default(CommodityEntity))
@@ -73,20 +58,10 @@ namespace WebAPI.Controllers
         [HttpPost(Name = nameof(AddCommodity))]
         public ActionResult<string> AddCommodity(ApiVersion version, [FromBody] CommodityCreateDto commodityCreateDto)
         {
-            // var newG = _commodityRepository.Create(new CommodityEntity()
-            // {
-            //     Category = commodityCreateDto.Category,
-            //     Weight = commodityCreateDto.Weight,
-            //     Name = commodityCreateDto.Name,
-            //     Description = commodityCreateDto.Description,
-            //     Image = commodityCreateDto.Image,
-            //     Manufacturer = commodityCreateDto.Manufacturer,
-            //     Price = commodityCreateDto.Price,
-            //     Reviews = new List<ReviewEntity>(),
-            //     NumberOfPiecesInStock = commodityCreateDto.NumberOfPiecesInStock
-            // });
+            var ent = _mapper.Map<CommodityEntity>(commodityCreateDto);
+            var newG = _repo.Create(ent);
 #if DEBUG
-            return string.Empty;
+            return newG.ToString();
 #else
             return Ok();
 #endif
