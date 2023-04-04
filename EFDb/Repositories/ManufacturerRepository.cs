@@ -1,21 +1,28 @@
 ﻿using App.DAL.Entities;
+using AutoMapper;
 using CommonDbProperties.Interfaces.Repositories;
 using EFDb.Context;
+using EFDb.Models;
 
 namespace EFDb.Repositories;
 
 public class ManufacturerRepository : IRepository<ManufacturerEntity>
 {
     private readonly EshopContext _db;
+    private readonly IMapper _mapper;
     
-    public ManufacturerRepository(EshopContext dbContext)
+    public ManufacturerRepository(EshopContext dbContext, IMapper mapper)
     {
         _db = dbContext;
+        _mapper = mapper;
     }
     
     public Guid Create(ManufacturerEntity entity)
     {
-        throw new NotImplementedException();
+        var cat = _db.Manufacturers.Add(_mapper.Map<Manufacturer>(entity));
+        _db.SaveChanges();
+
+        return cat.Entity.Id;
     }
 
     public IEnumerable<ManufacturerEntity> Get()

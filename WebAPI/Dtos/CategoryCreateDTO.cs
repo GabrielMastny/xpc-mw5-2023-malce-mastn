@@ -1,4 +1,5 @@
 ﻿using System;
+using CommonDbProperties.Interfaces.Entities;
 
 namespace WebAPI.Dtos;
 
