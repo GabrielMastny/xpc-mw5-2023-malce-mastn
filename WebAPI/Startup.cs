@@ -31,6 +31,9 @@ namespace WebAPI
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
+            services.AddAutoMapper(typeof(CommodityMappings));
+            services.AddAutoMapper(typeof(CategoryMappings));
+            services.AddAutoMapper(typeof(ManufacturerMappings));
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPI", Version = "v1" });
             });
