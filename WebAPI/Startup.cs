@@ -2,6 +2,7 @@ using System;
 using App.DAL.Entities;
 using CommonDbProperties.Interfaces.Repositories;
 using EFDb.Context;
+using EFDb.Mappings;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -39,6 +40,9 @@ namespace WebAPI
             services.AddAutoMapper(typeof(ManufacturerMappings));
             if (Environment.GetEnvironmentVariable("DB_Type") == "EFDb")
             {
+                services.AddAutoMapper(typeof(CategoryDBMappings));
+                services.AddAutoMapper(typeof(ManufacturerMappings));
+                
                 services.AddScoped<IRepository<CommodityEntity>, EFDB.CommodityRepository>();
                 services.AddScoped<IRepository<CategoryEntity>, EFDB.CategoryRepository>();
                 services.AddScoped<IRepository<ManufacturerEntity>, EFDB.ManufacturerRepository>();
