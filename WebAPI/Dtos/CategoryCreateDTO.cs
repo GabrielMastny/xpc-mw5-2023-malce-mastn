@@ -1,0 +1,10 @@
+﻿using System;
+
+namespace WebAPI.Dtos;
+
+public class CategoryCreateDTO
+{
+    public required string Name { get; set; }
+    public string Description { get; set; }
+    public string Image { get; set; }
+}
