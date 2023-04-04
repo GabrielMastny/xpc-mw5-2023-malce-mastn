@@ -34,10 +34,12 @@ namespace WebAPI
             services.AddAutoMapper(typeof(CommodityMappings));
             services.AddAutoMapper(typeof(CategoryMappings));
             services.AddAutoMapper(typeof(ManufacturerMappings));
+            if (Environment.GetEnvironmentVariable("DB_Type") == "EFDb")
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPI", Version = "v1" });
-            });
-            services.AddSingleton<CommodityRepository>();
+            }
+            else
+            {
+            }
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
