@@ -23,7 +23,7 @@ public class ConfigureSwaggerOptions : IConfigureOptions<SwaggerGenOptions>
 
     static OpenApiInfo CreateInfoForApiVersion(ApiVersionDescription description)
     {
-        var info = new OpenApiInfo()
+        var info = new OpenApiInfo
         {
             Title = "Sample API",
             Version = description.ApiVersion.ToString(),

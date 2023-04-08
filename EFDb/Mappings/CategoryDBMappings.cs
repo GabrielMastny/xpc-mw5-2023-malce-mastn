@@ -1,16 +1,14 @@
 ﻿using App.DAL.Entities;
 using AutoMapper;
-using CommonDbProperties.Interfaces.Entities;
 using EFDb.Models;
 
 namespace EFDb.Mappings;
 
-public class CategoryDBMappings : Profile
+public class CategoryDbMappings : Profile
 {
-    public CategoryDBMappings()
+    public CategoryDbMappings()
     {
-        CreateMap<ICategory, CategoryEntity>();
-        CreateMap<CategoryEntity, Category>();
+        CreateMap<Category, CategoryEntity>().ReverseMap();
     }
     
 }

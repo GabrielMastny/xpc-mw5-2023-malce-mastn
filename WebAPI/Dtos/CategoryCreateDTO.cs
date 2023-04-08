@@ -1,7 +1,4 @@
-﻿using System;
-using CommonDbProperties.Interfaces.Entities;
-
-namespace WebAPI.Dtos;
+﻿namespace WebAPI.Dtos;
 
 public class CategoryCreateDTO
 {

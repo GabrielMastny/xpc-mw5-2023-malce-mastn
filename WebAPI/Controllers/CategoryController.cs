@@ -4,7 +4,6 @@ using System.Linq;
 using App.DAL.Entities;
 using AutoMapper;
 using CommonDbProperties.Interfaces.Repositories;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using WebAPI.Dtos;

@@ -1,7 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Runtime.Versioning;
-using CommonDbProperties.Interfaces;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using CommonDbProperties.Interfaces.Entities;
 
 namespace EFDb.Models;

@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using CommonDbProperties.Interfaces;
 using CommonDbProperties.Interfaces.Entities;
 
 namespace EFDb.Models;

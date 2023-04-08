@@ -1,7 +1,5 @@
-﻿using System.Linq.Expressions;
-using App.DAL.Entities;
-using CommonDbProperties.Interfaces;
-using CommonDbProperties.Interfaces.Entities;
+﻿using App.DAL.Entities;
+using AutoMapper;
 using CommonDbProperties.Interfaces.Repositories;
 using EFDb.Context;
 using EFDb.Models;
@@ -11,10 +9,12 @@ namespace EFDb.Repositories;
 public class CommodityRepository : IRepository<CommodityEntity>
 {
     private readonly EshopContext _db;
+    private readonly IMapper _mapper;
     
-    public CommodityRepository(EshopContext dbContext)
+    public CommodityRepository(EshopContext dbContext, IMapper mapper)
     {
         _db = dbContext;
+        _mapper = mapper;
     }
 
     public Guid Create(CommodityEntity entity)
@@ -26,7 +26,7 @@ public class CommodityRepository : IRepository<CommodityEntity>
         if (_db.Manufacturers.Any(x => x.Id == entity.Manufacturer.Id))
             return Guid.Empty;
         
-        Guid newComId = _db.Comodities.Add(new Commodity()
+        Guid newComId = _db.Comodities.Add(new Commodity
         {
             Description = entity.Description,
             Image = entity.Image,
@@ -43,32 +43,32 @@ public class CommodityRepository : IRepository<CommodityEntity>
 
     public IEnumerable<CommodityEntity> Get()
     {
-       return _db.Comodities.Select(x => new CommodityEntity()
+        return _db.Comodities.Select(x => new CommodityEntity
         {
             Description = x.Description,
             Image = x.Image,
             Name = x.Name,
             Price = x.Price,
             Weight = x.Weight,
-            Category = new CategoryEntity() { Description = "", Id = x.CategoryId, Image = "", Name = "" },
+            Category = CategoryEntity.Default(x.CategoryId),
             Id = x.Id,
-            Manufacturer = new ManufacturerEntity()
-                { Description = "", Id = x.ManufacturerId, Image = "", Name = "", CountryOfOrigin = "" },
+            Manufacturer = ManufacturerEntity.Default(x.ManufacturerId),
             NumberOfPiecesInStock = x.NumberOfPiecesInStock,
+            Reviews = (_db.Reviews.Where(y => y.RelatedTo == x.Id).Select(z => _mapper.Map<ReviewEntity>(z))).ToList()
 
         }).ToList();
     }
 
     public CommodityEntity GetById(Guid id)
     {
-        return _db.Comodities.Where(x => x.Id == id).Select(y => new CommodityEntity()
+        return _db.Comodities.Where(x => x.Id == id).Select(y => new CommodityEntity
         {
             Description = y.Description,
             Image = y.Image,
             Name = y.Name,
             Price = y.Price,
             Weight = y.Weight,
-            Category = new CategoryEntity()
+            Category = new CategoryEntity
             {
                 Description = "",
                 Id = y.CategoryId,
@@ -76,7 +76,7 @@ public class CommodityRepository : IRepository<CommodityEntity>
                 Name = ""
             },
             Id = y.Id,
-            Manufacturer = new ManufacturerEntity()
+            Manufacturer = new ManufacturerEntity
             {
                 Description = "",
                 Id = y.ManufacturerId,

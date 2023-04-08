@@ -1,6 +1,9 @@
-﻿namespace WebAPI.Dtos;
+﻿using System;
+using CommonDbProperties.Interfaces.Entities;
 
-public class CommodityBriefDto
+namespace WebAPI.Dtos;
+
+public class CommodityBriefDto : IItemable
 {
     public required string Name { get; set; }
     public string Image { get; set; }
@@ -9,4 +12,5 @@ public class CommodityBriefDto
     public double Weight { get; set; }
     public int NumberOfPiecesInStock { get; set; }
     public int ReviewCount { get; set; }
+    public Guid Id { get; set; }
 }

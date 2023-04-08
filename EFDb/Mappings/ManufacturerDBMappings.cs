@@ -1,14 +1,13 @@
 ﻿using App.DAL.Entities;
 using AutoMapper;
-using CommonDbProperties.Interfaces.Entities;
 using EFDb.Models;
 
 namespace EFDb.Mappings;
 
-public class ManufacturerDBMappings : Profile
+public class ManufacturerDbMappings : Profile
 {
-    public ManufacturerDBMappings()
+    public ManufacturerDbMappings()
     {
-        CreateMap<IManufacturer, ManufacturerEntity>();
+        CreateMap<Manufacturer, ManufacturerEntity>().ReverseMap();
     }
 }

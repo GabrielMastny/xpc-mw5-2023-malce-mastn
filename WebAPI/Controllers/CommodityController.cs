@@ -2,14 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using App.DAL.Entities;
-using App.DAL.Repositories;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using AutoMapper;
 using CommonDbProperties.Interfaces.Repositories;
-using EFDb.Context;
-using EFDb.Models;
-using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using WebAPI.Dtos;
 using WebAPI.Models;
 
@@ -34,25 +30,14 @@ namespace WebAPI.Controllers
         public ActionResult<IEnumerable<CommodityEntity>> Get(ApiVersion version, [FromQuery] QueryParameters queryParameters)
         {
             
-            return Ok(_repo.Get());
+            return Ok(_repo.Get().Select(x => _mapper.Map<CommodityBriefDto>(x)));
         }
         
         [HttpGet]
         [Route("{id:Guid}", Name = nameof(GetSingleCommodity))]
-        public ActionResult<CommodityEntity> GetSingleCommodity(ApiVersion version, Guid id)
+        public ActionResult<CommodityDto> GetSingleCommodity(ApiVersion version, Guid id)
         {
-            CommodityEntity commodityItem = null;
-
-            var com = _repo.GetById(id);
-            
-
-            if (commodityItem is default(CommodityEntity))
-            {
-                return NotFound();
-            }
-
-            return commodityItem;
-            //return Ok<CommodityEntity>(commodityItem);
+            return _mapper.Map<CommodityDto>(_repo.Get().Single(x => x.Id == id));
         }
 
         [HttpPost(Name = nameof(AddCommodity))]

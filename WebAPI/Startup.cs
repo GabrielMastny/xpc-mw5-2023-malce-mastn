@@ -40,13 +40,14 @@ namespace WebAPI
             services.AddAutoMapper(typeof(ManufacturerMappings));
             if (Environment.GetEnvironmentVariable("DB_Type") == "EFDb")
             {
-                services.AddAutoMapper(typeof(CategoryDBMappings));
+                services.AddAutoMapper(typeof(CategoryDbMappings));
                 services.AddAutoMapper(typeof(ManufacturerMappings));
                 
                 services.AddScoped<IRepository<CommodityEntity>, EFDB.CommodityRepository>();
                 services.AddScoped<IRepository<CategoryEntity>, EFDB.CategoryRepository>();
                 services.AddScoped<IRepository<ManufacturerEntity>, EFDB.ManufacturerRepository>();
-                services.AddDbContext<EshopContext>(options => options.UseSqlServer(@"Server=localhost\SQLEXPRESS;Database=master;Encrypt=False;Trusted_Connection=Yes"));
+                services.AddScoped<IRepository<ReviewEntity>, EFDB.ReviewRepository>();
+                services.AddDbContext<EshopContext>();
                 
             }
             else
