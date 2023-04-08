@@ -9,9 +9,14 @@ public class EshopContext : DbContext
     {
         
     }
+    
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.UseSqlServer(@"Server=localhost\SQLEXPRESS;Database=master;Encrypt=False;Trusted_Connection=Yes");
+    }
 
-    public DbSet<Commodity> Comodities { get; set; } = null;
-    public DbSet<Category> Categories { get; set; } = null;
-    public DbSet<Manufacturer> Manufacturers { get; set; } = null;
-    public DbSet<Review> Reviews { get; set; } = null;
+    public DbSet<Commodity> Comodities { get; set; }
+    public DbSet<Category> Categories { get; set; }
+    public DbSet<Manufacturer> Manufacturers { get; set; }
+    public DbSet<Review> Reviews { get; set; }
 }

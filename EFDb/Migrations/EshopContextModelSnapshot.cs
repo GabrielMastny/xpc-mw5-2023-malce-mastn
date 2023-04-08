@@ -120,6 +120,9 @@ namespace EFDb.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid>("RelatedTo")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<int>("Stars")
                         .HasColumnType("int");
 
