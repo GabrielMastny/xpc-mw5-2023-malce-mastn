@@ -1,6 +1,4 @@
-﻿using System;
-using CommonDbProperties.Interfaces;
-using CommonDbProperties.Interfaces.Entities;
+﻿using CommonDbProperties.Interfaces.Entities;
 
 namespace App.DAL.Entities;
 

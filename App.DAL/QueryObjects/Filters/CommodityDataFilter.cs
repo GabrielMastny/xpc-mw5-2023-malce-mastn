@@ -6,7 +6,7 @@
 //     double Price,
 //     int NumberOfPiecesInStock) : IFilter;
 
-public record CommodityDataFilter() : IFilter
+public record CommodityDataFilter : IFilter
 {
     public string? Name { get; set; }
     public double?[] Price { get; set; }

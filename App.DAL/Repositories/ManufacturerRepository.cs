@@ -1,8 +1,4 @@
-﻿using System;
-using System.Linq;
-using App.DAL.Entities;
-using CommonDbProperties.Interfaces;
-using CommonDbProperties.Interfaces.Entities;
+﻿using App.DAL.Entities;
 using CommonDbProperties.Interfaces.Repositories;
 
 namespace App.DAL.Repositories;
@@ -45,16 +41,14 @@ public class ManufacturerRepository : IRepository<ManufacturerEntity>
         if (Database.Instance.Manufacturers.Any(s => s.Name == manufacturerEntity.Name))
         {
             return Database.Instance.Manufacturers.Single(s => s.Name == manufacturerEntity.Name);   
-        } 
-        else 
-        {
-            manufacturerEntity.Id = Guid.NewGuid();
-            //manufacturerEntity.ListOfCommodities = new List<CommodityEntity>();
-        
-            Database.Instance.Manufacturers.Add(manufacturerEntity);
-            
-            return Database.Instance.Manufacturers.Single(s => s.Name == manufacturerEntity.Name);
         }
+
+        manufacturerEntity.Id = Guid.NewGuid();
+        //manufacturerEntity.ListOfCommodities = new List<CommodityEntity>();
+        
+        Database.Instance.Manufacturers.Add(manufacturerEntity);
+            
+        return Database.Instance.Manufacturers.Single(s => s.Name == manufacturerEntity.Name);
     }
 
     public ManufacturerEntity Update(ManufacturerEntity? entity)

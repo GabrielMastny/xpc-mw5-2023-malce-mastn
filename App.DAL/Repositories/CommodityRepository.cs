@@ -1,8 +1,4 @@
-﻿using System;
-using System.Linq;
-using App.DAL.Entities;
-using CommonDbProperties.Interfaces;
-using CommonDbProperties.Interfaces.Entities;
+﻿using App.DAL.Entities;
 using CommonDbProperties.Interfaces.Repositories;
 
 namespace App.DAL.Repositories;

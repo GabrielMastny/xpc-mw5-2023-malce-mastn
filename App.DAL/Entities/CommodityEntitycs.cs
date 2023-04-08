@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using CommonDbProperties.Interfaces;
-using CommonDbProperties.Interfaces.Entities;
+﻿using CommonDbProperties.Interfaces.Entities;
 
 namespace App.DAL.Entities;
 
@@ -14,5 +12,29 @@ public record CommodityEntity : EntityBase, ICommodity
     public int NumberOfPiecesInStock { get; set; }
     public required CategoryEntity Category { get; set; }
     public required ManufacturerEntity Manufacturer { get; set; }
-    public ICollection<ReviewEntity> Reviews { get; } = new List<ReviewEntity>();
+    public ICollection<ReviewEntity> Reviews { get; set; } = new List<ReviewEntity>();
+
+    public static CommodityEntity Default()
+    {
+        return new CommodityEntity()
+        {
+            Category = CategoryEntity.Default(),
+            Description = string.Empty,
+            Image = String.Empty,
+            Manufacturer = ManufacturerEntity.Default(),
+            Name = string.Empty,
+            Price = 0,
+            Reviews = new List<ReviewEntity>(),
+            Weight = 0,
+            NumberOfPiecesInStock = 0,
+            Id = Guid.Empty
+        };
+    }
+    
+    public static CommodityEntity Default(Guid id)
+    {
+        var com = CommodityEntity.Default();
+        com.Id = id;
+        return com;
+    }
 }

@@ -1,6 +1,4 @@
-﻿using App.DAL.Entities;
-using App.DAL.QueryObjects.Filters;
-using CommonDbProperties.Interfaces;
+﻿using App.DAL.QueryObjects.Filters;
 using CommonDbProperties.Interfaces.Entities;
 
 namespace App.DAL.QueryObjects;

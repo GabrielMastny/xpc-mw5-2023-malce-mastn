@@ -1,6 +1,5 @@
 ﻿using App.DAL.Entities;
 using Bogus;
-using Bogus.Extensions;
 
 namespace App.DAL;
 

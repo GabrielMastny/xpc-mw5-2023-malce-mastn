@@ -1,9 +1,4 @@
-﻿using System;
-using System.ComponentModel.Design;
-using System.Linq;
-using App.DAL.Entities;
-using CommonDbProperties.Interfaces;
-using CommonDbProperties.Interfaces.Entities;
+﻿using App.DAL.Entities;
 using CommonDbProperties.Interfaces.Repositories;
 
 namespace App.DAL.Repositories;
@@ -32,12 +27,10 @@ public class CategoryRepository : IRepository<CategoryEntity>
         if (Database.Instance.Categories.Any(s => s.Name == categoryEntity.Name))
         {
             return Database.Instance.Categories.Single(s => s.Name == categoryEntity.Name);   
-        } 
-        else 
-        {
-            var category = Create(categoryEntity);
-            return Database.Instance.Categories.Single(s => s.Id == category);
         }
+
+        var category = Create(categoryEntity);
+        return Database.Instance.Categories.Single(s => s.Id == category);
     }
 
     public CategoryEntity GetById(Guid id)
