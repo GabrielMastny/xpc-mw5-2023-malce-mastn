@@ -1,5 +1,6 @@
 ﻿using App.DAL.Entities;
 using App.DAL.QueryObjects.Filters;
+using CommonDbProperties.Interfaces.QueryObjects;
 
 namespace App.DAL.QueryObjects;
 

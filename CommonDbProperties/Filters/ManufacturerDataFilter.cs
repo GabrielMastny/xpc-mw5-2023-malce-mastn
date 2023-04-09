@@ -1,4 +1,6 @@
-﻿namespace App.DAL.QueryObjects.Filters;
+﻿using CommonDbProperties.Interfaces.Filters;
+
+namespace App.DAL.QueryObjects.Filters;
 
 public record ManufacturerDataFilter : IFilter
 {

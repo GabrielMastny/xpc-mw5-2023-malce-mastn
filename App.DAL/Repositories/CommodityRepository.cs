@@ -8,12 +8,9 @@ public class CommodityRepository : IRepository<CommodityEntity>
     public Guid Create(CommodityEntity? entity)
     {
         if (entity is null) throw new ArgumentNullException(nameof(entity));
-
         entity.Id = Guid.NewGuid();
-        
         Database.Instance.Manufacturers.Single(m => m.Name == entity.Manufacturer.Name).ListOfCommodities.Add(entity);
         Database.Instance.Commodities.Add(entity);
-
         return entity.Id;
     }
 
@@ -24,29 +21,32 @@ public class CommodityRepository : IRepository<CommodityEntity>
 
     public CommodityEntity GetById(Guid id)
     {
-        return Database.Instance.Commodities.Single(s => s.Id == id);
+        if (Database.Instance.Commodities.All(c => c.Id != id)) throw new ArgumentNullException();
+        return Database.Instance.Commodities.Single(c => c.Id == id);
     }
 
     public CommodityEntity GetByName(string name)
     {
         if(name == null) throw new ArgumentNullException();
-        return Database.Instance.Commodities.Single(s => s.Name == name);
+        if (Database.Instance.Commodities.All(c => c.Name != name)) throw new ArgumentNullException(nameof(name));
+        return Database.Instance.Commodities.Single(c => c.Name == name);
     }
 
     public CommodityEntity Update(CommodityEntity? entity)
     {
         if (entity == null) throw new ArgumentNullException(nameof(entity));
-        
-        var commodity = Database.Instance.Commodities.Single(s => s.Id == entity.Id);
+        if (Database.Instance.Commodities.All(c => c.Id != entity.Id)) throw new ArgumentNullException(nameof(entity));
+        var commodity = Database.Instance.Commodities.Single(c => c.Id == entity.Id);
         commodity.Name = entity.Name;
+        commodity.Description = entity.Description;
+        commodity.Price = entity.Price;
         return commodity;
     }
 
     public void Delete(Guid id)
     {
-        if(!Database.Instance.Commodities.Any(c => c.Id == id)) throw new ArgumentException();
-        
-        var commodity = Database.Instance.Commodities.Single(s => s.Id == id);
+        if(Database.Instance.Commodities.All(c => c.Id != id)) throw new ArgumentException();
+        var commodity = Database.Instance.Commodities.Single(c => c.Id == id);
         Database.Instance.Manufacturers.Single(m => m == commodity.Manufacturer).ListOfCommodities.Remove(commodity);
         foreach (var r in commodity.Reviews)
         {

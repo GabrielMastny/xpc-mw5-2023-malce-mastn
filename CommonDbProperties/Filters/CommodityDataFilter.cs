@@ -1,4 +1,4 @@
-﻿namespace App.DAL.QueryObjects.Filters;
+﻿namespace CommonDbProperties.Interfaces.Filters;
 
 // public record DataFilter(
 //     string Category,
