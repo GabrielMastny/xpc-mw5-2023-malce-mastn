@@ -20,8 +20,6 @@ public class GetCategoriesByCategoryFilterQuery : IQuery<CategoryEntity, Categor
     
     public IEnumerable<CategoryEntity> Execute(CategoryFilter filter)
     {
-        //return _db.Categories.Select(c => c.Name == filter.Name).SingleOrDefault();
-        throw new NotImplementedException();
-
+        return _db.Categories.Select(x => _mapper.Map<CategoryEntity>(x)).Where(x => x.Name == filter.Name);;
     }
 }
