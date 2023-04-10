@@ -26,7 +26,7 @@ namespace WebAPI.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet(Name = nameof(Get))]
+        [HttpGet(Name = "GetCommodities")]
         public ActionResult<IEnumerable<CommodityEntity>> Get(ApiVersion version, [FromQuery] QueryParameters queryParameters)
         {
             
@@ -52,6 +52,13 @@ namespace WebAPI.Controllers
 #endif
         }
         
-        
+        [HttpDelete]
+        [Route("{id:Guid}", Name = nameof(RemoveCommodity))]
+        public ActionResult RemoveCommodity(Guid id)
+        {
+            _repo.Delete(id);
+
+            return new OkResult();
+        }
     }
 }
