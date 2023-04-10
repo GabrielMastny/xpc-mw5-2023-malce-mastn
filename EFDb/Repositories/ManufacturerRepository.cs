@@ -19,29 +19,37 @@ public class ManufacturerRepository : IRepository<ManufacturerEntity>
     
     public Guid Create(ManufacturerEntity entity)
     {
-        var cat = _db.Manufacturers.Add(_mapper.Map<Manufacturer>(entity));
+        var man = _db.Manufacturers.Add(_mapper.Map<Manufacturer>(entity));
         _db.SaveChanges();
 
-        return cat.Entity.Id;
+        return man.Entity.Id;
     }
 
     public IEnumerable<ManufacturerEntity> Get()
     {
-        throw new NotImplementedException();
+        return _db.Manufacturers.Select(x => _mapper.Map<ManufacturerEntity>(x));
     }
 
     public ManufacturerEntity GetById(Guid id)
     {
-        throw new NotImplementedException();
+        return _mapper.Map<ManufacturerEntity>(_db.Manufacturers.SingleOrDefault(x => x.Id == id));
     }
 
     public ManufacturerEntity Update(ManufacturerEntity? entity)
     {
-        throw new NotImplementedException();
+        var man = _db.Update(_mapper.Map<Manufacturer>(entity));
+        _db.SaveChanges();
+        
+        return _mapper.Map<ManufacturerEntity>(man.Entity);
     }
 
     public void Delete(Guid id)
     {
-        throw new NotImplementedException();
+        var man = _db.Manufacturers.SingleOrDefault(x => x.Id == id);
+        
+        if (man == null) return;
+
+        _db.Manufacturers.Remove(man);
+        _db.SaveChanges();
     }
 }
