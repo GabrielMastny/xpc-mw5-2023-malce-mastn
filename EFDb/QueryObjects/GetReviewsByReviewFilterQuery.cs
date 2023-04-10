@@ -19,6 +19,6 @@ public class GetReviewsByReviewFilterQuery : IQuery<ReviewEntity, ReviewFilter>
     }
     public IEnumerable<ReviewEntity> Execute(ReviewFilter filter)
     {
-        return _db.Reviews.Select(x => _mapper.Map<ReviewEntity>(x)).Where(x => x.Stars == filter.Stars);
+        return _db.Reviews.Select(r => _mapper.Map<ReviewEntity>(r)).Where(r => r.Stars == filter.Stars);
     }
 }

@@ -19,7 +19,7 @@ public class GetCommoditiesByCommodityDataFilterQuery : IQuery<CommodityEntity, 
     }
     public IEnumerable<CommodityEntity> Execute(CommodityDataFilter filter)
     {
-        IEnumerable<CommodityEntity> list = _db.Comodities.Select(x => _mapper.Map<CommodityEntity>(x));
+        IEnumerable<CommodityEntity> list = _db.Comodities.Select(c => _mapper.Map<CommodityEntity>(c));
         if (filter.Name != null) list = list.Where(c => c.Name.Contains(filter.Name));
         if (filter.Category != null) list = list.Where(c => c.Category.Name == filter.Category);
         if (filter.Manufacturer != null) list = list.Where(c => c.Manufacturer.Name == filter.Manufacturer);
