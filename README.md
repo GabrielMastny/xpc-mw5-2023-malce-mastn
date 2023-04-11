@@ -6,5 +6,5 @@ Ladislav Malček, email: xmalce00@vutbr.cz
 
 Repository: xpc-mw5-2023-malce-mastn
 
-## Project variant
+## Project variant:
 A (backend + DB)
