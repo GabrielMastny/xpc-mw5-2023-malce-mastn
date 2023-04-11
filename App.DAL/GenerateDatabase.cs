@@ -26,6 +26,16 @@ public class GenerateDatabase : IDisposable
         return faker.Generate(number);
     }
 
+    public ICollection<ReviewEntity> GenerateFakeReviewsTest(int number)
+    {
+        return new Faker<ReviewEntity>()
+            //.UseSeed(99)
+            .RuleFor(r => r.Stars, f => f.Random.Int(0, 5))
+            .RuleFor(r => r.Description, f => f.Lorem.Sentence())
+            .RuleFor(r => r.Title, f => f.Name.FirstName())
+            .Generate(number);
+    }
+    
     public ICollection<ReviewEntity> GenerateFakeReviews(int number)
     {
         return new Faker<ReviewEntity>()
