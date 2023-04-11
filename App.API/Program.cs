@@ -39,9 +39,10 @@ class Program
                 c.Category = categoryRepository.ReturnOrCreate(c.Category);
                 commodityRepository.Create(c);
 
-                foreach (var r in generateCommodities.GenerateFakeReviews(3))
+                foreach (var r in generateCommodities.GenerateFakeReviewsTest(3))
                 {
                     c.Reviews.Add(reviewRepository.GetById(reviewRepository.Create(r)));
+                    //r.RelatedTo = c;
                 }
             }
 
@@ -49,7 +50,8 @@ class Program
         
         //Database.Instance.ShowData();
         
-        Console.WriteLine("\nManufacturer Greta");
+        Console.WriteLine("\n###### Get by ID test ######");
+        Console.WriteLine("\nManufacturer Greta - list of commodities");
         var man = manufacturerRepository.GetByName("Greta");
         foreach (var c in man.ListOfCommodities)
         {
@@ -64,40 +66,38 @@ class Program
             Console.WriteLine(c.Name);
         }
         
-        Console.WriteLine("\n### Manufacturer filter: ");
+        Console.WriteLine("\n### Manufacturer filter: Wiley");
         var manufacturers = new GetManufacturersByManufacturerDataFilterQuery().Execute(new ManufacturerDataFilter()
         {
             CountryOfOrigin = "Wiley"
         });
-
+        
         foreach (var m in manufacturers)
         {
             Console.WriteLine(m.Name);
         }
         
-        Console.WriteLine("\n### Commodity filter: ");
+        Console.WriteLine("\n### Commodity filter: price - 1-200, number of pieces in stock - 200, weight - 10-20");
         var comms = new GetCommoditiesByDataFilterQuery().Execute(new CommodityDataFilter()
         {
             Price = new double?[]{1,200},
             NumberOfPiecesInStock = 200,
             Weight = new double?[]{10, 20}
         });
-
+        
         foreach (var c in comms)
         {
             Console.WriteLine(c);
         }
         
-        Console.WriteLine("\n### Review filter: ");
+        Console.WriteLine("\n### Review filter: starts - 2");
         var reviews = new GetReviewsByReviewFilterQuery().Execute(new ReviewFilter() { Stars = 2 });
-
+        
         foreach (var r in reviews)
         {
             Console.WriteLine(r);
         }
-        
-        //Console.WriteLine("\n### Complex filter: ");
-        
+
     }
 
 }

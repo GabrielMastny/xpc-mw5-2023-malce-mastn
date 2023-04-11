@@ -19,10 +19,9 @@ public class ReviewRepository : IRepository<ReviewEntity>
 
     public Guid Create(ReviewEntity entity)
     {
-        var rev = _mapper.Map<Review>(entity);
-
-        var entry = _db.Reviews.Add(rev);
+        var entry = _db.Reviews.Add(_mapper.Map<Review>(entity));
         _db.SaveChanges();
+        
         return entry.Entity.Id;
     }
 
@@ -41,6 +40,7 @@ public class ReviewRepository : IRepository<ReviewEntity>
     public ReviewEntity Update(ReviewEntity? entity)
     {
         var rev = _db.Update(_mapper.Map<Review>(entity));
+        _db.SaveChanges();
 
         return _mapper.Map<ReviewEntity>(rev.Entity);
     }
@@ -52,5 +52,6 @@ public class ReviewRepository : IRepository<ReviewEntity>
         if (rev == null) return;
 
         _db.Reviews.Remove(rev);
+        _db.SaveChanges();
     }
 }

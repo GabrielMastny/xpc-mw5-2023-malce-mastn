@@ -40,7 +40,7 @@ public class CategoryRepository : IRepository<CategoryEntity>
 
     public CategoryEntity Update(CategoryEntity? entity)
     {
-        if (entity == null || !_db.Categories.Any(x => x.Id == entity.Id))
+        if (entity == null )//|| !_db.Categories.Any(x => x.Id == entity.Id))
             return null;
 
         var cat = _mapper.Map<Category>(entity);

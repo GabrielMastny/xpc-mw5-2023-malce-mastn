@@ -25,7 +25,7 @@ public class ReviewController
         _mapper = mapper;
     }
     
-    [HttpGet]
+    [HttpGet(Name = "GetReviews")]
     public IEnumerable<ReviewDTO> Get()
     {
         return _repo.Get().Select(x => _mapper.Map<ReviewDTO>(x));

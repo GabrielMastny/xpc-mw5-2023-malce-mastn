@@ -1,3 +1,10 @@
-# xpc-mw5-2023-lukas-malce-mastn
+# Project XPC-MW5
 
-update 1
+## Authors: 
+Gabriel Mastný, email: xmastn02@vutbr.cz  
+Ladislav Malček, email: xmalce00@vutbr.cz
+
+Repository: xpc-mw5-2023-malce-mastn
+
+## Project variant
+A (backend + DB)

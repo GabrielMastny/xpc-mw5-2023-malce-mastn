@@ -25,7 +25,7 @@ public class CategoryController
         _mapper = mapper;
     }
 
-    [HttpGet]
+    [HttpGet(Name = "GetCategories")]
     public IEnumerable<CategoryDTO> Get()
     {
         return _repo.Get().Select(x => _mapper.Map<CategoryDTO>(x));

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using App.DAL.Entities;
 using AutoMapper;
 using CommonDbProperties.Interfaces.Repositories;
@@ -23,10 +24,10 @@ public class ManufacturerController
         _mapper = mapper;
     }
 
-    [HttpGet]
-    public IEnumerable<ManufacturerEntity> Get()
+    [HttpGet(Name = "GetManufacturers")]
+    public IEnumerable<ManufacturerDTO> Get()
     {
-        return new List<ManufacturerEntity>();
+        return _repo.Get().Select(x => _mapper.Map<ManufacturerDTO>(x));
     }
     
     [HttpPost(Name = nameof(AddManufacturer))]

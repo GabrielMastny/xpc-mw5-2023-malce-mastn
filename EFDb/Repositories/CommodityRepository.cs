@@ -23,7 +23,7 @@ public class CommodityRepository : IRepository<CommodityEntity>
         if (!_db.Categories.Any(x => x.Id == entity.Category.Id))
             return Guid.Empty;
         
-        if (_db.Manufacturers.Any(x => x.Id == entity.Manufacturer.Id))
+        if (!_db.Manufacturers.Any(x => x.Id == entity.Manufacturer.Id))
             return Guid.Empty;
         
         Guid newComId = _db.Comodities.Add(new Commodity
@@ -94,7 +94,7 @@ public class CommodityRepository : IRepository<CommodityEntity>
         if (entity == null)
             return null;
 
-        var qr = _db.Comodities.Where(x => x.Id == entity.Id).Single();
+        var qr = _db.Comodities.Update(_mapper.Map<Commodity>(entity));
         return entity;
     }
 
@@ -104,5 +104,6 @@ public class CommodityRepository : IRepository<CommodityEntity>
         if (ent == null) return;
 
         _db.Comodities.Remove(ent);
+        _db.SaveChanges();
     }
 }
