@@ -1,11 +1,9 @@
 using System;
-using App.DAL.Entities;
-using CommonDbProperties.Interfaces.Repositories;
-using EFDb.Context;
-using EFDb.Mappings;
+using Eshop.DAL.Context;
+using Eshop.DAL.Entities;
+using Eshop.DAL.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -13,8 +11,6 @@ using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using WebAPI.Helpers;
 using WebAPI.MappingProfiles;
-using MemDB = App.DAL.Repositories;
-using EFDB = EFDb.Repositories;
 
 namespace WebAPI
 {
@@ -38,24 +34,14 @@ namespace WebAPI
             services.AddAutoMapper(typeof(CommodityMappings));
             services.AddAutoMapper(typeof(CategoryMappings));
             services.AddAutoMapper(typeof(ManufacturerMappings));
-            if (Environment.GetEnvironmentVariable("DB_Type") == "EFDb")
-            {
-                services.AddAutoMapper(typeof(CategoryDbMappings));
-                services.AddAutoMapper(typeof(ManufacturerMappings));
+            //services.AddAutoMapper(typeof(CategoryDbMappings));
+            services.AddAutoMapper(typeof(ManufacturerMappings));
                 
-                services.AddScoped<IRepository<CommodityEntity>, EFDB.CommodityRepository>();
-                services.AddScoped<IRepository<CategoryEntity>, EFDB.CategoryRepository>();
-                services.AddScoped<IRepository<ManufacturerEntity>, EFDB.ManufacturerRepository>();
-                services.AddScoped<IRepository<ReviewEntity>, EFDB.ReviewRepository>();
-                services.AddDbContext<EshopContext>();
-                
-            }
-            else
-            {
-                services.AddScoped<IRepository<CommodityEntity>, MemDB.CommodityRepository>();
-                services.AddScoped<IRepository<CategoryEntity>, MemDB.CategoryRepository>();
-                services.AddScoped<IRepository<ManufacturerEntity>, MemDB.ManufacturerRepository>();
-            }
+            services.AddScoped<IRepository<CommodityEntity>, CommodityRepository>();
+            services.AddScoped<IRepository<CategoryEntity>, CategoryRepository>();
+            services.AddScoped<IRepository<ManufacturerEntity>, ManufacturerRepository>();
+            services.AddScoped<IRepository<ReviewEntity>, ReviewRepository>();
+            services.AddDbContext<EshopContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -66,7 +52,9 @@ namespace WebAPI
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebAPI v1"));
-          Eshop.API           app.UseHttpsRedirection();
+                app.UseHttpsRedirection();
+
+            }
 
             app.UseRouting();
 

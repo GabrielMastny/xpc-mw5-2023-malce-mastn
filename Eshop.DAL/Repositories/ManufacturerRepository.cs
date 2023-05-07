@@ -1,8 +1,6 @@
 ﻿using Eshop.DAL.Entities;
 using AutoMapper;
-using CommonDbProperties.Interfaces.Repositories;
 using Eshop.DAL.Context;
-using Eshop.DAL.Models;
 
 namespace Eshop.DAL.Repositories;
 
@@ -19,7 +17,7 @@ public class ManufacturerRepository : IRepository<ManufacturerEntity>
     
     public Guid Create(ManufacturerEntity entity)
     {
-        var man = _db.Manufacturers.Add(_mapper.Map<Manufacturer>(entity));
+        var man = _db.Manufacturers.Add(entity);
         _db.SaveChanges();
 
         return man.Entity.Id;
@@ -32,7 +30,7 @@ public class ManufacturerRepository : IRepository<ManufacturerEntity>
 
     public ManufacturerEntity Update(ManufacturerEntity? entity)
     {
-        var man = _db.Update(_mapper.Map<Manufacturer>(entity));
+        var man = _db.Update(entity);
         _db.SaveChanges();
         
         return _mapper.Map<ManufacturerEntity>(man.Entity);

@@ -2,7 +2,6 @@
 
 #nullable disable
 
-using EFDb.Context;
 using Eshop.DAL.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;

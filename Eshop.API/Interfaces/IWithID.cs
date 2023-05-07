@@ -1,4 +1,6 @@
-﻿namespace CommonDbProperties.Interfaces.Entities;
+﻿using System;
+
+namespace Eshop.API.Interfaces;
 
 public interface IWithId
 {

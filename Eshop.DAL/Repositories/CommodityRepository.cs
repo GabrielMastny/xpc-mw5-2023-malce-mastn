@@ -1,8 +1,6 @@
 ﻿using Eshop.DAL.Entities;
 using AutoMapper;
-using CommonDbProperties.Interfaces.Repositories;
 using Eshop.DAL.Context;
-using Eshop.DAL.Models;
 
 namespace Eshop.DAL.Repositories;
 
@@ -26,15 +24,15 @@ public class CommodityRepository : IRepository<CommodityEntity>
         if (!_db.Manufacturers.Any(x => x.Id == entity.Manufacturer.Id))
             return Guid.Empty;
         
-        Guid newComId = _db.Comodities.Add(new Commodity
+        Guid newComId = _db.Comodities.Add(new CommodityEntity()
         {
             Description = entity.Description,
             Image = entity.Image,
             Name = entity.Name,
             Price = entity.Price,
             Weight = entity.Weight,
-            CategoryId = entity.Category.Id,
-            ManufacturerId = entity.Manufacturer.Id,
+            Category = new CategoryEntity(), //needs to be fixed
+            Manufacturer = new ManufacturerEntity(), //also
             NumberOfPiecesInStock = entity.NumberOfPiecesInStock
         }).Entity.Id;
         _db.SaveChanges();
@@ -53,7 +51,7 @@ public class CommodityRepository : IRepository<CommodityEntity>
             Category = new CategoryEntity
             {
                 Description = "",
-                Id = y.CategoryId,
+                Id = y.Category.Id,
                 Image = "",
                 Name = ""
             },
@@ -61,7 +59,7 @@ public class CommodityRepository : IRepository<CommodityEntity>
             Manufacturer = new ManufacturerEntity
             {
                 Description = "",
-                Id = y.ManufacturerId,
+                Id = y.Manufacturer.Id,
                 Image = "",
                 Name = "",
                 CountryOfOrigin = ""
@@ -76,7 +74,7 @@ public class CommodityRepository : IRepository<CommodityEntity>
         if (entity == null)
             return null;
 
-        var qr = _db.Comodities.Update(_mapper.Map<Commodity>(entity));
+        var qr = _db.Comodities.Update(entity);
         return entity;
     }
 

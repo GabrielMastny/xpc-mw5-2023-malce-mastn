@@ -1,8 +1,6 @@
 ﻿using Eshop.DAL.Entities;
 using AutoMapper;
-using CommonDbProperties.Interfaces.Repositories;
 using Eshop.DAL.Context;
-using Eshop.DAL.Models;
 
 namespace Eshop.DAL.Repositories;
 
@@ -18,7 +16,7 @@ public class CategoryRepository : IRepository<CategoryEntity>
     }
     public Guid Create(CategoryEntity entity)
     {
-        var cat = _db.Categories.Add(_mapper.Map<Category>(entity));
+        var cat = _db.Categories.Add(entity);
         _db.SaveChanges();
 
         return cat.Entity.Id;
@@ -38,9 +36,7 @@ public class CategoryRepository : IRepository<CategoryEntity>
         if (entity == null )//|| !_db.Categories.Any(x => x.Id == entity.Id))
             return null;
 
-        var cat = _mapper.Map<Category>(entity);
-
-        _db.Categories.Update(cat);
+        _db.Categories.Update(entity);
         _db.SaveChanges();
 
         return entity;

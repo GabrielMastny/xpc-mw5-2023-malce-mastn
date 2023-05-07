@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Eshop.API.Dtos;
 
 namespace WebAPI.Dtos;
 

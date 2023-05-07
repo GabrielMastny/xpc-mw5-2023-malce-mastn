@@ -1,4 +1,6 @@
-﻿namespace CommonDbProperties.Interfaces.Entities;
+﻿using Eshop.API.Interfaces;
+
+namespace CommonDbProperties.Interfaces.Entities;
 
 public interface IReview : IWithId
 {

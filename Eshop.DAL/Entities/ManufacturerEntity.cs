@@ -1,10 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using CommonDbProperties.Interfaces.Entities;
 
-namespace Eshop.DAL.Models;
+namespace Eshop.DAL.Entities;
 
 [Table("Manufacturer")]
-public class Manufacturer : TableBase, IManufacturer
+public class ManufacturerEntity : TableBase
 {
     public string Name { get; set; }
     public string Description { get; set; }

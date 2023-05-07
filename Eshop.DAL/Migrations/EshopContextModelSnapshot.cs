@@ -22,7 +22,7 @@ namespace Eshop.DAL.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Eshop.DAL.Models.Category", b =>
+            modelBuilder.Entity("Eshop.DAL.Entities.CategoryEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -45,7 +45,7 @@ namespace Eshop.DAL.Migrations
                     b.ToTable("Category");
                 });
 
-            modelBuilder.Entity("Eshop.DAL.Models.Commodity", b =>
+            modelBuilder.Entity("Eshop.DAL.Entities.CommodityEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -80,10 +80,14 @@ namespace Eshop.DAL.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("ManufacturerId");
+
                     b.ToTable("Commodity");
                 });
 
-            modelBuilder.Entity("Eshop.DAL.Models.Manufacturer", b =>
+            modelBuilder.Entity("Eshop.DAL.Entities.ManufacturerEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -110,7 +114,7 @@ namespace Eshop.DAL.Migrations
                     b.ToTable("Manufacturer");
                 });
 
-            modelBuilder.Entity("Eshop.DAL.Models.Review", b =>
+            modelBuilder.Entity("Eshop.DAL.Entities.ReviewEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -120,7 +124,7 @@ namespace Eshop.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("RelatedTo")
+                    b.Property<Guid>("RelatedToId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Stars")
@@ -132,7 +136,39 @@ namespace Eshop.DAL.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("RelatedToId");
+
                     b.ToTable("Review");
+                });
+
+            modelBuilder.Entity("Eshop.DAL.Entities.CommodityEntity", b =>
+                {
+                    b.HasOne("Eshop.DAL.Entities.CategoryEntity", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Eshop.DAL.Entities.ManufacturerEntity", "Manufacturer")
+                        .WithMany()
+                        .HasForeignKey("ManufacturerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+
+                    b.Navigation("Manufacturer");
+                });
+
+            modelBuilder.Entity("Eshop.DAL.Entities.ReviewEntity", b =>
+                {
+                    b.HasOne("Eshop.DAL.Entities.CommodityEntity", "RelatedTo")
+                        .WithMany()
+                        .HasForeignKey("RelatedToId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("RelatedTo");
                 });
 #pragma warning restore 612, 618
         }

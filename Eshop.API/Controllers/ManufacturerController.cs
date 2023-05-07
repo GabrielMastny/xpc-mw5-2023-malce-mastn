@@ -2,7 +2,7 @@
 using System.Linq;
 using Eshop.DAL.Entities;
 using AutoMapper;
-using CommonDbProperties.Interfaces.Repositories;
+using Eshop.DAL.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using WebAPI.Dtos;
@@ -27,7 +27,8 @@ public class ManufacturerController
     [HttpGet(Name = "GetManufacturers")]
     public IEnumerable<ManufacturerDTO> Get()
     {
-        return _repo.Get().Select(x => _mapper.Map<ManufacturerDTO>(x));
+        //return _repo.Get().Select(x => _mapper.Map<ManufacturerDTO>(x));
+        return null;
     }
     
     [HttpPost(Name = nameof(AddManufacturer))]

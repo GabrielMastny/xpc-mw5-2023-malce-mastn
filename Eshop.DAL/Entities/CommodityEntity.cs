@@ -1,10 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using CommonDbProperties.Interfaces.Entities;
+using Eshop.DAL.Entities;
 
-namespace Eshop.DAL.Models;
+namespace Eshop.DAL.Entities;
 
 [Table("Commodity")]
-public class Commodity : TableBase, ICommodity
+public class CommodityEntity : TableBase
 {
     public required string Name { get; set; }
     public string Image { get; set; }
@@ -12,6 +12,6 @@ public class Commodity : TableBase, ICommodity
     public required double Price { get; set; }
     public double Weight { get; set; }
     public int NumberOfPiecesInStock { get; set; }
-    public required Guid CategoryId { get; set; }
-    public required Guid ManufacturerId { get; set; }
+    public required CategoryEntity Category { get; set; }
+    public required ManufacturerEntity Manufacturer { get; set; }
 }

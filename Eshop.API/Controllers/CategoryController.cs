@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Eshop.DAL.Entities;
 using AutoMapper;
-using CommonDbProperties.Interfaces.Repositories;
+using Eshop.API.Dtos;
+using Eshop.DAL.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using WebAPI.Dtos;
@@ -28,7 +29,8 @@ public class CategoryController
     [HttpGet(Name = "GetCategories")]
     public IEnumerable<CategoryDTO> Get()
     {
-        return _repo.Get().Select(x => _mapper.Map<CategoryDTO>(x));
+        //return _repo.Get().Select(x => _mapper.Map<CategoryDTO>(x));
+        return null;
     }
     
     [HttpPost(Name = nameof(AddCategory))]

@@ -1,8 +1,6 @@
 ﻿using Eshop.DAL.Entities;
 using AutoMapper;
-using CommonDbProperties.Interfaces.Repositories;
 using Eshop.DAL.Context;
-using Eshop.DAL.Models;
 
 namespace Eshop.DAL.Repositories;
 
@@ -19,7 +17,7 @@ public class ReviewRepository : IRepository<ReviewEntity>
 
     public Guid Create(ReviewEntity entity)
     {
-        var entry = _db.Reviews.Add(_mapper.Map<Review>(entity));
+        var entry = _db.Reviews.Add(entity);
         _db.SaveChanges();
         
         return entry.Entity.Id;
@@ -29,12 +27,12 @@ public class ReviewRepository : IRepository<ReviewEntity>
     {
         var rev = _db.Reviews.SingleOrDefault(x => x.Id == id);
 
-        return rev == null ? ReviewEntity.Default() : _mapper.Map<ReviewEntity>(rev);
+        return rev;
     }
 
     public ReviewEntity Update(ReviewEntity? entity)
     {
-        var rev = _db.Update(_mapper.Map<Review>(entity));
+        var rev = _db.Update(entity);
         _db.SaveChanges();
 
         return _mapper.Map<ReviewEntity>(rev.Entity);

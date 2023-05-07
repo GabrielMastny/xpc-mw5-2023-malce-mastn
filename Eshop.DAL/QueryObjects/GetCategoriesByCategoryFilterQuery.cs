@@ -1,8 +1,8 @@
-﻿using Eshop.DAL.Entities;
-using AutoMapper;
+﻿using AutoMapper;
+using Eshop.DAL.Entities;
 using CommonDbProperties.Interfaces.Filters;
 using CommonDbProperties.Interfaces.QueryObjects;
-using EFDb.Context;
+using Eshop.DAL.Context;
 
 namespace EFDb.QueryObjects;
 

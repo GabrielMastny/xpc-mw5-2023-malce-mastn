@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Eshop.DAL.Entities;
 using AutoMapper;
-using CommonDbProperties.Interfaces.Repositories;
+using Eshop.DAL.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using WebAPI.Dtos;
@@ -28,7 +28,8 @@ public class ReviewController
     [HttpGet(Name = "GetReviews")]
     public IEnumerable<ReviewDTO> Get()
     {
-        return _repo.Get().Select(x => _mapper.Map<ReviewDTO>(x));
+       // return _repo.Get().Select(x => _mapper.Map<ReviewDTO>(x));
+       return null;
     }
     
     [HttpPost(Name = nameof(AddReview))]
