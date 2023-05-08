@@ -1,7 +1,7 @@
 ﻿using System.Data.SqlClient;
 using Eshop.DAL;
-using Eshop.DAL.Entities;
 using Eshop.DAL.Mappers;
+using Eshop.DAL.QueryObjects;
 using Eshop.DAL.Repositories;
 
 namespace Eshop.ConsoleApp;
@@ -17,24 +17,59 @@ class Program
     private static ManufacturerRepository _manufacturerRepository =
         new ManufacturerRepository(new EshopContext(), new ManufacturerMapper());
 
+    private static ReviewRepository _reviewRepository = new ReviewRepository(new EshopContext(), new ReviewMapper());
+
     public static void Main(string[] args)
     {
-        Random rnd = new Random();
+
+        var commodities =
+            new GetCommoditiesByCommodityDataFilterQuery(new EshopContext(), new CommodityMapper()).Execute(
+                new CommodityDataFilter()
+                {
+                    Price = new double?[] {10,300},
+                    Weight = new double?[] {0,100},
+                    NumberOfPiecesInStock = 200
+                });
+
+        foreach (var c in commodities)
+        {
+            Console.WriteLine(c);
+        }
         
-        Console.WriteLine("Hello, World!");
+        // var commodities =
+        //     new GetCommoditiesByCommodityDataFilterQuery(new EshopContext(), new CommodityMapper()).Execute(
+        //         new CommodityDataFilter());
+        //
+        // foreach (var c in commodities)
+        // {
+        //     var reviews = GenerateDatabase.GenerateFakeReviews(3);
+        //
+        //     foreach (var r in reviews)
+        //     {
+        //         c.Reviews.Add(r);
+        //
+        //         r.Commodity = c.Id;
+        //         
+        //         _reviewRepository.Create(r);
+        //     }
+        //
+        //     Console.WriteLine(c.Name);
+        // }
 
-        var mans = GenerateDatabase.GenerateFakeManufacturer(10);
-
-        var cats = GenerateDatabase.GenerateFakeCategory(20);
-
-        var comms = GenerateDatabase.GenerateFakeCommodities(100);
-
-        var revs = GenerateDatabase.GenerateFakeReviews(300);
-
-        var array = cats.ToArray();
-
-        var marray = mans.ToArray();
-
+        // Random rnd = new Random();
+        //
+        // Console.WriteLine("Hello, World!");
+        //
+        // var mans = GenerateDatabase.GenerateFakeManufacturer(10);
+        //
+        // var cats = GenerateDatabase.GenerateFakeCategory(20);
+        //
+        // var comms = GenerateDatabase.GenerateFakeCommodities(100);
+        //
+        // var array = cats.ToArray();
+        //
+        // var marray = mans.ToArray();
+        //
         // foreach (var m in mans)
         // {
         //     _manufacturerRepository.Create(m);
@@ -43,21 +78,34 @@ class Program
         //
         // foreach (var ca in cats)
         // {
-        //     //var id = _categoryRepository.Create(ca);
-        //
-        //     //Console.WriteLine(id);
+        //     var id = _categoryRepository.Create(ca);
+        //     Console.WriteLine(id);
         // }
-        // //
-        foreach (var c in comms)
-        {
-            c.Category = _categoryRepository.GetById(Guid.Parse("00e02cde-a825-429f-8c8e-da826f7f2755"));
-            
-            c.Manufacturer = _manufacturerRepository.GetById(Guid.Parse("0459fbc6-2b12-489c-9b73-e89a5d543f7c"));
-
-            _commodityRepository.Create(c);
-            
-            Console.WriteLine(c.Name);
-        }
+        //
+        // foreach (var c in comms)
+        // {
+        //     c.Category = array[rnd.Next(array.Length)];
+        //     
+        //     c.Manufacturer = marray[rnd.Next(marray.Length)];
+        //     
+        //     //c.Category = _categoryRepository.GetById(Guid.Parse("00e02cde-a825-429f-8c8e-da826f7f2755"));
+        //     
+        //     //c.Manufacturer = _manufacturerRepository.GetById(Guid.Parse("0459fbc6-2b12-489c-9b73-e89a5d543f7c"));
+        //     
+        //     // var revs = GenerateDatabase.GenerateFakeReviews(3);
+        //     //
+        //     // foreach (var r in revs)
+        //     // {
+        //     //     c.Reviews.Add(r);
+        //     //     r.Commodity = c.Id;
+        //     //
+        //     //     _reviewRepository.Create(r);
+        //     // }
+        //     
+        //     _commodityRepository.Create(c);
+        //     
+        //     Console.WriteLine(c.Name);
+        // }
 
         // const string connstring =
         //     "Data Source=DESKTOP-TA4S5VB\\SQLEXPRESS; Initial Catalog=Eshop; Integrated Security=true; TrustServerCertificate=true";

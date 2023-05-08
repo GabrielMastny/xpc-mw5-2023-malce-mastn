@@ -9,5 +9,6 @@ public record ReviewEntity : EntityBase //TableBase, IReview
     public string Title { get; set; }
     public required int Stars { get; set; }
     
-    //public required Guid RelatedTo { get; set; }
+    public required Guid Commodity { get; set; }
+    
 }

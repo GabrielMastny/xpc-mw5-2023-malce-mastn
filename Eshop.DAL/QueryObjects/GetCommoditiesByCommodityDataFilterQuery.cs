@@ -1,5 +1,6 @@
 ﻿using Eshop.DAL.Entities;
 using Eshop.DAL.Context;
+using Eshop.DAL.Mappers;
 
 namespace Eshop.DAL.QueryObjects;
 
@@ -7,16 +8,16 @@ public class GetCommoditiesByCommodityDataFilterQuery : IQuery<CommodityEntity, 
 {
     
     private readonly EshopContext _db;
-    //private readonly IMapper _mapper;
+    private readonly CommodityMapper _mapper;
     
-    public GetCommoditiesByCommodityDataFilterQuery(EshopContext db)
+    public GetCommoditiesByCommodityDataFilterQuery(EshopContext db, CommodityMapper mapper)
     {
         _db = db;
-        //_mapper = mapper;
+        _mapper = mapper;
     }
     public IEnumerable<CommodityEntity> Execute(CommodityDataFilter filter)
     {
-        IEnumerable<CommodityEntity> list = null; //_db.Comodities.Select(c => _mapper.Map<CommodityEntity>(c));
+        IEnumerable<CommodityEntity> list = _db.Commodities.Select(c => _mapper.ReverseMap(c));
         if (filter.Name != null)
         {
             list = list.Where(c => c.Name.Contains(filter.Name));

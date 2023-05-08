@@ -1,10 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿namespace Eshop.DAL.Entities;
 
-namespace Eshop.DAL.Entities;
-
-[Table("Category")]
-public class CategoryEntity : TableBase, IEntity
+//[Table("Category")]
+public record CategoryEntity : EntityBase
 {
     public string Name { get; set; }
     public string Description { get; set; }

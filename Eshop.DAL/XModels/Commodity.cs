@@ -15,7 +15,7 @@ public partial class Commodity : IModel
 
     public double Price { get; set; }
 
-    public double? Weight { get; set; }
+    public double Weight { get; set; }
 
     public int NumberOfPiecesInStock { get; set; }
 
