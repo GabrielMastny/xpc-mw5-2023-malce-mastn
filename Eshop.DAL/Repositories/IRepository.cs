@@ -1,11 +1,10 @@
-﻿using CommonDbProperties.Interfaces.Entities;
+﻿using Eshop.DAL.Entities;
 
-namespace CommonDbProperties.Interfaces.Repositories;
+namespace Eshop.DAL.Repositories;
 
-public interface IRepository<TEntity> where TEntity : class, IWithId
+public interface IRepository<TEntity> where TEntity : EntityBase
 {
     Guid Create(TEntity entity);
-    IEnumerable<TEntity> Get();
     TEntity GetById(Guid id);
     TEntity Update(TEntity? entity);
     void Delete(Guid id);

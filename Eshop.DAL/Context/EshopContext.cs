@@ -1,4 +1,4 @@
-﻿using Eshop.DAL.Models;
+﻿using Eshop.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Eshop.DAL.Context;
@@ -15,8 +15,8 @@ public class EshopContext : DbContext
         optionsBuilder.UseSqlServer(@"Server=localhost\SQLEXPRESS;Database=master;Encrypt=False;Trusted_Connection=Yes");
     }
 
-    public DbSet<Commodity> Comodities { get; set; }
-    public DbSet<Category> Categories { get; set; }
-    public DbSet<Manufacturer> Manufacturers { get; set; }
-    public DbSet<Review> Reviews { get; set; }
+    public DbSet<CommodityEntity> Comodities { get; set; }
+    public DbSet<CategoryEntity> Categories { get; set; }
+    public DbSet<ManufacturerEntity> Manufacturers { get; set; }
+    public DbSet<ReviewEntity> Reviews { get; set; }
 }

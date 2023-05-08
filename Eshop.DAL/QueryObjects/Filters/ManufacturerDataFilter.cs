@@ -1,6 +1,6 @@
-﻿using CommonDbProperties.Interfaces.Filters;
+﻿using Eshop.DAL.QueryObjects.Filters;
 
-namespace App.DAL.QueryObjects.Filters;
+namespace Eshop.DAL.QueryObjects;
 
 public record ManufacturerDataFilter : IFilter
 {

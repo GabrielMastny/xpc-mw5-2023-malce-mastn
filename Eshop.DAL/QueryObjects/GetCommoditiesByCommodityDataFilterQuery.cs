@@ -1,7 +1,4 @@
 ﻿using Eshop.DAL.Entities;
-using AutoMapper;
-using CommonDbProperties.Interfaces.Filters;
-using CommonDbProperties.Interfaces.QueryObjects;
 using Eshop.DAL.Context;
 
 namespace Eshop.DAL.QueryObjects;
@@ -10,16 +7,16 @@ public class GetCommoditiesByCommodityDataFilterQuery : IQuery<CommodityEntity, 
 {
     
     private readonly EshopContext _db;
-    private readonly IMapper _mapper;
+    //private readonly IMapper _mapper;
     
-    public GetCommoditiesByCommodityDataFilterQuery(EshopContext db, IMapper mapper)
+    public GetCommoditiesByCommodityDataFilterQuery(EshopContext db)
     {
         _db = db;
-        _mapper = mapper;
+        //_mapper = mapper;
     }
     public IEnumerable<CommodityEntity> Execute(CommodityDataFilter filter)
     {
-        IEnumerable<CommodityEntity> list = _db.Comodities.Select(c => _mapper.Map<CommodityEntity>(c));
+        IEnumerable<CommodityEntity> list = null; //_db.Comodities.Select(c => _mapper.Map<CommodityEntity>(c));
         if (filter.Name != null)
         {
             list = list.Where(c => c.Name.Contains(filter.Name));

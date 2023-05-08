@@ -1,4 +1,6 @@
-﻿namespace CommonDbProperties.Interfaces.Filters;
+﻿using Eshop.DAL.QueryObjects.Filters;
+
+namespace Eshop.DAL.QueryObjects;
 
 // public record DataFilter(
 //     string Category,

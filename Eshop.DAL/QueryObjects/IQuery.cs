@@ -1,9 +1,9 @@
-﻿using CommonDbProperties.Interfaces.Entities;
-using CommonDbProperties.Interfaces.Filters;
+﻿using Eshop.DAL.Entities;
+using Eshop.DAL.QueryObjects.Filters;
 
-namespace CommonDbProperties.Interfaces.QueryObjects;
+namespace Eshop.DAL.QueryObjects;
 
-public interface IQuery<TModel, TFilter> where TModel : IWithId where TFilter : IFilter
+public interface IQuery<TModel, TFilter> where TModel : IEntity where TFilter : IFilter
 {
     IEnumerable<TModel> Execute(TFilter filter);
 }

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Eshop.DAL.Models;
+namespace Eshop.DAL.Entities;
 
 public abstract class TableBase
 {

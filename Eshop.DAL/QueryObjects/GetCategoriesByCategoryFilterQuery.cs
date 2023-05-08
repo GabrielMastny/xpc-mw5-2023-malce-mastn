@@ -1,25 +1,24 @@
 ﻿using Eshop.DAL.Entities;
-using AutoMapper;
-using CommonDbProperties.Interfaces.Filters;
-using CommonDbProperties.Interfaces.QueryObjects;
-using EFDb.Context;
+using Eshop.DAL.Context;
+using Eshop.DAL.QueryObjects.Filters;
 
-namespace EFDb.QueryObjects;
+namespace Eshop.DAL.QueryObjects;
 
 public class GetCategoriesByCategoryFilterQuery : IQuery<CategoryEntity, CategoryFilter>
 {
     
     private readonly EshopContext _db;
-    private readonly IMapper _mapper;
+    //private readonly IMapper _mapper;
     
-    public GetCategoriesByCategoryFilterQuery(EshopContext db, IMapper mapper)
+    public GetCategoriesByCategoryFilterQuery(EshopContext db)
     {
         _db = db;
-        _mapper = mapper;
+        //_mapper = mapper;
     }
     
     public IEnumerable<CategoryEntity> Execute(CategoryFilter filter)
     {
-        return _db.Categories.Select(c => _mapper.Map<CategoryEntity>(c)).Where(c => c.Name == filter.Name);
+        //return _db.Categories.Select(c => _mapper.Map<CategoryEntity>(c)).Where(c => c.Name == filter.Name);
+        return null;
     }
 }
