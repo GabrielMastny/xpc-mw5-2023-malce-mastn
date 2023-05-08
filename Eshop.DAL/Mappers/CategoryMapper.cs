@@ -17,6 +17,12 @@ public class CategoryMapper : IMapper<CategoryEntity, Category>
 
     public CategoryEntity ReverseMap(Category category)
     {
-        return null;
+        return new CategoryEntity()
+        {
+            Id = Guid.Parse(category.Id),
+            Name = category.Name,
+            Description = category.Description,
+            Image = category.Image
+        };
     } 
 }

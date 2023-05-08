@@ -1,7 +1,41 @@
-﻿namespace Eshop.DAL.Repositories;
+﻿using Eshop.DAL.Entities;
+using Eshop.DAL.Mappers;
 
-public class ManufacturerRepository //: IRepository<ManufacturerEntity>
+namespace Eshop.DAL.Repositories;
+
+public class ManufacturerRepository : IRepository<ManufacturerEntity>
 {
+    private readonly EshopContext _db;
+    private readonly ManufacturerMapper _mapper;
+    public ManufacturerRepository(EshopContext eshopContext, ManufacturerMapper mapper)
+    {
+        _db = eshopContext;
+        _mapper = mapper;
+    }
+    public Guid Create(ManufacturerEntity entity)
+    {
+        _db.Add(_mapper.Map(entity));
+        _db.SaveChanges();
+
+        return entity.Id;
+    }
+
+    public ManufacturerEntity GetById(Guid id)
+    {
+        throw new NotImplementedException();
+        //0459fbc6-2b12-489c-9b73-e89a5d543f7c
+    }
+
+    public ManufacturerEntity Update(ManufacturerEntity? entity)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Delete(Guid id)
+    {
+        throw new NotImplementedException();
+    }
+    
     // private readonly EshopContext _db;
     // private readonly IMapper _mapper;
     //
@@ -41,4 +75,5 @@ public class ManufacturerRepository //: IRepository<ManufacturerEntity>
     //     _db.Manufacturers.Remove(man);
     //     _db.SaveChanges();
     // }
+    
 }

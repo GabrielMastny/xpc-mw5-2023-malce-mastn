@@ -7,8 +7,8 @@ public class CommodityRepository : IRepository<CommodityEntity>
 {
     
     private readonly EshopContext _db;
-    private readonly CategoryMapper _mapper;
-    public CommodityRepository(EshopContext eshopContext, CategoryMapper mapper)
+    private readonly CommodityMapper _mapper;
+    public CommodityRepository(EshopContext eshopContext, CommodityMapper mapper)
     {
         _db = eshopContext;
         _mapper = mapper;
@@ -16,7 +16,9 @@ public class CommodityRepository : IRepository<CommodityEntity>
     
     public Guid Create(CommodityEntity entity)
     {
-        throw new NotImplementedException();
+        _db.Commodities.Add(_mapper.Map(entity));
+        _db.SaveChanges();
+        return entity.Id;
     }
 
     public CommodityEntity GetById(Guid id)

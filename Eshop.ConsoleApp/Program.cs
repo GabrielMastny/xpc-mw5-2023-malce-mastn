@@ -1,5 +1,6 @@
 ﻿using System.Data.SqlClient;
 using Eshop.DAL;
+using Eshop.DAL.Entities;
 using Eshop.DAL.Mappers;
 using Eshop.DAL.Repositories;
 
@@ -10,8 +11,16 @@ class Program
 
     private static CategoryRepository _categoryRepository = new CategoryRepository(new EshopContext(), new CategoryMapper());
 
+    private static CommodityRepository _commodityRepository =
+        new CommodityRepository(new EshopContext(), new CommodityMapper());
+
+    private static ManufacturerRepository _manufacturerRepository =
+        new ManufacturerRepository(new EshopContext(), new ManufacturerMapper());
+
     public static void Main(string[] args)
     {
+        Random rnd = new Random();
+        
         Console.WriteLine("Hello, World!");
 
         var mans = GenerateDatabase.GenerateFakeManufacturer(10);
@@ -22,25 +31,33 @@ class Program
 
         var revs = GenerateDatabase.GenerateFakeReviews(300);
 
+        var array = cats.ToArray();
+
+        var marray = mans.ToArray();
+
         // foreach (var m in mans)
         // {
-        //     Console.WriteLine(m);
+        //     _manufacturerRepository.Create(m);
+        //     Console.WriteLine(m.Name);
         // }
         //
-        foreach (var ca in cats)
-        {
-
-
-            var id = _categoryRepository.Create(ca);
-            
-            Console.WriteLine(id);
-
-        }
-        //
-        // foreach (var c in comms)
+        // foreach (var ca in cats)
         // {
-        //     Console.WriteLine(c);
+        //     //var id = _categoryRepository.Create(ca);
+        //
+        //     //Console.WriteLine(id);
         // }
+        // //
+        foreach (var c in comms)
+        {
+            c.Category = array[rnd.Next(array.Length)];
+
+            c.Manufacturer = marray[rnd.Next(marray.Length)];
+        
+            _commodityRepository.Create(c);
+            
+            Console.WriteLine(c.Name);
+        }
 
         // const string connstring =
         //     "Data Source=DESKTOP-TA4S5VB\\SQLEXPRESS; Initial Catalog=Eshop; Integrated Security=true; TrustServerCertificate=true";

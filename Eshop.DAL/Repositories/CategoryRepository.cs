@@ -18,7 +18,7 @@ public class CategoryRepository : IRepository<CategoryEntity> //: IRepository<Ca
     {
         var category = _mapper.Map(entity);
 
-        _db.Add(category);
+        _db.Categories.Add(category);
         _db.SaveChanges();
 
         return entity.Id;
@@ -27,7 +27,8 @@ public class CategoryRepository : IRepository<CategoryEntity> //: IRepository<Ca
 
     public CategoryEntity GetById(Guid id)
     {
-        throw new NotImplementedException();
+        var c = _db.Categories.Single(x => x.Id.Equals("00e02cde-a825-429f-8c8e-da826f7f2755"));
+        return _mapper.ReverseMap(c);
     }
 
     public CategoryEntity Update(CategoryEntity? entity)
