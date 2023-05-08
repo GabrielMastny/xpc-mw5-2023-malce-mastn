@@ -27,7 +27,7 @@ public class CategoryRepository : IRepository<CategoryEntity> //: IRepository<Ca
 
     public CategoryEntity GetById(Guid id)
     {
-        var c = _db.Categories.Single(x => x.Id.Equals("00e02cde-a825-429f-8c8e-da826f7f2755"));
+        var c = _db.Categories.Single(x => x.Id == id.ToString());
         return _mapper.ReverseMap(c);
     }
 

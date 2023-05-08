@@ -18,6 +18,13 @@ public class ManufacturerMapper : IMapper<ManufacturerEntity, Manufacturer>
 
     public ManufacturerEntity ReverseMap(Manufacturer model)
     {
-        throw new NotImplementedException();
+        return new ManufacturerEntity()
+        {
+            Id = Guid.Parse(model.Id),
+            Name = model.Name,
+            CountryOfOrigin = model.CountryOfOrigin,
+            Description = model.Description,
+            Image = model.Image
+        };
     }
 }

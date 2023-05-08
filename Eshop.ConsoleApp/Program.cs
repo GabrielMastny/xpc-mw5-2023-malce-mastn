@@ -50,10 +50,10 @@ class Program
         // //
         foreach (var c in comms)
         {
-            c.Category = array[rnd.Next(array.Length)];
+            c.Category = _categoryRepository.GetById(Guid.Parse("00e02cde-a825-429f-8c8e-da826f7f2755"));
+            
+            c.Manufacturer = _manufacturerRepository.GetById(Guid.Parse("0459fbc6-2b12-489c-9b73-e89a5d543f7c"));
 
-            c.Manufacturer = marray[rnd.Next(marray.Length)];
-        
             _commodityRepository.Create(c);
             
             Console.WriteLine(c.Name);

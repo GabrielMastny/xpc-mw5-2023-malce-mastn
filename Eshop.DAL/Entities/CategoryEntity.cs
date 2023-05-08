@@ -1,12 +1,12 @@
-﻿namespace Eshop.DAL.Entities;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-//[Table("Category")]
-public record CategoryEntity : EntityBase
+namespace Eshop.DAL.Entities;
+
+[Table("Category")]
+public class CategoryEntity : TableBase, IEntity
 {
-    //[Key]
-    //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    //public Guid Id { get; set; }
-    public required string Name { get; set; }
+    public string Name { get; set; }
     public string Description { get; set; }
     public string Image { get; set; }
 }

@@ -23,7 +23,8 @@ public class CommodityRepository : IRepository<CommodityEntity>
 
     public CommodityEntity GetById(Guid id)
     {
-        throw new NotImplementedException();
+        var c = _db.Commodities.Single(x => x.Id == id.ToString());
+        return _mapper.ReverseMap(c);
     }
 
     public CommodityEntity Update(CommodityEntity? entity)

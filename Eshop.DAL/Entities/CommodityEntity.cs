@@ -1,9 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using Eshop.DAL.Entities;
 
 namespace Eshop.DAL.Entities;
 
-//[Table("Commodity")]
-public record CommodityEntity : EntityBase //TableBase
+[Table("Commodity")]
+public class CommodityEntity : TableBase, IEntity
 {
     public required string Name { get; set; }
     public string Image { get; set; }
@@ -13,5 +14,4 @@ public record CommodityEntity : EntityBase //TableBase
     public int NumberOfPiecesInStock { get; set; }
     public required CategoryEntity Category { get; set; }
     public required ManufacturerEntity Manufacturer { get; set; }
-    public ICollection<ReviewEntity> Reviews { get; set; } = new List<ReviewEntity>();
 }

@@ -14,7 +14,7 @@ public class ManufacturerRepository : IRepository<ManufacturerEntity>
     }
     public Guid Create(ManufacturerEntity entity)
     {
-        _db.Add(_mapper.Map(entity));
+        _db.Manufacturers.Add(_mapper.Map(entity));
         _db.SaveChanges();
 
         return entity.Id;
@@ -22,7 +22,8 @@ public class ManufacturerRepository : IRepository<ManufacturerEntity>
 
     public ManufacturerEntity GetById(Guid id)
     {
-        throw new NotImplementedException();
+        var m = _db.Manufacturers.Single(x => x.Id == id.ToString());
+        return _mapper.ReverseMap(m);
         //0459fbc6-2b12-489c-9b73-e89a5d543f7c
     }
 

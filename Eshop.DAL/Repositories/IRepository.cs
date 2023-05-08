@@ -2,7 +2,7 @@
 
 namespace Eshop.DAL.Repositories;
 
-public interface IRepository<TEntity> where TEntity : EntityBase
+public interface IRepository<TEntity>
 {
     Guid Create(TEntity entity);
     TEntity GetById(Guid id);
