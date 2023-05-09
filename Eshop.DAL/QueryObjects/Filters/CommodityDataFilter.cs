@@ -1,10 +1,4 @@
-﻿namespace CommonDbProperties.Interfaces.Filters;
-
-// public record DataFilter(
-//     string Category,
-//     string Manufacturer,
-//     double Price,
-//     int NumberOfPiecesInStock) : IFilter;
+﻿namespace Eshop.DAL.QueryObjects.Filters;
 
 public record CommodityDataFilter : IFilter
 {

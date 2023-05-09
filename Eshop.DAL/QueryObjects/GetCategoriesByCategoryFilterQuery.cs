@@ -1,10 +1,9 @@
 ﻿using AutoMapper;
-using Eshop.DAL.Entities;
-using CommonDbProperties.Interfaces.Filters;
-using CommonDbProperties.Interfaces.QueryObjects;
 using Eshop.DAL.Context;
+using Eshop.DAL.Entities;
+using Eshop.DAL.QueryObjects.Filters;
 
-namespace EFDb.QueryObjects;
+namespace Eshop.DAL.QueryObjects;
 
 public class GetCategoriesByCategoryFilterQuery : IQuery<CategoryEntity, CategoryFilter>
 {

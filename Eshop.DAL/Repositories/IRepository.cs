@@ -1,6 +1,4 @@
-﻿
-
-namespace Eshop.DAL.Repositories;
+﻿namespace Eshop.DAL.Repositories;
 
 public interface IRepository<TEntity> where TEntity : class
 {

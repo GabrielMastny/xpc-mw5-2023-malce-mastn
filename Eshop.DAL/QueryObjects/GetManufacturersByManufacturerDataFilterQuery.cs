@@ -1,8 +1,7 @@
-﻿using App.DAL.QueryObjects.Filters;
-using Eshop.DAL.Entities;
+﻿using Eshop.DAL.Entities;
 using AutoMapper;
-using CommonDbProperties.Interfaces.QueryObjects;
 using Eshop.DAL.Context;
+using Eshop.DAL.QueryObjects.Filters;
 
 namespace Eshop.DAL.QueryObjects;
 

@@ -1,4 +1,4 @@
-﻿namespace CommonDbProperties.Interfaces.Filters;
+﻿namespace Eshop.DAL.QueryObjects.Filters;
 
 public record ReviewFilter : IFilter
 {

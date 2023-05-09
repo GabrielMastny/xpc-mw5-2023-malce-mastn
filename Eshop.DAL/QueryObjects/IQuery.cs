@@ -1,6 +1,6 @@
-﻿using CommonDbProperties.Interfaces.Filters;
+﻿using Eshop.DAL.QueryObjects.Filters;
 
-namespace CommonDbProperties.Interfaces.QueryObjects;
+namespace Eshop.DAL.QueryObjects;
 
 public interface IQuery<TModel, TFilter> where TFilter : IFilter
 {
