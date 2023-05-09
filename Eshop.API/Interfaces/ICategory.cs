@@ -1,4 +1,4 @@
-﻿namespace CommonDbProperties.Interfaces.Entities;
+﻿namespace Eshop.API.Interfaces;
 
 public interface ICategory : IItemable
 {

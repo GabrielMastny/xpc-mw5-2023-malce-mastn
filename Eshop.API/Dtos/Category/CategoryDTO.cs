@@ -1,5 +1,5 @@
 ﻿using System;
-using CommonDbProperties.Interfaces.Entities;
+using Eshop.API.Interfaces;
 
 namespace Eshop.API.Dtos;
 

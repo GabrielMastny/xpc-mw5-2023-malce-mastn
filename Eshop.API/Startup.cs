@@ -1,4 +1,6 @@
 using System;
+using Eshop.API.Helpers;
+using Eshop.API.MappingProfiles;
 using Eshop.DAL.Context;
 using Eshop.DAL.Entities;
 using Eshop.DAL.Repositories;
@@ -9,10 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.SwaggerGen;
-using WebAPI.Helpers;
-using WebAPI.MappingProfiles;
 
-namespace WebAPI
+namespace Eshop.API
 {
     public class Startup
     {

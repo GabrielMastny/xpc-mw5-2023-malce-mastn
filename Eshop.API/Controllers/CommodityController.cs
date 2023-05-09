@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using Eshop.DAL.Entities;
 using AutoMapper;
+using Eshop.API.Dtos;
 using Eshop.DAL.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using WebAPI.Dtos;
 
-namespace WebAPI.Controllers
+namespace Eshop.API.Controllers
 {
     [ApiController]
     [ApiVersion("1.0")]

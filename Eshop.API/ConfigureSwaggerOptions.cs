@@ -4,7 +4,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace WebAPI;
+namespace Eshop.API;
 // author:
 // https://github.com/FabianGosebrink/ASPNETCore-Eshop.API-Sample/blob/05da9cb3a068037f31f72bb8658c0a311aaa6ffa/SampleWebApiAspNetCore/ConfigureSwaggerOptions.cs
 public class ConfigureSwaggerOptions : IConfigureOptions<SwaggerGenOptions>

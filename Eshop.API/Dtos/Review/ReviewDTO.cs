@@ -1,7 +1,7 @@
 ﻿using System;
-using CommonDbProperties.Interfaces.Entities;
+using Eshop.API.Interfaces;
 
-namespace WebAPI.Dtos;
+namespace Eshop.API.Dtos;
 
 public class ReviewDTO : ReviewCreateDTO, IReview
 {

@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using Eshop.API.Dtos;
 
-namespace WebAPI.Dtos;
+namespace Eshop.API.Dtos;
 
 public class DemoDTO
 {

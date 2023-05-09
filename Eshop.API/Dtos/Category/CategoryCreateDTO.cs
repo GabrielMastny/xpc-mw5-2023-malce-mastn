@@ -1,4 +1,4 @@
-﻿namespace WebAPI.Dtos;
+﻿namespace Eshop.API.Dtos;
 
 public class CategoryCreateDTO
 {

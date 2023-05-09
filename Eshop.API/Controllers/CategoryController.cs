@@ -4,12 +4,12 @@ using System.Linq;
 using Eshop.DAL.Entities;
 using AutoMapper;
 using Eshop.API.Dtos;
+using Eshop.DAL.QueryObjects.Filters;
 using Eshop.DAL.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using WebAPI.Dtos;
 
-namespace WebAPI.Controllers;
+namespace Eshop.API.Controllers;
 
 [ApiController]
 [ApiVersion("1.0")]
@@ -82,4 +82,29 @@ public class CategoryController
 
         return new OkResult();
     }
+    
+    // [HttpDelete]
+    // [Route("{id:Guid}", Name = nameof(RemoveCategory1))]
+    // public ActionResult RemoveCategory1(Guid id)
+    // {
+    //     _repo.Delete(id);
+    //
+    //     return new OkResult();
+    // }
+
+//     [HttpPost(Name = nameof(FilterCategory))]
+//     public ActionResult<string> FilterCategory(ApiVersion version, [FromBody] CategoryFilter categoryFilter)
+//     {
+//         //var newG = _repo.Create(_mapper.Map<CategoryEntity>(categoryCreateDto));
+//
+//         var foo = categoryFilter.Name;
+//
+//         return foo;
+//
+// // #if DEBUG
+// //         return foo; //newG.ToString(); 
+// // #else
+// //         return (Guid.Empty == newG) ? new BadRequestResult() : new OkResult();
+// // #endif
+//     }
 }

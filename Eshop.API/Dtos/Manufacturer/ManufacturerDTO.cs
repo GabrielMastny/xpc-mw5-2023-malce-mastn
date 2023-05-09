@@ -1,8 +1,8 @@
 ﻿using System;
 using AutoMapper;
-using CommonDbProperties.Interfaces.Entities;
+using Eshop.API.Interfaces;
 
-namespace WebAPI.Dtos;
+namespace Eshop.API.Dtos;
 
 public class ManufacturerDTO : IManufacturer
 {

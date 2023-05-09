@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WebAPI.Dtos;
+namespace Eshop.API.Dtos;
 
 public class ReviewCreateDTO
 {

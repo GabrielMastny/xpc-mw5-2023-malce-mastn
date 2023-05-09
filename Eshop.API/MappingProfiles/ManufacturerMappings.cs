@@ -1,8 +1,8 @@
 ﻿using Eshop.DAL.Entities;
 using AutoMapper;
-using WebAPI.Dtos;
+using Eshop.API.Dtos;
 
-namespace WebAPI.MappingProfiles;
+namespace Eshop.API.MappingProfiles;
 
 public class ManufacturerMappings : Profile
 {

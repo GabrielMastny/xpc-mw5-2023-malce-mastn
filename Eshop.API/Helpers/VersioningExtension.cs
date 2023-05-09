@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace WebAPI.Helpers;
+namespace Eshop.API.Helpers;
 
 public static class VersioningExtension
 {

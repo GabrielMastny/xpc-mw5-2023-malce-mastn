@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace WebAPI.Dtos;
+namespace Eshop.API.Dtos;
 
 public class CommodityDto
 {

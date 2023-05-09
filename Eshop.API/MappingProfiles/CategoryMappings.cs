@@ -1,10 +1,9 @@
 ﻿using Eshop.DAL.Entities;
 using AutoMapper;
-using CommonDbProperties.Interfaces.Entities;
 using Eshop.API.Dtos;
-using WebAPI.Dtos;
+using Eshop.API.Interfaces;
 
-namespace WebAPI.MappingProfiles;
+namespace Eshop.API.MappingProfiles;
 
 public class CategoryMappings : Profile
 {

@@ -1,6 +1,4 @@
-﻿using Eshop.API.Interfaces;
-
-namespace CommonDbProperties.Interfaces.Entities;
+﻿namespace Eshop.API.Interfaces;
 
 public interface IItemable : IWithId
 {
