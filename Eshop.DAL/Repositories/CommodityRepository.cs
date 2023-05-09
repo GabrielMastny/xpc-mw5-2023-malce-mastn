@@ -29,14 +29,17 @@ public class CommodityRepository : IRepository<CommodityEntity>
 
         c.Category = _db.Categories.Single(m => m.Id == c.CategoryId);
 
-        //var reviews = ;
+        var reviews = _db.Reviews.Where(r => r.CommodityId == id.ToString());
 
-        foreach (var r in _db.Reviews.Where(r => r.CommodityId == id.ToString()))
+        foreach (var r in reviews)
         {
-            Console.WriteLine("Print");
             c.Reviews.Add(r);
         }
-        
+
+        foreach (var r in reviews)
+        {
+            Console.WriteLine(r);
+        }
         
         return _mapper.ReverseMap(c);
     }
