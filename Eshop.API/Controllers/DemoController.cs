@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Eshop.DAL;
 using Eshop.DAL.Entities;
 using AutoMapper;
@@ -59,49 +58,49 @@ public class DemoController
     [Route($"[action]")]
     public ActionResult BuildDefaultDatabaseData()
     {
-        // GenerateDatabase dbBuilder = new GenerateDatabase();
-        // Dictionary<Guid, Guid> manufacturers = new Dictionary<Guid, Guid>();
-        // Dictionary<Guid, Guid> categories = new Dictionary<Guid, Guid>();
-        //
-        // foreach (var commodity in dbBuilder.init(30))
-        // {
-        //     Guid manId = Guid.Empty;
-        //     
-        //     if (!manufacturers.ContainsKey(commodity.Manufacturer.Id))
-        //     {
-        //         manId = _manRepo.Create(commodity.Manufacturer);
-        //         manufacturers[commodity.Manufacturer.Id] = manId;
-        //     }
-        //     else
-        //     {
-        //         manId = manufacturers[commodity.Manufacturer.Id];
-        //     }
-        //     
-        //     Guid catId = Guid.Empty;
-        //     
-        //     if (!categories.ContainsKey(commodity.Category.Id))
-        //     {
-        //         catId = _catRepo.Create(commodity.Category);
-        //         categories[commodity.Category.Id] = catId;
-        //     }
-        //     else
-        //     {
-        //         catId = categories[commodity.Category.Id];
-        //     }
-        //
-        //     commodity.Category.Id = catId;
-        //     commodity.Manufacturer.Id = manId;
-        //     
-        //     var comId = _comRepo.Create(commodity);
-        //     commodity.Id = comId;
-        //     foreach (var review in dbBuilder.GenerateFakeReviews(30))
-        //     {
-        //         review.RelatedTo = commodity;
-        //         _revRepo.Create(review);
-        //     }
-        // }
-        //
-        // dbBuilder.Dispose();
+        GenerateDatabase dbBuilder = new GenerateDatabase();
+        Dictionary<Guid, Guid> manufacturers = new Dictionary<Guid, Guid>();
+        Dictionary<Guid, Guid> categories = new Dictionary<Guid, Guid>();
+        
+        foreach (var commodity in dbBuilder.init(30))
+        {
+            Guid manId = Guid.Empty;
+            
+            if (!manufacturers.ContainsKey(commodity.Manufacturer.Id))
+            {
+                manId = _manRepo.Create(commodity.Manufacturer);
+                manufacturers[commodity.Manufacturer.Id] = manId;
+            }
+            else
+            {
+                manId = manufacturers[commodity.Manufacturer.Id];
+            }
+            
+            Guid catId = Guid.Empty;
+            
+            if (!categories.ContainsKey(commodity.Category.Id))
+            {
+                catId = _catRepo.Create(commodity.Category);
+                categories[commodity.Category.Id] = catId;
+            }
+            else
+            {
+                catId = categories[commodity.Category.Id];
+            }
+        
+            commodity.Category.Id = catId;
+            commodity.Manufacturer.Id = manId;
+            
+            var comId = _comRepo.Create(commodity);
+            commodity.Id = comId;
+            foreach (var review in dbBuilder.GenerateFakeReviews(30))
+            {
+                review.RelatedTo = commodity;
+                _revRepo.Create(review);
+            }
+        }
+        
+        dbBuilder.Dispose();
 
         return new OkResult();
     }
