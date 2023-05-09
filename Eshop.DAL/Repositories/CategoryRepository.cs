@@ -24,7 +24,7 @@ public class CategoryRepository : IRepository<CategoryEntity>
 
     public CategoryEntity GetById(Guid id)
     {
-        var ent = _db.Categories.Where(x => x.Id == id).SingleOrDefault();
+        var ent = _db.Categories.Where(category => category.Id == id).SingleOrDefault();
 
         if (ent == null) return null;
 
@@ -33,8 +33,7 @@ public class CategoryRepository : IRepository<CategoryEntity>
 
     public CategoryEntity Update(CategoryEntity? entity)
     {
-        if (entity == null )//|| !_db.Categories.Any(x => x.Id == entity.Id))
-            return null;
+        if (entity == null || !_db.Categories.Any(category => category.Id == entity.Id)) return null;
 
         _db.Categories.Update(entity);
         _db.SaveChanges();
@@ -44,11 +43,11 @@ public class CategoryRepository : IRepository<CategoryEntity>
 
     public void Delete(Guid id)
     {
-        var cat = _db.Categories.Where(x => x.Id == id).SingleOrDefault();
+        var category = _db.Categories.Where(category => category.Id == id).SingleOrDefault();
         
-        if (cat == null) return;
+        if (category == null) return;
 
-        _db.Categories.Remove(cat);
+        _db.Categories.Remove(category);
         _db.SaveChanges();
     }
 }
