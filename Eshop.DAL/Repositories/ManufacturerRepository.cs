@@ -28,12 +28,27 @@ public class ManufacturerRepository : IRepository<ManufacturerEntity>
 
     public ManufacturerEntity Update(ManufacturerEntity? entity)
     {
-        throw new NotImplementedException();
+        if (!_db.Manufacturers.Any(category => entity != null && category.Id == entity.Id.ToString()) || entity == null)
+        {
+            throw new ArgumentNullException();
+        }
+
+        _db.Manufacturers.Update(_mapper.Map(entity));
+        _db.SaveChanges();
+        return entity;
     }
 
     public void Delete(Guid id)
     {
-        throw new NotImplementedException();
+        var manufacturer = _db.Manufacturers.Single(manufacturer => manufacturer.Id == id.ToString());
+        if (manufacturer == null) throw new ArgumentNullException();
+        var commoditiesToRemove = _db.Commodities.Where(commodity => commodity.ManufacturerId == manufacturer.Id);
+        foreach (var commodity in commoditiesToRemove)
+        {
+            _db.Commodities.Remove(commodity);
+        }
+        _db.Manufacturers.Remove(manufacturer);
+        _db.SaveChanges();
     }
 
 }

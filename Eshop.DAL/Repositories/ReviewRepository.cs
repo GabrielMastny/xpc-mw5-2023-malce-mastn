@@ -22,17 +22,27 @@ public class ReviewRepository : IRepository<ReviewEntity>
 
     public ReviewEntity GetById(Guid id)
     {
-        throw new NotImplementedException();
+        var r = _db.Reviews.Single(review => review.Id == id.ToString());
+        return _mapper.ReverseMap(r);
     }
 
     public ReviewEntity Update(ReviewEntity? entity)
     {
-        throw new NotImplementedException();
+        if (!_db.Reviews.Any(review => entity != null && review.Id == entity.Id.ToString()) || entity == null)
+        {
+            throw new ArgumentNullException();
+        }
+        _db.Reviews.Update(_mapper.Map(entity));
+        _db.SaveChanges();
+        return entity;
     }
 
     public void Delete(Guid id)
     {
-        throw new NotImplementedException();
+        var review = _db.Reviews.Single(review => review.Id == id.ToString());
+        if (review == null) throw new ArgumentNullException();
+        _db.Reviews.Remove(review);
+        _db.SaveChanges();
     }
 
 }

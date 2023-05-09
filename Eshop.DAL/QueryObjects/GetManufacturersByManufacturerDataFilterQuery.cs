@@ -1,5 +1,4 @@
 ﻿using Eshop.DAL.Entities;
-using Eshop.DAL.Context;
 using Eshop.DAL.Mappers;
 
 namespace Eshop.DAL.QueryObjects;
@@ -18,8 +17,15 @@ public class GetManufacturersByManufacturerDataFilterQuery : IQuery<Manufacturer
     public IEnumerable<ManufacturerEntity> Execute(ManufacturerDataFilter filter)
     {
         IEnumerable<ManufacturerEntity> list = _db.Manufacturers.Select(m => _mapper.ReverseMap(m));
-        if (filter.Name != null) list = list.Where(m => m.Name.Contains(filter.Name));
-        if (filter.CountryOfOrigin != null) list = list.Where(m => m.CountryOfOrigin == filter.CountryOfOrigin);
+        if (filter.Name != null)
+        {
+            list = list.Where(manufacturer => manufacturer.Name.Contains(filter.Name));
+        }
+
+        if (filter.CountryOfOrigin != null)
+        {
+            list = list.Where(manufacturer => String.Equals(manufacturer.CountryOfOrigin, filter.CountryOfOrigin, StringComparison.CurrentCultureIgnoreCase));
+        }
         return list;
     }
 }

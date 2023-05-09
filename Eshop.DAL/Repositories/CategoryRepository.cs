@@ -1,6 +1,5 @@
 ﻿using Eshop.DAL.Entities;
 using Eshop.DAL.Mappers;
-using Microsoft.EntityFrameworkCore;
 
 namespace Eshop.DAL.Repositories;
 
@@ -23,28 +22,37 @@ public class CategoryRepository : IRepository<CategoryEntity>
         _db.SaveChanges();
 
         return entity.Id;
-        //throw new NotImplementedException();
     }
 
     public CategoryEntity GetById(Guid id)
     {
-        var c = _db.Categories.Single(x => x.Id == id.ToString());
+        var c = _db.Categories.Single(category => category.Id == id.ToString());
         return _mapper.ReverseMap(c);
     }
 
     public CategoryEntity Update(CategoryEntity? entity)
     {
-        throw new NotImplementedException();
+        if (!_db.Categories.Any(category => entity != null && category.Id == entity.Id.ToString()) || entity == null)
+        {
+            throw new ArgumentNullException();
+        }
+
+        _db.Categories.Update(_mapper.Map(entity));
+        _db.SaveChanges();
+        return entity;
     }
 
     public void Delete(Guid id)
     {
-        var c = _db.Categories.Single(x => x.Id == id.ToString());
-
-        if (c == null) throw new ArgumentNullException();
-
-        _db.Categories.Remove(c);
-
+        var category = _db.Categories.Single(category => category.Id == id.ToString());
+        if (category == null) throw new ArgumentNullException();
+        var commoditiesToRemove = _db.Commodities.Where(commodity => commodity.CategoryId == category.Id);
+        foreach (var commodity in commoditiesToRemove)
+        {
+            _db.Commodities.Remove(commodity);
+        }
+        _db.Categories.Remove(category);
+        _db.SaveChanges();
     }
 
 }

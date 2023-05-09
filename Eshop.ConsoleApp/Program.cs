@@ -27,16 +27,29 @@ class Program
         
         Console.WriteLine(commodity);
 
-        foreach (var r in commodity.Reviews)
+        var man = new GetManufacturersByManufacturerDataFilterQuery(new EshopContext(), new ManufacturerMapper())
+            .Execute(new ManufacturerDataFilter()
+            {
+                CountryOfOrigin = "WILEY"
+            });
+
+        Console.WriteLine("\n/////////////////////////////\n");
+        
+        foreach (var m in man)
         {
-            Console.WriteLine("Print console");
-            Console.WriteLine(r);
+            Console.WriteLine(m);
         }
+
+        // foreach (var r in commodity.Reviews)
+        // {
+        //     Console.WriteLine("Print console");
+        //     Console.WriteLine(r);
+        // }
 
         // var commodities =
         //     new GetCommoditiesByCommodityDataFilterQuery(new EshopContext(), new CommodityMapper()).Execute(
         //         new CommodityDataFilter());
-        
+
         // foreach (var c in commodities)
         // {
         //     var reviews = GenerateDatabase.GenerateFakeReviews(3);

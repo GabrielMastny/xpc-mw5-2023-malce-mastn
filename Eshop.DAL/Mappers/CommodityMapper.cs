@@ -42,7 +42,6 @@ public class CommodityMapper : IMapper<CommodityEntity, Commodity>
         foreach (var r in model.Reviews)
         {
             commodity.Reviews.Add(_reviewMapper.ReverseMap(r));
-            Console.WriteLine("mapper review");
         }
 
         return commodity;

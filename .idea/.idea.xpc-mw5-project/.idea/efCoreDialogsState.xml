@@ -3,11 +3,18 @@
   <component name="EfCoreDialogsState">
     <option name="keyValueStorage">
       <map>
-        <entry key="Common:1ac749cb-8b71-4880-990d-f18393e84ff7:dbContext" value="EFDb.Context.EshopContext" />
+        <entry key="Common:1ac749cb-8b71-4880-990d-f18393e84ff7:dbContext" value="Eshop.DAL.Context.EshopContext" />
         <entry key="Common:buildConfiguration" value="Debug" />
+        <entry key="Common:dbContextFolder" value="Context" />
+        <entry key="Common:dbContextName" value="MyDbContext" />
+        <entry key="Common:generateOnConfiguring" value="true" />
         <entry key="Common:noBuild" value="false" />
         <entry key="Common:outputFolder" value="Migrations" />
+        <entry key="Common:provider" value="Microsoft.EntityFrameworkCore" />
+        <entry key="Common:useAttributes" value="true" />
+        <entry key="Common:useDatabaseNames" value="true" />
         <entry key="Common:useDefaultConnection" value="false" />
+        <entry key="Common:usePluralizer" value="true" />
       </map>
     </option>
   </component>

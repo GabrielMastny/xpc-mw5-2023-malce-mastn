@@ -18,6 +18,6 @@ public class GetCategoriesByCategoryFilterQuery : IQuery<CategoryEntity, Categor
     
     public IEnumerable<CategoryEntity> Execute(CategoryFilter filter)
     {
-        return _db.Categories.Select(c => _mapper.ReverseMap(c)).Where(c => c.Name == filter.Name);
+        return _db.Categories.Select(category => _mapper.ReverseMap(category)).Where(category => String.Equals(category.Name, filter.Name, StringComparison.CurrentCultureIgnoreCase));
     }
 }
