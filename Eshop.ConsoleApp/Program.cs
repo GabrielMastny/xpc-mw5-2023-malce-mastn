@@ -22,24 +22,21 @@ class Program
     public static void Main(string[] args)
     {
 
-        var commodities =
-            new GetCommoditiesByCommodityDataFilterQuery(new EshopContext(), new CommodityMapper()).Execute(
-                new CommodityDataFilter()
-                {
-                    Price = new double?[] {10,300},
-                    Weight = new double?[] {0,100},
-                    NumberOfPiecesInStock = 200
-                });
 
-        foreach (var c in commodities)
-        {
-            Console.WriteLine(c);
-        }
+        var commodity = _commodityRepository.GetById(Guid.Parse("000d0f21-7d41-44cd-9323-e5df99300c6d"));
         
+        Console.WriteLine(commodity);
+
+        foreach (var r in commodity.Reviews)
+        {
+            Console.WriteLine("Print console");
+            Console.WriteLine(r);
+        }
+
         // var commodities =
         //     new GetCommoditiesByCommodityDataFilterQuery(new EshopContext(), new CommodityMapper()).Execute(
         //         new CommodityDataFilter());
-        //
+        
         // foreach (var c in commodities)
         // {
         //     var reviews = GenerateDatabase.GenerateFakeReviews(3);

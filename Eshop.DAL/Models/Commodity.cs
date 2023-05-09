@@ -27,5 +27,5 @@ public partial class Commodity : IModel
 
     public virtual Manufacturer Manufacturer { get; set; } = null!;
 
-    public virtual ICollection<Review> Reviews { get; } = new List<Review>();
+    public virtual ICollection<Review> Reviews { get; set; } = new List<Review>();
 }

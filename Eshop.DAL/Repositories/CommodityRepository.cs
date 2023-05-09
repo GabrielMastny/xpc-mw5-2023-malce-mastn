@@ -24,6 +24,20 @@ public class CommodityRepository : IRepository<CommodityEntity>
     public CommodityEntity GetById(Guid id)
     {
         var c = _db.Commodities.Single(x => x.Id == id.ToString());
+
+        c.Manufacturer = _db.Manufacturers.Single(m => m.Id == c.ManufacturerId);
+
+        c.Category = _db.Categories.Single(m => m.Id == c.CategoryId);
+
+        //var reviews = ;
+
+        foreach (var r in _db.Reviews.Where(r => r.CommodityId == id.ToString()))
+        {
+            Console.WriteLine("Print");
+            c.Reviews.Add(r);
+        }
+        
+        
         return _mapper.ReverseMap(c);
     }
 

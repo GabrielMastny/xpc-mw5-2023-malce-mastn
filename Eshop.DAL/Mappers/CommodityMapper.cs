@@ -4,6 +4,10 @@ namespace Eshop.DAL.Mappers;
 
 public class CommodityMapper : IMapper<CommodityEntity, Commodity>
 {
+
+    private readonly CategoryMapper _categoryMapper = new CategoryMapper();
+    private readonly ManufacturerMapper _manufacturerMapper = new ManufacturerMapper();
+    private readonly ReviewMapper _reviewMapper = new ReviewMapper();
     public Commodity Map(CommodityEntity entity)
     {
         return new Commodity()
@@ -22,17 +26,25 @@ public class CommodityMapper : IMapper<CommodityEntity, Commodity>
 
     public CommodityEntity ReverseMap(Commodity model)
     {
-        return new CommodityEntity()
+        var commodity =  new CommodityEntity()
         {
             Id = Guid.Parse(model.Id),
             Name = model.Name,
             Description = model.Describtion,
-            //Category = model.Category.Id.ToString(),
-            //ManufacturerId = entity.Manufacturer.Id.ToString(),
+            Category = _categoryMapper.ReverseMap(model.Category),
+            Manufacturer = _manufacturerMapper.ReverseMap(model.Manufacturer),
             Price = model.Price,
             Weight = model.Weight,
             Image = model.Image,
             NumberOfPiecesInStock = model.NumberOfPiecesInStock
         };
+
+        foreach (var r in model.Reviews)
+        {
+            commodity.Reviews.Add(_reviewMapper.ReverseMap(r));
+            Console.WriteLine("mapper review");
+        }
+
+        return commodity;
     }
 }

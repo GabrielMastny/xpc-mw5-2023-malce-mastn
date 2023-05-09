@@ -1,5 +1,6 @@
 ﻿using Eshop.DAL.Entities;
 using Eshop.DAL.Mappers;
+using Microsoft.EntityFrameworkCore;
 
 namespace Eshop.DAL.Repositories;
 
