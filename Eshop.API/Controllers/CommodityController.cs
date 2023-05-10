@@ -7,6 +7,7 @@ using Eshop.API.Dtos;
 using Eshop.DAL.QueryObjects;
 using Eshop.DAL.QueryObjects.Filters;
 using Eshop.DAL.Repositories;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -30,11 +31,18 @@ namespace Eshop.API.Controllers
         }
 
         [HttpGet(Name = "GetCommodities")]
-        public ActionResult<IEnumerable<CommodityEntity>> Get(ApiVersion version)
+        public IActionResult Get(ApiVersion version)
         {
-            
-            //return Ok(_repo.Get().Select(x => _mapper.Map<CommodityBriefDto>(x)));
-            return Ok();
+            var filtered = _query.Execute(new CommodityDataFilter()).ToList();
+
+            if (!filtered.Any())
+            {
+                return new EmptyResult();
+            }
+            else
+            {
+                return Ok(filtered.Select(x => _mapper.Map<CommodityDto>(x)));
+            }
         }
         
         [HttpGet]
@@ -50,11 +58,7 @@ namespace Eshop.API.Controllers
         {
             var ent = _mapper.Map<CommodityEntity>(commodityCreateDto);
             var newG = _repo.Create(ent);
-#if DEBUG
             return newG.ToString();
-#else
-            return Ok();
-#endif
         }
         
         [HttpDelete]

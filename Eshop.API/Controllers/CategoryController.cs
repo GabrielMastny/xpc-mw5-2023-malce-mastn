@@ -7,6 +7,7 @@ using Eshop.API.Dtos;
 using Eshop.DAL.QueryObjects;
 using Eshop.DAL.QueryObjects.Filters;
 using Eshop.DAL.Repositories;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -37,15 +38,10 @@ public class CategoryController
     }
     
     [HttpPost(Name = nameof(AddCategory))]
-    public ActionResult<string> AddCategory(ApiVersion version, [FromBody] CategoryCreateDTO categoryCreateDto)
+    public ActionResult<Guid> AddCategory(ApiVersion version, [FromBody] CategoryCreateDTO categoryCreateDto)
     {
         var newG = _repo.Create(_mapper.Map<CategoryEntity>(categoryCreateDto));
-        
-#if DEBUG
-        return newG.ToString(); 
-#else
-        return (Guid.Empty == newG) ? new BadRequestResult() : new OkResult();
-#endif
+        return (Guid.Empty == newG) ? new BadRequestResult() : new OkObjectResult(newG);
     }
     
     [HttpGet]

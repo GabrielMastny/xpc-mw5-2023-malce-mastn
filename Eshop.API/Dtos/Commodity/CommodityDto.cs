@@ -10,9 +10,9 @@ public class CommodityDto
     public required double Price { get; set; }
     public double Weight { get; set; }
     public int NumberOfPiecesInStock { get; set; }
-    public IEnumerable<ReviewDTO> Reviews
-    {
-        get;
-        set;
-    }
+    // public IEnumerable<ReviewDTO> Reviews
+    // {
+    //     get;
+    //     set;
+    // }
 }

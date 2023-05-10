@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Eshop.DAL.Entities;
 using AutoMapper;
@@ -34,17 +35,15 @@ public class ManufacturerController
         //return _repo.Get().Select(x => _mapper.Map<ManufacturerDTO>(x));
         return null;
     }
-    
+
     [HttpPost(Name = nameof(AddManufacturer))]
-    public ActionResult<string> AddManufacturer(ApiVersion version, [FromBody] ManufacturerCreateDTO manufacturerCreateDto)
+    public ActionResult<Guid> AddManufacturer(ApiVersion version,
+        [FromBody] ManufacturerCreateDTO manufacturerCreateDto)
     {
         var ent = _mapper.Map<ManufacturerEntity>(manufacturerCreateDto);
         var newG = _repo.Create(ent);
-#if DEBUG
-        return newG.ToString();
-#else
-            return Ok();
-#endif
+
+        return (Guid.Empty == newG) ? new BadRequestResult() : new OkObjectResult(newG);
     }
 
     [HttpPost]
