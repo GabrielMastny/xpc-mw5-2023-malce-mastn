@@ -21,17 +21,17 @@ public class GetCommoditiesByCommodityDataFilterQuery : IQuery<CommodityEntity, 
         IEnumerable<CommodityEntity> list = _db.Comodities.Select(commodity => _mapper.Map<CommodityEntity>(commodity));
         if (filter.Name != null)
         {
-            list = list.Where(commodity => commodity.Name.Contains(filter.Name));
+            list = list.Where(commodity => String.Equals(commodity.Name, filter.Name, StringComparison.CurrentCultureIgnoreCase));
         }
 
         if (filter.Category != null)
         {
-            list = list.Where(commodity => commodity.Category.Name == filter.Category);
+            list = list.Where(commodity => String.Equals(commodity.Category.Name, filter.Category, StringComparison.CurrentCultureIgnoreCase));
         }
 
         if (filter.Manufacturer != null)
         {
-            list = list.Where(commodity => commodity.Manufacturer.Name == filter.Manufacturer);
+            list = list.Where(commodity => String.Equals(commodity.Manufacturer.Name, filter.Manufacturer, StringComparison.CurrentCultureIgnoreCase));
         }
 
         if (filter.Price != null)

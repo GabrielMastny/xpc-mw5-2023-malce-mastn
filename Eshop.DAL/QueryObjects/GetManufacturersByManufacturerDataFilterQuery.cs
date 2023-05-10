@@ -22,12 +22,12 @@ public class GetManufacturersByManufacturerDataFilterQuery : IQuery<Manufacturer
         
         if (filter.Name != null)
         {
-            list = list.Where(manufacturer => manufacturer.Name.Contains(filter.Name));
+            list = list.Where(manufacturer => String.Equals(manufacturer.Name, filter.Name, StringComparison.CurrentCultureIgnoreCase));
         }
 
         if (filter.CountryOfOrigin != null)
         {
-            list = list.Where(manufacturer => manufacturer.CountryOfOrigin == filter.CountryOfOrigin);
+            list = list.Where(manufacturer => String.Equals(manufacturer.CountryOfOrigin, filter.CountryOfOrigin, StringComparison.CurrentCultureIgnoreCase));
         }
         return list;
     }

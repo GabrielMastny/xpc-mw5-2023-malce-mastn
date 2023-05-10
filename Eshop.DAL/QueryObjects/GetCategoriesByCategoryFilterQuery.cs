@@ -23,7 +23,7 @@ public class GetCategoriesByCategoryFilterQuery : IQuery<CategoryEntity, Categor
 
         if (filter.Name != null)
         {
-            list = list.Where(category => category.Name.Equals(filter.Name));   
+            list = list.Where(category => String.Equals(category.Name, filter.Name, StringComparison.CurrentCultureIgnoreCase));
         }
 
         return list;

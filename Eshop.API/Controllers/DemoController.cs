@@ -110,9 +110,7 @@ public class DemoController
     public ActionResult BuildDatabaseDataTest()
     {
         GenerateDatabase dbBuilder = new GenerateDatabase();
-        //Dictionary<Guid, Guid> manufacturers = new Dictionary<Guid, Guid>();
-        //Dictionary<Guid, Guid> categories = new Dictionary<Guid, Guid>();
-        
+
         ManufacturerEntity manufacturer = null;
         CategoryEntity category = null;
 
