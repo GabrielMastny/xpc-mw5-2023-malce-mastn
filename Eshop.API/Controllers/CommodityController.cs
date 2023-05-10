@@ -4,6 +4,8 @@ using System.Linq;
 using Eshop.DAL.Entities;
 using AutoMapper;
 using Eshop.API.Dtos;
+using Eshop.DAL.QueryObjects;
+using Eshop.DAL.QueryObjects.Filters;
 using Eshop.DAL.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -18,11 +20,13 @@ namespace Eshop.API.Controllers
         private readonly ILogger<CommodityController> _logger;
         private readonly IRepository<CommodityEntity> _repo;
         private readonly IMapper _mapper;
-        public CommodityController(ILogger<CommodityController> logger, IRepository<CommodityEntity> repo, IMapper mapper)
+        private readonly GetCommoditiesByCommodityDataFilterQuery _query;
+        public CommodityController(ILogger<CommodityController> logger, IRepository<CommodityEntity> repo, IMapper mapper, GetCommoditiesByCommodityDataFilterQuery query)
         {
             _logger = logger;
             _repo = repo;
             _mapper = mapper;
+            _query = query;
         }
 
         [HttpGet(Name = "GetCommodities")]
@@ -60,6 +64,21 @@ namespace Eshop.API.Controllers
             _repo.Delete(id);
 
             return new OkResult();
+        }
+        
+        [HttpPost]
+        [Route($"[action]")]
+        public ActionResult<dynamic> FilterCommodity(ApiVersion version, CommodityDataFilter commodityDataFilter)
+        {
+            var results = _query.Execute(commodityDataFilter);
+
+            List<string> names = new List<string>();
+
+            foreach (var r in results)
+            {
+                names.Add(r.Name);
+            }
+            return names;
         }
     }
 }

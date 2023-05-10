@@ -19,6 +19,7 @@ public class GetManufacturersByManufacturerDataFilterQuery : IQuery<Manufacturer
     public IEnumerable<ManufacturerEntity> Execute(ManufacturerDataFilter filter)
     {
         IEnumerable<ManufacturerEntity> list = _db.Comodities.Select(manufacturer => _mapper.Map<ManufacturerEntity>(manufacturer));
+        
         if (filter.Name != null)
         {
             list = list.Where(manufacturer => manufacturer.Name.Contains(filter.Name));

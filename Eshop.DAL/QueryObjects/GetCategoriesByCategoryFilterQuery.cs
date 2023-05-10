@@ -19,6 +19,13 @@ public class GetCategoriesByCategoryFilterQuery : IQuery<CategoryEntity, Categor
     
     public IEnumerable<CategoryEntity> Execute(CategoryFilter filter)
     {
-        return _db.Categories.Select(category => _mapper.Map<CategoryEntity>(category)).Where(category => category.Name == filter.Name);
+        IEnumerable<CategoryEntity> list =  _db.Categories.Select(category => _mapper.Map<CategoryEntity>(category));
+
+        if (filter.Name != null)
+        {
+            list = list.Where(category => category.Name.Equals(filter.Name));   
+        }
+
+        return list;
     }
 }

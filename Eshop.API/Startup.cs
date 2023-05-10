@@ -3,6 +3,7 @@ using Eshop.API.Helpers;
 using Eshop.API.MappingProfiles;
 using Eshop.DAL.Context;
 using Eshop.DAL.Entities;
+using Eshop.DAL.QueryObjects;
 using Eshop.DAL.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -41,6 +42,12 @@ namespace Eshop.API
             services.AddScoped<IRepository<CategoryEntity>, CategoryRepository>();
             services.AddScoped<IRepository<ManufacturerEntity>, ManufacturerRepository>();
             services.AddScoped<IRepository<ReviewEntity>, ReviewRepository>();
+
+            services.AddScoped<GetCategoriesByCategoryFilterQuery>();
+            services.AddScoped<GetCommoditiesByCommodityDataFilterQuery>();
+            services.AddScoped<GetManufacturersByManufacturerDataFilterQuery>();
+            services.AddScoped<GetReviewsByReviewFilterQuery>();
+            
             services.AddDbContext<EshopContext>();
         }
 

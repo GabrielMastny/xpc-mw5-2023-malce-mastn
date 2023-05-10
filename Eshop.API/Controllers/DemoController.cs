@@ -107,6 +107,50 @@ public class DemoController
     
     [HttpPost]
     [Route($"[action]")]
+    public ActionResult BuildDatabaseDataTest()
+    {
+        GenerateDatabase dbBuilder = new GenerateDatabase();
+        //Dictionary<Guid, Guid> manufacturers = new Dictionary<Guid, Guid>();
+        //Dictionary<Guid, Guid> categories = new Dictionary<Guid, Guid>();
+        
+        ManufacturerEntity manufacturer = null;
+        CategoryEntity category = null;
+
+
+        for (int i = 0; i < 40; i++)
+        {
+
+            if (i % 4 == 0)
+            {
+                manufacturer = dbBuilder.GenerateManufacturerEntity();
+                category = dbBuilder.GenerateCaterogyEntity();
+
+                _manRepo.Create(manufacturer);
+                _catRepo.Create(category);   
+            }
+
+            CommodityEntity commodity = dbBuilder.GenerateCommodityEntity();
+            
+            commodity.Manufacturer = manufacturer;
+            commodity.Category = category;
+            
+
+            foreach (var review in dbBuilder.GenerateFakeReviewsTest(3))
+            {
+                review.RelatedTo = commodity;
+                _revRepo.Create(review);
+            }
+
+            _comRepo.Create(commodity);
+        }
+        
+        dbBuilder.Dispose();
+
+        return new OkResult();
+    }
+    
+    [HttpPost]
+    [Route($"[action]")]
     public void ClearDatabase()
     {
         List<Guid> revIds = new List<Guid>();

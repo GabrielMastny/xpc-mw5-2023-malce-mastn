@@ -4,6 +4,8 @@ using System.Linq;
 using Eshop.DAL.Entities;
 using AutoMapper;
 using Eshop.API.Dtos;
+using Eshop.DAL.QueryObjects;
+using Eshop.DAL.QueryObjects.Filters;
 using Eshop.DAL.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -18,11 +20,13 @@ public class ReviewController
     private readonly ILogger<ReviewController> _logger;
     private readonly IRepository<ReviewEntity> _repo;
     private readonly IMapper _mapper;
-    public ReviewController(ILogger<ReviewController> logger, IRepository<ReviewEntity> repo, IMapper mapper)
+    private readonly GetReviewsByReviewFilterQuery _query;
+    public ReviewController(ILogger<ReviewController> logger, IRepository<ReviewEntity> repo, IMapper mapper, GetReviewsByReviewFilterQuery query)
     {
         _logger = logger;
         _repo = repo;
         _mapper = mapper;
+        _query = query;
     }
     
     [HttpGet(Name = "GetReviews")]
@@ -80,5 +84,21 @@ public class ReviewController
         _repo.Delete(id);
 
         return new OkResult();
+    }
+    
+    [HttpPost]
+    [Route($"[action]")]
+    public ActionResult<dynamic> FilterReview(ApiVersion version, ReviewFilter reviewFilter)
+    {
+        var results = _query.Execute(reviewFilter);
+
+        List<string> names = new List<string>();
+
+        foreach (var r in results)
+        {
+            names.Add(r.Title);
+        }
+
+        return names;
     }
 }

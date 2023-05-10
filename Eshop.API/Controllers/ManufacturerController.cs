@@ -3,6 +3,8 @@ using System.Linq;
 using Eshop.DAL.Entities;
 using AutoMapper;
 using Eshop.API.Dtos;
+using Eshop.DAL.QueryObjects;
+using Eshop.DAL.QueryObjects.Filters;
 using Eshop.DAL.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -17,11 +19,13 @@ public class ManufacturerController
     private readonly ILogger<ManufacturerController> _logger;
     private readonly IRepository<ManufacturerEntity> _repo;
     private readonly IMapper _mapper;
-    public ManufacturerController(ILogger<ManufacturerController> logger, IRepository<ManufacturerEntity> repo, IMapper mapper)
+    private readonly GetManufacturersByManufacturerDataFilterQuery _query;
+    public ManufacturerController(ILogger<ManufacturerController> logger, IRepository<ManufacturerEntity> repo, IMapper mapper, GetManufacturersByManufacturerDataFilterQuery query)
     {
         _logger = logger;
         _repo = repo;
         _mapper = mapper;
+        _query = query;
     }
 
     [HttpGet(Name = "GetManufacturers")]
@@ -41,5 +45,21 @@ public class ManufacturerController
 #else
             return Ok();
 #endif
+    }
+
+    [HttpPost]
+    [Route($"[action]")]
+    public ActionResult<dynamic> FilterManufacturer(ApiVersion version, ManufacturerDataFilter manufacturerDataFilter)
+    {
+        var results = _query.Execute(manufacturerDataFilter);
+
+        List<string> names = new List<string>();
+
+        foreach (var r in results)
+        {
+            names.Add(r.Name);
+        }
+
+        return names;
     }
 }

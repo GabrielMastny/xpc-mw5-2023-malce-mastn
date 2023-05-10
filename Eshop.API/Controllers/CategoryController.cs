@@ -4,6 +4,7 @@ using System.Linq;
 using Eshop.DAL.Entities;
 using AutoMapper;
 using Eshop.API.Dtos;
+using Eshop.DAL.QueryObjects;
 using Eshop.DAL.QueryObjects.Filters;
 using Eshop.DAL.Repositories;
 using Microsoft.AspNetCore.Mvc;
@@ -19,11 +20,13 @@ public class CategoryController
     private readonly ILogger<CategoryController> _logger;
     private readonly IRepository<CategoryEntity> _repo;
     private readonly IMapper _mapper;
-    public CategoryController(ILogger<CategoryController> logger, IRepository<CategoryEntity> repo, IMapper mapper)
+    private readonly GetCategoriesByCategoryFilterQuery _query;
+    public CategoryController(ILogger<CategoryController> logger, IRepository<CategoryEntity> repo, IMapper mapper, GetCategoriesByCategoryFilterQuery query)
     {
         _logger = logger;
         _repo = repo;
         _mapper = mapper;
+        _query = query;
     }
 
     [HttpGet(Name = "GetCategories")]
@@ -79,32 +82,22 @@ public class CategoryController
     public ActionResult RemoveCategory(Guid id)
     {
         _repo.Delete(id);
-
+    
         return new OkResult();
     }
-    
-    // [HttpDelete]
-    // [Route("{id:Guid}", Name = nameof(RemoveCategory1))]
-    // public ActionResult RemoveCategory1(Guid id)
-    // {
-    //     _repo.Delete(id);
-    //
-    //     return new OkResult();
-    // }
 
-//     [HttpPost(Name = nameof(FilterCategory))]
-//     public ActionResult<string> FilterCategory(ApiVersion version, [FromBody] CategoryFilter categoryFilter)
-//     {
-//         //var newG = _repo.Create(_mapper.Map<CategoryEntity>(categoryCreateDto));
-//
-//         var foo = categoryFilter.Name;
-//
-//         return foo;
-//
-// // #if DEBUG
-// //         return foo; //newG.ToString(); 
-// // #else
-// //         return (Guid.Empty == newG) ? new BadRequestResult() : new OkResult();
-// // #endif
-//     }
+    [HttpPost]
+    [Route($"[action]")]
+    public ActionResult<dynamic> FilterCategory(ApiVersion version, CategoryFilter categoryFilter)
+    {
+
+        var results = _query.Execute(categoryFilter);
+        List<string> names = new List<string>();
+        foreach (var r in results)
+        {
+            names.Add(r.Name);
+        }
+        
+        return names; 
+    }
 }

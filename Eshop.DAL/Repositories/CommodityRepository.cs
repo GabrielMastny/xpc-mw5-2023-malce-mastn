@@ -18,11 +18,11 @@ public class CommodityRepository : IRepository<CommodityEntity>
     public Guid Create(CommodityEntity entity)
     {
         
-        if (!_db.Categories.Any(x => x.Id == entity.Category.Id))
-            return Guid.Empty;
-        
-        if (!_db.Manufacturers.Any(x => x.Id == entity.Manufacturer.Id))
-            return Guid.Empty;
+        // if (!_db.Categories.Any(x => x.Id == entity.Category.Id))
+        //     return Guid.Empty;
+        //
+        // if (!_db.Manufacturers.Any(x => x.Id == entity.Manufacturer.Id))
+        //     return Guid.Empty;
         
         Guid newComId = _db.Comodities.Add(new CommodityEntity()
         {
@@ -31,8 +31,8 @@ public class CommodityRepository : IRepository<CommodityEntity>
             Name = entity.Name,
             Price = entity.Price,
             Weight = entity.Weight,
-            Category = new CategoryEntity(), //needs to be fixed
-            Manufacturer = new ManufacturerEntity(), //also
+            Category = entity.Category,//new CategoryEntity(), //needs to be fixed
+            Manufacturer = entity.Manufacturer, //new ManufacturerEntity(), //also
             NumberOfPiecesInStock = entity.NumberOfPiecesInStock
         }).Entity.Id;
         _db.SaveChanges();
