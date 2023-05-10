@@ -10,6 +10,6 @@ public class CommodityCreateDto
     public required double Price { get; set; }
     public double Weight { get; set; }
     public int NumberOfPiecesInStock { get; set; }
-    public required Guid CategoryId { get; set; }
-    public required Guid ManufacturerId { get; set; }
+    public required CategoryDTO Category { get; set; }
+    public required ManufacturerDTO Manufacturer { get; set; }
 }

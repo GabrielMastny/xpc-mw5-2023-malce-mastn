@@ -6,6 +6,4 @@ namespace Eshop.API.Dtos;
 public class ManufacturerBriefDTO : ManufacturerCreateDTO, IManufacturer
 {
     public Guid Id { get; set; }
-    
-    public int CommoditiesCount { get; set; }
 }

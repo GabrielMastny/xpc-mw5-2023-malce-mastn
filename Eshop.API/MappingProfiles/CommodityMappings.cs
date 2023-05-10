@@ -10,11 +10,7 @@ public class CommodityMappings :Profile
     {
         
         
-        CreateMap<CommodityEntity, CommodityCreateDto>()
-            .ForMember(dto => dto.CategoryId, act => act.MapFrom((ent => ent.Category.Id)))
-            .ForMember(dto => dto.ManufacturerId, act => act.MapFrom(ent => ent.Manufacturer.Id))
-            .ReverseMap();
-
+        CreateMap<CommodityEntity, CommodityCreateDto>().ReverseMap();
         CreateMap<CommodityEntity, CommodityDto>().ReverseMap();
 
     }
