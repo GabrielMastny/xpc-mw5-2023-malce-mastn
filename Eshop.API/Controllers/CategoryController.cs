@@ -88,16 +88,14 @@ public class CategoryController
 
     [HttpPost]
     [Route($"[action]")]
-    public ActionResult<dynamic> FilterCategory(ApiVersion version, CategoryFilter categoryFilter)
+    public ActionResult<List<CategoryEntity>> FilterCategory(ApiVersion version, CategoryFilter categoryFilter)
     {
-
         var results = _query.Execute(categoryFilter);
-        List<string> names = new List<string>();
+        List<CategoryEntity> names = new List<CategoryEntity>();
         foreach (var r in results)
         {
-            names.Add(r.Name);
+            names.Add(r);
         }
-        
         return names; 
     }
 }

@@ -49,17 +49,14 @@ public class ManufacturerController
 
     [HttpPost]
     [Route($"[action]")]
-    public ActionResult<dynamic> FilterManufacturer(ApiVersion version, ManufacturerDataFilter manufacturerDataFilter)
+    public ActionResult<List<ManufacturerEntity>> FilterManufacturer(ApiVersion version, ManufacturerDataFilter manufacturerDataFilter)
     {
         var results = _query.Execute(manufacturerDataFilter);
-
-        List<string> names = new List<string>();
-
+        List<ManufacturerEntity> names = new List<ManufacturerEntity>();
         foreach (var r in results)
         {
-            names.Add(r.Name);
+            names.Add(r);
         }
-
         return names;
     }
 }

@@ -50,19 +50,19 @@ public class CommodityRepository : IRepository<CommodityEntity>
             Weight = y.Weight,
             Category = new CategoryEntity
             {
-                Description = "",
+                Description = y.Category.Description,
                 Id = y.Category.Id,
-                Image = "",
-                Name = ""
+                Image = y.Category.Description,
+                Name = y.Category.Name
             },
             Id = y.Id,
             Manufacturer = new ManufacturerEntity
             {
-                Description = "",
+                Description = y.Manufacturer.Description,
                 Id = y.Manufacturer.Id,
-                Image = "",
-                Name = "",
-                CountryOfOrigin = ""
+                Image = y.Manufacturer.Image,
+                Name = y.Manufacturer.Name,
+                CountryOfOrigin = y.Manufacturer.CountryOfOrigin
             },
             NumberOfPiecesInStock = y.NumberOfPiecesInStock,
 
@@ -80,10 +80,10 @@ public class CommodityRepository : IRepository<CommodityEntity>
 
     public void Delete(Guid id)
     {
-        var ent = _db.Comodities.Where(x => x.Id == id).SingleOrDefault();
-        if (ent == null) return;
+        var entity = _db.Comodities.Where(x => x.Id == id).SingleOrDefault();
+        if (entity == null) throw new ArgumentNullException();
 
-        _db.Comodities.Remove(ent);
+        _db.Comodities.Remove(entity);
         _db.SaveChanges();
     }
 }

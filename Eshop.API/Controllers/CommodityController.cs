@@ -68,15 +68,13 @@ namespace Eshop.API.Controllers
         
         [HttpPost]
         [Route($"[action]")]
-        public ActionResult<dynamic> FilterCommodity(ApiVersion version, CommodityDataFilter commodityDataFilter)
+        public ActionResult<List<CommodityEntity>> FilterCommodity(ApiVersion version, CommodityDataFilter commodityDataFilter)
         {
             var results = _query.Execute(commodityDataFilter);
-
-            List<string> names = new List<string>();
-
+            List<CommodityEntity> names = new List<CommodityEntity>();
             foreach (var r in results)
             {
-                names.Add(r.Name);
+                names.Add(r);
             }
             return names;
         }

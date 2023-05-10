@@ -25,26 +25,26 @@ public class ReviewRepository : IRepository<ReviewEntity>
 
     public ReviewEntity GetById(Guid id)
     {
-        var rev = _db.Reviews.SingleOrDefault(x => x.Id == id);
+        var review= _db.Reviews.SingleOrDefault(x => x.Id == id);
 
-        return rev;
+        return review;
     }
 
     public ReviewEntity Update(ReviewEntity? entity)
     {
-        var rev = _db.Update(entity);
+        var review= _db.Update(entity);
         _db.SaveChanges();
 
-        return _mapper.Map<ReviewEntity>(rev.Entity);
+        return _mapper.Map<ReviewEntity>(review.Entity);
     }
 
     public void Delete(Guid id)
     {
-        var rev = _db.Reviews.SingleOrDefault(x => x.Id == id);
+        var review= _db.Reviews.SingleOrDefault(x => x.Id == id);
         
-        if (rev == null) return;
+        if (review== null) throw new ArgumentNullException();;
 
-        _db.Reviews.Remove(rev);
+        _db.Reviews.Remove(review);
         _db.SaveChanges();
     }
 }

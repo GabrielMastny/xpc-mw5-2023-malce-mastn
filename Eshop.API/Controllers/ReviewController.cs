@@ -88,17 +88,14 @@ public class ReviewController
     
     [HttpPost]
     [Route($"[action]")]
-    public ActionResult<dynamic> FilterReview(ApiVersion version, ReviewFilter reviewFilter)
+    public ActionResult<List<ReviewEntity>> FilterReview(ApiVersion version, ReviewFilter reviewFilter)
     {
         var results = _query.Execute(reviewFilter);
-
-        List<string> names = new List<string>();
-
+        List<ReviewEntity> names = new List<ReviewEntity>();
         foreach (var r in results)
         {
-            names.Add(r.Title);
+            names.Add(r);
         }
-
         return names;
     }
 }

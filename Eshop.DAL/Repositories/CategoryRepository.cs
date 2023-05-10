@@ -45,7 +45,7 @@ public class CategoryRepository : IRepository<CategoryEntity>
     {
         var category = _db.Categories.Where(category => category.Id == id).SingleOrDefault();
         
-        if (category == null) return;
+        if (category == null) throw new ArgumentNullException();
 
         _db.Categories.Remove(category);
         _db.SaveChanges();

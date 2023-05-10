@@ -59,7 +59,7 @@ public class GenerateDatabase : IDisposable
             .RuleFor(c => c.Id, f => Guid.NewGuid())
             .RuleFor(c => c.Name, f => f.Name.FirstName())
             .RuleFor(c => c.Description, f => f.Lorem.Sentence())
-            .RuleFor(c => c.Image, f => f.Image.Random.String())
+            .RuleFor(c => c.Image, f => f.Image.Random.String(1))
             .Generate();
     }
 

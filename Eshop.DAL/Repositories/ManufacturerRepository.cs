@@ -40,7 +40,7 @@ public class ManufacturerRepository : IRepository<ManufacturerEntity>
     {
         var man = _db.Manufacturers.SingleOrDefault(x => x.Id == id);
         
-        if (man == null) return;
+        if (man == null) throw new ArgumentNullException();;
 
         _db.Manufacturers.Remove(man);
         _db.SaveChanges();
