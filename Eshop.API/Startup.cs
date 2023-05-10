@@ -35,7 +35,6 @@ namespace Eshop.API
             services.AddAutoMapper(typeof(CommodityMappings));
             services.AddAutoMapper(typeof(CategoryMappings));
             services.AddAutoMapper(typeof(ManufacturerMappings));
-            //services.AddAutoMapper(typeof(CategoryDbMappings));
             services.AddAutoMapper(typeof(ManufacturerMappings));
                 
             services.AddScoped<IRepository<CommodityEntity>, CommodityRepository>();
