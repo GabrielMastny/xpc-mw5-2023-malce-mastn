@@ -10,10 +10,10 @@ Repository: xpc-mw5-2023-malce-mastn
 A (backend + DB)
 
 ## Database
-Commodity table
-Category table
-Review table
-Manufacturer table
+* Commodity table
+* Category table
+* Review table
+* Manufacturer table
 
 ## Basic functionality
 
