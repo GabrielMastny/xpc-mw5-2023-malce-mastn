@@ -9,4 +9,18 @@ Repository: xpc-mw5-2023-malce-mastn
 ## Project variant
 A (backend + DB)
 
-# disclaimer: unit tests work properly only locally because of dependency on working database, howewer for demonstration CI build runs also tests
+## Database
+Commodity table
+Category table
+Review table
+Manufacturer table
+
+## Basic functionality
+
+### Demo controller
+* Generate test database data
+* Clear database
+
+### Unit test
+* Only local functionality
+
