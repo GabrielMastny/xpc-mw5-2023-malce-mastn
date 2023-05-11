@@ -21,6 +21,9 @@ A (backend + DB)
 * Generate test database data
 * Clear database
 
-### Unit test
-* Only local functionality
+### Entity controllers
+* Endpoints for get, delete, put and update single element from the database
+* Filter endpoint for each entity for filtering the elements from the database
 
+### Unit tests
+* Only local functionality
