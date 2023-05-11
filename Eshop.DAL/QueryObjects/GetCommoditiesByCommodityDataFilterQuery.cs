@@ -48,6 +48,13 @@ public class GetCommoditiesByCommodityDataFilterQuery : IQuery<CommodityEntity, 
         {
             list = list.Where(commodity => commodity.NumberOfPiecesInStock > filter.NumberOfPiecesInStock);
         }
+
+        // foreach (var c in list)
+        // {
+        //     c.Manufacturer = _db.Manufacturers.Single(x => x.Id == c.Manufacturer.Id);
+        //     c.Category = _db.Categories.Single(x => x.Id == c.Category.Id);
+        // }
+        
         return list;
     }
 }

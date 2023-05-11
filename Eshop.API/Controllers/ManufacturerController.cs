@@ -30,10 +30,18 @@ public class ManufacturerController
     }
 
     [HttpGet(Name = "GetManufacturers")]
-    public IEnumerable<ManufacturerDTO> Get()
+    public IActionResult Get(ApiVersion version)
     {
-        //return _repo.Get().Select(x => _mapper.Map<ManufacturerDTO>(x));
-        return null;
+        var filtered = _query.Execute(new ManufacturerDataFilter()).ToList();
+
+        if (!filtered.Any())
+        {
+            return new EmptyResult();
+        }
+        else
+        {
+            return new OkResult();
+        }
     }
 
     [HttpPost(Name = nameof(AddManufacturer))]
@@ -50,12 +58,6 @@ public class ManufacturerController
     [Route($"[action]")]
     public ActionResult<List<ManufacturerEntity>> FilterManufacturer(ApiVersion version, ManufacturerDataFilter manufacturerDataFilter)
     {
-        var results = _query.Execute(manufacturerDataFilter);
-        List<ManufacturerEntity> names = new List<ManufacturerEntity>();
-        foreach (var r in results)
-        {
-            names.Add(r);
-        }
-        return names;
+        return _query.Execute(manufacturerDataFilter).ToList();
     }
 }

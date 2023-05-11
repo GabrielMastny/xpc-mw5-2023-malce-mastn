@@ -4,7 +4,7 @@ using Eshop.API.Dtos;
 
 namespace Eshop.API.MappingProfiles;
 
-public class CommodityMappings :Profile
+public class CommodityMappings : Profile
 {
     public CommodityMappings()
     {

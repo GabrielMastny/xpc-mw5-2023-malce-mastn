@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Eshop.DAL;
 using Eshop.DAL.Entities;
 using AutoMapper;
@@ -132,31 +133,28 @@ public class DemoController
         ManufacturerEntity manufacturer = null;
         CategoryEntity category = null;
 
-
-        for (int i = 0; i < 100; i++)
+        for (int i = 0; i < 16; i++)
         {
-
             if (i % 4 == 0)
             {
                 manufacturer = dbBuilder.GenerateManufacturerEntity();
                 category = dbBuilder.GenerateCaterogyEntity();
-
+        
                 _manRepo.Create(manufacturer);
                 _catRepo.Create(category);   
             }
-
+        
             CommodityEntity commodity = dbBuilder.GenerateCommodityEntity();
-            
+
             commodity.Manufacturer = manufacturer;
             commodity.Category = category;
-            
-
+        
             foreach (var review in dbBuilder.GenerateFakeReviewsTest(3))
             {
                 review.RelatedTo = commodity;
                 _revRepo.Create(review);
             }
-
+        
             _comRepo.Create(commodity);
         }
         
@@ -165,30 +163,32 @@ public class DemoController
         return new OkResult();
     }
     
-    // [HttpPost]
-    // [Route($"[action]")]
-    // public void ClearDatabase()
-    // {
-    //     foreach (var revId in _revQuery.Execute(new ReviewFilter()))
-    //     {
-    //         _revRepo.Delete(revId.Id);
-    //     }
-    //     
-    //     foreach (var manufacturer in _manQuery.Execute(new ManufacturerDataFilter()))
-    //     {
-    //         _manRepo.Delete(manufacturer.Id);
-    //     }
-    //     
-    //     foreach (var category in _catQuery.Execute(new CategoryFilter()))
-    //     {
-    //         _catRepo.Delete(category.Id);
-    //     }
-    //     
-    //     foreach (var commodity in _comQuery.Execute(new CommodityDataFilter()))
-    //     {
-    //         _comRepo.Delete(commodity.Id);
-    //     }
-    // }
+    [HttpDelete]
+    [Route($"[action]")]
+    public void ClearDatabase()
+    {
+        //_comRepo.Delete(Guid.Parse("7558671F-2D54-40CF-B27B-08DB51EC7AC0"));
+
+        foreach (var revId in _revQuery.Execute(new ReviewFilter()).ToList())
+        {
+            _revRepo.Delete(revId.Id);
+        }
+        
+        foreach (var commodity in _comQuery.Execute(new CommodityDataFilter()).ToList())
+        {
+            _comRepo.Delete(commodity.Id);
+        }
+        
+        foreach (var manufacturer in _manQuery.Execute(new ManufacturerDataFilter()).ToList())
+        {
+            _manRepo.Delete(manufacturer.Id);
+        }
+        
+        foreach (var category in _catQuery.Execute(new CategoryFilter()).ToList())
+        {
+            _catRepo.Delete(category.Id);
+        }
+    }
     
 #endif
 }

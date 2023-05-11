@@ -74,13 +74,7 @@ namespace Eshop.API.Controllers
         [Route($"[action]")]
         public ActionResult<List<CommodityEntity>> FilterCommodity(ApiVersion version, CommodityDataFilter commodityDataFilter)
         {
-            var results = _query.Execute(commodityDataFilter);
-            List<CommodityEntity> names = new List<CommodityEntity>();
-            foreach (var r in results)
-            {
-                names.Add(r);
-            }
-            return names;
+            return _query.Execute(commodityDataFilter).ToList();
         }
     }
 }

@@ -30,10 +30,18 @@ public class ReviewController
     }
     
     [HttpGet(Name = "GetReviews")]
-    public IEnumerable<ReviewDTO> Get()
+    public IActionResult Get(ApiVersion version)
     {
-       // return _repo.Get().Select(x => _mapper.Map<ReviewDTO>(x));
-       return null;
+        var filtered = _query.Execute(new ReviewFilter()).ToList();
+
+        if (!filtered.Any())
+        {
+            return new EmptyResult();
+        }
+        else
+        {
+            return new OkResult();
+        }
     }
     
     [HttpPost(Name = nameof(AddReview))]
@@ -90,12 +98,6 @@ public class ReviewController
     [Route($"[action]")]
     public ActionResult<List<ReviewEntity>> FilterReview(ApiVersion version, ReviewFilter reviewFilter)
     {
-        var results = _query.Execute(reviewFilter);
-        List<ReviewEntity> names = new List<ReviewEntity>();
-        foreach (var r in results)
-        {
-            names.Add(r);
-        }
-        return names;
+        return _query.Execute(reviewFilter).ToList();
     }
 }

@@ -24,19 +24,31 @@ public class CommodityRepository : IRepository<CommodityEntity>
         // if (!_db.Manufacturers.Any(x => x.Id == entity.Manufacturer.Id))
         //     return Guid.Empty;
         
-        Guid newComId = _db.Comodities.Add(new CommodityEntity()
+        //var commodity = _db.Comodities.Add(entity);
+
+        //_db.Comodities.Add(entity);
+
+        if (_db.Comodities.Any(x => x.Name == entity.Name))
         {
-            Description = entity.Description,
-            Image = entity.Image,
-            Name = entity.Name,
-            Price = entity.Price,
-            Weight = entity.Weight,
-            Category = entity.Category,//new CategoryEntity(), //needs to be fixed
-            Manufacturer = entity.Manufacturer, //new ManufacturerEntity(), //also
-            NumberOfPiecesInStock = entity.NumberOfPiecesInStock
-        }).Entity.Id;
+            
+        }
+        else
+        {
+            var commodity = _db.Comodities.Add(new CommodityEntity()
+            {
+                Name = entity.Name,
+                Description = entity.Description,
+                Image = entity.Image,
+                Category = entity.Category,
+                Manufacturer = entity.Manufacturer,
+                NumberOfPiecesInStock = entity.NumberOfPiecesInStock,
+                Price = entity.Price,
+                Weight = entity.Weight
+            });   
+        }
+
         _db.SaveChanges();
-        return newComId;
+        return entity.Id;
     }
 
     public CommodityEntity GetById(Guid id)

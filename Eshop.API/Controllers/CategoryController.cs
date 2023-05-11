@@ -31,10 +31,19 @@ public class CategoryController
     }
 
     [HttpGet(Name = "GetCategories")]
-    public IEnumerable<CategoryDTO> Get()
+    public IActionResult Get(ApiVersion version)
     {
-        //return _repo.Get().Select(x => _mapper.Map<CategoryDTO>(x));
-        return null;
+        var filtered = _query.Execute(new CategoryFilter()).ToList();
+
+        if (!filtered.Any())
+        {
+            return new EmptyResult();
+        }
+        else
+        {
+            //return Ok(filtered.Select(x => _mapper.Map<CategoryDTO>(x))); 
+            return new OkResult();
+        }
     }
     
     [HttpPost(Name = nameof(AddCategory))]
@@ -86,12 +95,6 @@ public class CategoryController
     [Route($"[action]")]
     public ActionResult<List<CategoryEntity>> FilterCategory(ApiVersion version, CategoryFilter categoryFilter)
     {
-        var results = _query.Execute(categoryFilter);
-        List<CategoryEntity> names = new List<CategoryEntity>();
-        foreach (var r in results)
-        {
-            names.Add(r);
-        }
-        return names; 
+        return _query.Execute(categoryFilter).ToList(); 
     }
 }
