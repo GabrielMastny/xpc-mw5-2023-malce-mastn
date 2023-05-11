@@ -43,9 +43,9 @@ public class Tests
         IMapper mapp = new Mapper(c);
         var logFactory = new LoggerFactory( new List<ILoggerProvider>());
         
-        CommodityRepository rep = new CommodityRepository(db, mapp);
+        CommodityRepository rep = new CommodityRepository(db);
         var logger = logFactory.CreateLogger<CommodityController>();
-        _comController = new CommodityController(logger, rep, mapp, new GetCommoditiesByCommodityDataFilterQuery(db, mapp));
+        _comController = new CommodityController(logger, rep, mapp, new GetCommoditiesByCommodityDataFilterQuery(db));
         
         ManufacturerRepository manRep = new ManufacturerRepository(db, mapp);
         var manLogger = logFactory.CreateLogger<ManufacturerController>();

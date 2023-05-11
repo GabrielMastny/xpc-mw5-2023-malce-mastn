@@ -97,4 +97,12 @@ public class CategoryController
     {
         return _query.Execute(categoryFilter).ToList(); 
     }
+    
+    // [HttpPost]
+    // [Route($"[action]")]
+    // public ActionResult<CategoryEntity> GetCategory()
+    // {
+    //     var res = _repo.GetById(Guid.Parse("68A1745C-E51C-42BB-C4CE-08DB51F31579"));
+    //     return res; 
+    // }
 }

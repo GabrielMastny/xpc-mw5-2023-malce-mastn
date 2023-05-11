@@ -7,30 +7,17 @@ namespace Eshop.DAL.Repositories;
 public class CommodityRepository : IRepository<CommodityEntity>
 {
     private readonly EshopContext _db;
-    private readonly IMapper _mapper;
-    
-    public CommodityRepository(EshopContext dbContext, IMapper mapper)
+
+    public CommodityRepository(EshopContext dbContext)
     {
         _db = dbContext;
-        _mapper = mapper;
     }
 
     public Guid Create(CommodityEntity entity)
     {
-        
-        // if (!_db.Categories.Any(x => x.Id == entity.Category.Id))
-        //     return Guid.Empty;
-        //
-        // if (!_db.Manufacturers.Any(x => x.Id == entity.Manufacturer.Id))
-        //     return Guid.Empty;
-        
-        //var commodity = _db.Comodities.Add(entity);
-
-        //_db.Comodities.Add(entity);
-
         if (_db.Comodities.Any(x => x.Name == entity.Name))
         {
-            
+            return Guid.Empty;
         }
         else
         {
