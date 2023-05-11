@@ -1,8 +1,6 @@
 ﻿using Eshop.DAL.Entities;
-using AutoMapper;
 using Eshop.DAL.Context;
 using Eshop.DAL.QueryObjects.Filters;
-using Eshop.DAL.Repositories;
 
 namespace Eshop.DAL.QueryObjects;
 

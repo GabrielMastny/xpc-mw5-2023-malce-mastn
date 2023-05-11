@@ -50,15 +50,15 @@ public class Tests
         ManufacturerRepository manRep = new ManufacturerRepository(db, mapp);
         var manLogger = logFactory.CreateLogger<ManufacturerController>();
         _manController = new ManufacturerController(manLogger, manRep, mapp,
-            new GetManufacturersByManufacturerDataFilterQuery(db, mapp));
+            new GetManufacturersByManufacturerDataFilterQuery(db));
 
         CategoryRepository catRep = new CategoryRepository(db, mapp);
         var catLogger = logFactory.CreateLogger<CategoryController>();
-        _catController = new CategoryController(catLogger, catRep, mapp, new GetCategoriesByCategoryFilterQuery(db, mapp));
+        _catController = new CategoryController(catLogger, catRep, mapp, new GetCategoriesByCategoryFilterQuery(db));
 
         ReviewRepository revRep = new ReviewRepository(db, mapp);
         var revLogger = logFactory.CreateLogger<ReviewController>();
-        _reviewController = new ReviewController(revLogger, revRep, mapp, new GetReviewsByReviewFilterQuery(db, mapp));
+        _reviewController = new ReviewController(revLogger, revRep, mapp, new GetReviewsByReviewFilterQuery(db));
 
         _apiV = new ApiVersion(DateTime.Today);
         

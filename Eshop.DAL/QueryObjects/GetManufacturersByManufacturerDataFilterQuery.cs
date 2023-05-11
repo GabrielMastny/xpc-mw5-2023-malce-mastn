@@ -1,5 +1,4 @@
 ﻿using Eshop.DAL.Entities;
-using AutoMapper;
 using Eshop.DAL.Context;
 using Eshop.DAL.QueryObjects.Filters;
 
@@ -9,12 +8,10 @@ public class GetManufacturersByManufacturerDataFilterQuery : IQuery<Manufacturer
 {
     
     private readonly EshopContext _db;
-    private readonly IMapper _mapper;
-    
-    public GetManufacturersByManufacturerDataFilterQuery(EshopContext db, IMapper mapper)
+   
+    public GetManufacturersByManufacturerDataFilterQuery(EshopContext db)
     {
         _db = db;
-        _mapper = mapper;
     }
     public IEnumerable<ManufacturerEntity> Execute(ManufacturerDataFilter filter)
     {
