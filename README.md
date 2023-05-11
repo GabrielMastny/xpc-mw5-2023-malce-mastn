@@ -23,7 +23,9 @@ A (backend + DB)
 
 ### Entity controllers
 * Endpoints for get, delete, put and update single element from the database
+    * Usage of repositories
 * Filter endpoint for each entity for filtering the elements from the database
+    * Usage of query objects
 
 ### Unit tests
 * Only local functionality
