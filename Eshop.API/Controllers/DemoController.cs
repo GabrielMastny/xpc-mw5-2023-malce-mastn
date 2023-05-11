@@ -55,74 +55,34 @@ public class DemoController
         _revQuery = revQuery;
     }
 
-    // [HttpGet(Name = "GetWholeDb")]
-    // public DemoDTO Get()
-    // {
-    //     // var coms = new List<CommodityDto>();
-    //     // foreach (var comEnt in _comRepo.Get())
-    //     // {
-    //     //     coms.Add(_mapper.Map<CommodityDto>(comEnt));
-    //     // }
-    //     //
-    //     // return new DemoDTO()
-    //     // {
-    //     //     Categories = _catRepo.Get().Select(x => _mapper.Map<CategoryDTO>(x)),
-    //     //     Manufacturers = _manRepo.Get().Select(x => _mapper.Map<ManufacturerBriefDTO>(x)),
-    //     //     Commodities = coms
-    //     // };
-    //     return new DemoDTO();
-    // }
-
-    // [HttpPost]
-    // [Route($"[action]")]
-    // public ActionResult BuildDefaultDatabaseData()
-    // {
-    //     GenerateDatabase dbBuilder = new GenerateDatabase();
-    //     Dictionary<Guid, Guid> manufacturers = new Dictionary<Guid, Guid>();
-    //     Dictionary<Guid, Guid> categories = new Dictionary<Guid, Guid>();
-    //     
-    //     foreach (var commodity in dbBuilder.init(30))
-    //     {
-    //         Guid manId = Guid.Empty;
-    //         
-    //         if (!manufacturers.ContainsKey(commodity.Manufacturer.Id))
-    //         {
-    //             manId = _manRepo.Create(commodity.Manufacturer);
-    //             manufacturers[commodity.Manufacturer.Id] = manId;
-    //         }
-    //         else
-    //         {
-    //             manId = manufacturers[commodity.Manufacturer.Id];
-    //         }
-    //         
-    //         Guid catId = Guid.Empty;
-    //         
-    //         if (!categories.ContainsKey(commodity.Category.Id))
-    //         {
-    //             catId = _catRepo.Create(commodity.Category);
-    //             categories[commodity.Category.Id] = catId;
-    //         }
-    //         else
-    //         {
-    //             catId = categories[commodity.Category.Id];
-    //         }
-    //     
-    //         commodity.Category.Id = catId;
-    //         commodity.Manufacturer.Id = manId;
-    //         
-    //         var comId = _comRepo.Create(commodity);
-    //         commodity.Id = comId;
-    //         foreach (var review in dbBuilder.GenerateFakeReviews(30))
-    //         {
-    //             review.RelatedTo = commodity;
-    //             _revRepo.Create(review);
-    //         }
-    //     }
-    //     
-    //     dbBuilder.Dispose();
-    //
-    //     return new OkResult();
-    // }
+    [HttpGet(Name = "GetWholeDb")]
+    public DemoDTO Get()
+    {
+        var coms = new List<CommodityDto>();
+        foreach (var comEnt in _comQuery.Execute(new CommodityDataFilter()))
+        {
+            coms.Add(_mapper.Map<CommodityDto>(comEnt));
+        }
+        
+        var cats = new List<CategoryDTO>();
+        foreach (var catEnt in _catQuery.Execute(new CategoryFilter()))
+        {
+            cats.Add(_mapper.Map<CategoryDTO>(catEnt));
+        }
+        
+        var mans = new List<ManufacturerBriefDTO>();
+        foreach (var manEnt in _manQuery.Execute(new ManufacturerDataFilter()))
+        {
+            mans.Add(_mapper.Map<ManufacturerBriefDTO>(manEnt));
+        }
+        
+        return new DemoDTO()
+        {
+            Categories = cats,
+            Manufacturers = mans,
+            Commodities = coms
+        };
+    }
     
     [HttpPost]
     [Route($"[action]")]
@@ -167,8 +127,6 @@ public class DemoController
     [Route($"[action]")]
     public void ClearDatabase()
     {
-        //_comRepo.Delete(Guid.Parse("7558671F-2D54-40CF-B27B-08DB51EC7AC0"));
-
         foreach (var revId in _revQuery.Execute(new ReviewFilter()).ToList())
         {
             _revRepo.Delete(revId.Id);

@@ -31,7 +31,7 @@ public class CategoryController
     }
 
     [HttpGet(Name = "GetCategories")]
-    public IActionResult Get(ApiVersion version)
+    public ActionResult<List<CategoryDTO>> Get(ApiVersion version)
     {
         var filtered = _query.Execute(new CategoryFilter()).ToList();
 
@@ -41,8 +41,7 @@ public class CategoryController
         }
         else
         {
-            //return Ok(filtered.Select(x => _mapper.Map<CategoryDTO>(x))); 
-            return new OkResult();
+            return new OkObjectResult(filtered.Select(x => _mapper.Map<CategoryDTO>(x))); 
         }
     }
     
@@ -93,16 +92,8 @@ public class CategoryController
 
     [HttpPost]
     [Route($"[action]")]
-    public ActionResult<List<CategoryEntity>> FilterCategory(ApiVersion version, CategoryFilter categoryFilter)
+    public ActionResult<List<CategoryDTO>> FilterCategory(ApiVersion version, CategoryFilter categoryFilter)
     {
-        return _query.Execute(categoryFilter).ToList(); 
+        return new OkObjectResult((_query.Execute(categoryFilter)).Select(x => _mapper.Map<CategoryDTO>(x)).ToList()); 
     }
-    
-    // [HttpPost]
-    // [Route($"[action]")]
-    // public ActionResult<CategoryEntity> GetCategory()
-    // {
-    //     var res = _repo.GetById(Guid.Parse("68A1745C-E51C-42BB-C4CE-08DB51F31579"));
-    //     return res; 
-    // }
 }

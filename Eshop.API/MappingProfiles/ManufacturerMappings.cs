@@ -9,6 +9,7 @@ public class ManufacturerMappings : Profile
     public ManufacturerMappings()
     {
         CreateMap<ManufacturerCreateDTO, ManufacturerEntity>().ReverseMap();
-        CreateMap<ManufacturerEntity, ManufacturerBriefDTO>();
+        CreateMap<ManufacturerEntity, ManufacturerBriefDTO>().ReverseMap();
+        CreateMap<ManufacturerEntity, ManufacturerDTO>().ReverseMap();
     }
 }

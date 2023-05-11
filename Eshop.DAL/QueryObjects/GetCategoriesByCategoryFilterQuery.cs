@@ -19,7 +19,7 @@ public class GetCategoriesByCategoryFilterQuery : IQuery<CategoryEntity, Categor
     
     public IEnumerable<CategoryEntity> Execute(CategoryFilter filter)
     {
-        IEnumerable<CategoryEntity> list =  _db.Categories.Select(category => _mapper.Map<CategoryEntity>(category));
+        IEnumerable<CategoryEntity> list =  _db.Categories.ToList();
 
         if (filter.Name != null)
         {

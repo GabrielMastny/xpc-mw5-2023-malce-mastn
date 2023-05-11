@@ -30,7 +30,7 @@ public class ReviewController
     }
     
     [HttpGet(Name = "GetReviews")]
-    public IActionResult Get(ApiVersion version)
+    public ActionResult<List<ReviewDTO>> Get(ApiVersion version)
     {
         var filtered = _query.Execute(new ReviewFilter()).ToList();
 
@@ -40,20 +40,15 @@ public class ReviewController
         }
         else
         {
-            return new OkResult();
+            return new OkObjectResult(filtered.Select(x => _mapper.Map<ReviewDTO>(x)).ToList());
         }
     }
     
     [HttpPost(Name = nameof(AddReview))]
-    public ActionResult<string> AddReview(ApiVersion version, [FromBody] ReviewCreateDTO reviewCreateDto)
+    public ActionResult<Guid> AddReview(ApiVersion version, [FromBody] ReviewCreateDTO reviewCreateDto)
     {
         var newG = _repo.Create(_mapper.Map<ReviewEntity>(reviewCreateDto));
-        
-#if DEBUG
-        return newG.ToString(); 
-#else
-        return (Guid.Empty == newG) ? new BadRequestResult() : new OkResult();
-#endif
+        return (Guid.Empty == newG) ? new BadRequestResult() : new OkObjectResult(newG);
     }
     
     [HttpGet]

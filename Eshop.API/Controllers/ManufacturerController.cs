@@ -30,7 +30,7 @@ public class ManufacturerController
     }
 
     [HttpGet(Name = "GetManufacturers")]
-    public IActionResult Get(ApiVersion version)
+    public ActionResult<List<ManufacturerDTO>> Get(ApiVersion version)
     {
         var filtered = _query.Execute(new ManufacturerDataFilter()).ToList();
 
@@ -40,7 +40,7 @@ public class ManufacturerController
         }
         else
         {
-            return new OkResult();
+            return new OkObjectResult(filtered.Select(x => _mapper.Map<ManufacturerDTO>(x)).ToList());
         }
     }
 

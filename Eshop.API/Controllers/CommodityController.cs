@@ -49,16 +49,15 @@ namespace Eshop.API.Controllers
         [Route("{id:Guid}", Name = nameof(GetSingleCommodity))]
         public ActionResult<CommodityDto> GetSingleCommodity(ApiVersion version, Guid id)
         {
-            //return _mapper.Map<CommodityDto>(_repo.Get().Single(x => x.Id == id));
-            return new OkResult();
+            return new OkObjectResult(_mapper.Map<CommodityDto>(_repo.GetById(id)));
         }
 
         [HttpPost(Name = nameof(AddCommodity))]
-        public ActionResult<string> AddCommodity(ApiVersion version, [FromBody] CommodityCreateDto commodityCreateDto)
+        public ActionResult<Guid> AddCommodity(ApiVersion version, [FromBody] CommodityCreateDto commodityCreateDto)
         {
             var ent = _mapper.Map<CommodityEntity>(commodityCreateDto);
             var newG = _repo.Create(ent);
-            return newG.ToString();
+            return  new OkObjectResult(newG);
         }
         
         [HttpDelete]

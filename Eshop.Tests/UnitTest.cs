@@ -171,21 +171,21 @@ public class Tests
     public void GetCategoryTest()
     {
         var x = _catController.Get(_apiV);
-        Assert.IsInstanceOf<OkObjectResult>(x);
+        Assert.IsInstanceOf<OkObjectResult>(x.Result);
     }
     
     [Test]
     public void GetManufacturerTest()
     {
         var x = _manController.Get(_apiV);
-        Assert.IsInstanceOf<OkObjectResult>(x);
+        Assert.IsInstanceOf<OkObjectResult>(x.Result);
     }
     
     [Test]
     public void GetReviewTest()
     {
         var x = _reviewController.Get(_apiV);
-        Assert.IsInstanceOf<OkObjectResult>(x);
+        Assert.IsInstanceOf<OkObjectResult>(x.Result);
     }
 
     [Test]

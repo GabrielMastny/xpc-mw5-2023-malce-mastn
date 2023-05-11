@@ -10,6 +10,6 @@ public class CategoryMappings : Profile
     public CategoryMappings()
     {
         CreateMap<CategoryCreateDTO, CategoryEntity>();
-        CreateMap<ICategory, CategoryDTO>();
+        CreateMap<CategoryEntity, CategoryDTO>().ReverseMap();
     }
 }
